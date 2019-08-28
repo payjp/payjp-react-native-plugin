@@ -1,11 +1,30 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'"
+  },
   "devDependencies": {
-    "lerna": "^3.16.4"
+    "husky": "^3.0.4",
+    "lerna": "^3.16.4",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2"
   },
   "workspaces": [
     "packages/*",
     "examples/*"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "post-commit": "git reset",
+      "pre-commit": "lint-staged"
+    }
+  }
 }
