@@ -1,0 +1,38 @@
+{
+  "name": "payjp-react-native",
+  "version": "0.0.0",
+  "description": "PAY.JP SDK for React Native",
+  "keywords": [
+    "PAY.JP",
+    "payment processing",
+    "react native"
+  ],
+  "author": "yatatsu",
+  "homepage": "https://github.com/payjp/payjp-react-native",
+  "license": "MIT",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "directories": {
+    "test": "__tests__"
+  },
+  "files": [
+    "lib/src",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payjp/payjp-react-native.git"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "rimraf lib/",
+    "watch": "tsc -p . --watch",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/payjp/payjp-react-native/issues"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.3"
+  }
+}

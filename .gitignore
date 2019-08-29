@@ -92,3 +92,8 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# lerna
+packages/*/lib/
+
+# VS Code
+.vscode
