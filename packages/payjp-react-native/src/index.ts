@@ -1,3 +1,5 @@
-export const hello = (): string => {
+const hello = (): string => {
     return "hello";
 };
+
+export { hello };

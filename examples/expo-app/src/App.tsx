@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { hello } from "payjp-react-native";
 
 const styles = StyleSheet.create({
     container: {
@@ -10,10 +11,13 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function App() {
+const App = (): React.ReactElement => {
+    const greeting = hello();
     return (
         <View style={styles.container}>
-            <Text>Open up App.tsx to start working on your app!</Text>
+            <Text>{greeting}</Text>
         </View>
     );
-}
+};
+
+export default App;

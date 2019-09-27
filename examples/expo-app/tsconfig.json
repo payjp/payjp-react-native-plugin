@@ -1,8 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": [
-    "./src/**/*"
-  ],
   "exclude": [
     ".git",
     "node_modules"

@@ -3,8 +3,6 @@
   "version": "0.0.0",
   "main": "__generated__/AppEntry.js",
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . --watch",
     "test": "echo \"Error: run tests from root\" && exit 1",
     "start": "expo start",
     "android": "expo start --android",
@@ -15,6 +13,7 @@
   },
   "dependencies": {
     "expo": "^35.0.0",
+    "payjp-react-native": "^0.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",

@@ -1,6 +1,7 @@
 {
   "name": "payjp-react-native",
   "version": "0.0.0",
+  "private": true,
   "description": "PAY.JP SDK for React Native",
   "keywords": [
     "PAY.JP",
@@ -10,8 +11,8 @@
   "author": "yatatsu",
   "homepage": "https://github.com/payjp/payjp-react-native",
   "license": "MIT",
-  "main": "lib/src/index.js",
-  "types": "lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "directories": {
     "test": "__tests__"
   },
