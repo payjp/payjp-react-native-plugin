@@ -94,6 +94,3 @@ typings/
 
 # lerna
 packages/*/lib/
-
-# VS Code
-.vscode
