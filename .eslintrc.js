@@ -19,5 +19,8 @@ module.exports = {
             jsx: true
         }
     },
-    rules: {}
+    rules: {},
+    globals: {
+        __DEV__: true
+    }
 };

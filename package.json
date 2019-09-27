@@ -6,8 +6,8 @@
     "clean": "lerna run clean",
     "lint": "npm-run-all eslint",
     "lint:fix": "npm-run-all eslint:fix",
-    "eslint": "eslint --cache \"packages/**/{src,test}/**/*.ts\"",
-    "eslint:fix": "eslint --fix --cache \"packages/**/{src,test}/**/*.ts\"",
+    "eslint": "eslint --cache \"packages/**/{src,test}/**/*.{ts,tsx}\"",
+    "eslint:fix": "eslint --fix --cache \"packages/**/{src,test}/**/*.{ts,tsx}\"",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'"
   },
   "devDependencies": {
