@@ -30,6 +30,7 @@ jobs:
           keys: *all_keys_of_yarn_cache
       - restore_cache: &restore_node_cache
           keys: *all_keys_of_node_cache
+      - run: yarn install
       - run: yarn bootstrap
       - save_cache: &save_yarn_cache
           paths:
