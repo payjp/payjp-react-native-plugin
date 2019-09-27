@@ -1,0 +1,156 @@
+openapi: "3.0.0"
+info:
+  version: 0.1.0
+  title: PAY.JP API
+servers:
+  - url: https://api.pay.jp/v1
+paths:
+  /tokens:
+    post:
+      summary: Create a token
+      operationId: createToken
+      tags:
+        - token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenForm'
+      responses:
+        '200':
+          description: The token you created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /tokens/{token_id}:
+    get:
+      summary: Info for a specific token
+      operationId: getTokenById
+      tags:
+        - token
+      parameters:
+        - name: token_id
+          in: path
+          required: true
+          description: The id of the token to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    TokenForm:
+      required:
+        - card[number]
+        - card[exp_month]
+        - card[exp_year]
+      properties:
+        card[number]:
+          type: string
+        card[exp_month]:
+          type: string
+        card[exp_year]:
+          type: string
+        card[cvc]:
+          type: string
+        card[name]:
+          type: string
+    Token:
+      required:
+        - id
+        - card
+        - created
+        - livemode
+        - object
+        - used
+      properties:
+        id:
+          type: string
+        card:
+          $ref: "#/components/schemas/Card"
+        created:
+          type: integer
+          format: int32
+        livemode:
+          type: boolean
+        object:
+          type: string
+        used:
+          type: boolean
+    Card:
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        created:
+          type: integer
+          format: int32
+        name:
+          type: string
+        last4:
+          type: string
+        exp_month:
+          type: integer
+        exp_year:
+          type: integer
+        brand:
+          type: string # TODO
+        cvc_check:
+          type: string # TODO
+        fingerprint:
+          type: string
+        address_state:
+          type: string
+        address_city:
+          type: string
+        address_line1:
+          type: string
+        address_line2:
+          type: string
+        country:
+          type: string
+        address_zip:
+          type: string
+        address_zip_check:
+          type: string
+        # metadata:
+        #  type: # TODO
+    ErrorResponse:
+      required:
+        - error
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+    Error:
+      required:
+        - message
+        - type
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
