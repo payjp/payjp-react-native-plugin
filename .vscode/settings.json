@@ -20,5 +20,8 @@
   "cSpell.words": [
     "livemode",
     "payjp"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
