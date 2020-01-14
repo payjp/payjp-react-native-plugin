@@ -1,5 +1,5 @@
 const hello = (): string => {
-    return "hello";
+    return "hello react native!!";
 };
 
 export { hello };
