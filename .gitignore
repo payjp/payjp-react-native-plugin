@@ -95,6 +95,9 @@ typings/
 # lerna
 packages/*/lib/
 
+# Cocoapods
+Pods/
+
 # Xcode
 build/
 *.pbxuser
