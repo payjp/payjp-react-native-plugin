@@ -5,7 +5,7 @@
 #import <React/RCTBridgeModule.h>
 #endif
 
-@interface RNPayjpLibrary : NSObject <RCTBridgeModule>
+@interface RNPayjp : NSObject <RCTBridgeModule>
 
 @end
   

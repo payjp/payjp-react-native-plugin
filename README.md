@@ -4,7 +4,6 @@
 
 
 ```
-cd payjp-react-native
 yarn install
 yarn build
 ```

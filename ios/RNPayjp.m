@@ -1,7 +1,7 @@
 
-#import "RNPayjpLibrary.h"
+#import "RNPayjp.h"
 
-@implementation RNPayjpLibrary
+@implementation RNPayjp
 
 - (dispatch_queue_t)methodQueue
 {
