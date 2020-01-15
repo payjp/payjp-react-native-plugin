@@ -1,13 +1,13 @@
 openapi: "3.0.0"
 info:
   version: 0.1.0
-  title: PAY.JP API
+  title: PAY.JP Token API
 servers:
   - url: https://api.pay.jp/v1
 paths:
   /tokens:
     post:
-      summary: Create a token
+      summary: Create new token
       operationId: createToken
       tags:
         - token
@@ -24,8 +24,32 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Token"
+        '400':
+          description: Request Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: API key Authorization Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '402':
+          description: Payment Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         default:
-          description: unexpected error
+          description: Error
           content:
             application/json:
               schema:
@@ -50,8 +74,32 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Token"
+        '400':
+          description: Request Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: API key Authorization Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '402':
+          description: Payment Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         default:
-          description: unexpected error
+          description: Error
           content:
             application/json:
               schema:
@@ -89,13 +137,21 @@ components:
           $ref: "#/components/schemas/Card"
         created:
           type: integer
-          format: int32
         livemode:
           type: boolean
         object:
           type: string
         used:
           type: boolean
+    CardBrand:
+      type: string
+      enum:
+        - "Visa"
+        - "MasterCard"
+        - "JCB"
+        - "American Express"
+        - "Diners Club"
+        - "Discover"
     Card:
       required:
         - id
@@ -106,9 +162,9 @@ components:
           type: string
         created:
           type: integer
-          format: int32
         name:
           type: string
+          nullable: true
         last4:
           type: string
         exp_month:
@@ -116,27 +172,36 @@ components:
         exp_year:
           type: integer
         brand:
-          type: string # TODO
+          $ref: "#/components/schemas/CardBrand"
         cvc_check:
-          type: string # TODO
+          type: string
         fingerprint:
           type: string
         address_state:
           type: string
+          nullable: true
         address_city:
           type: string
+          nullable: true
         address_line1:
           type: string
+          nullable: true
         address_line2:
           type: string
+          nullable: true
         country:
           type: string
+          nullable: true
         address_zip:
           type: string
+          nullable: true
         address_zip_check:
           type: string
-        # metadata:
-        #  type: # TODO
+        customer:
+          type: string
+          nullable: true
+        metadata:
+          type: object
     ErrorResponse:
       required:
         - error

@@ -2,7 +2,15 @@
 
 ## for development
 
+
 ```
-yarn bootstrap
+cd payjp-react-native
+yarn install
 yarn build
+```
+
+```
+cd example
+yarn start
+yarn ios or android
 ```

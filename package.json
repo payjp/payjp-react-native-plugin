@@ -29,14 +29,16 @@
     "clean": "rimraf lib/",
     "watch": "tsc -p . --watch",
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "npm-run-all eslint",
-    "lint:fix": "npm-run-all eslint:fix",
     "eslint": "eslint --cache \"{src,test}/**/*.{ts,tsx}\"",
     "eslint:fix": "eslint --fix --cache \"{src,test}/**/*.{ts,tsx}\"",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'"
   },
   "bugs": {
     "url": "https://github.com/payjp/payjp-react-native/issues"
+  },
+  "dependencies": {
+    "react": "~16.9.0",
+    "react-native": "~0.61.4"
   },
   "devDependencies": {
     "typescript": "^3.5.3",
@@ -49,6 +51,8 @@
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
     "npm-run-all": "^4.1.5",
+    "@types/react": "~16.9.0",
+    "@types/react-native": "~0.60.23",
     "prettier": "^1.18.2"
   },
   "lint-staged": {

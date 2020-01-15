@@ -3,3 +3,9 @@ const hello = (): string => {
 };
 
 export { hello };
+
+import { NativeModules } from "react-native";
+
+const { RNPayjpLibrary } = NativeModules;
+
+export { RNPayjpLibrary };

@@ -1,5 +1,5 @@
 
-package com.reactlibrary;
+package jp.pay.reactnative;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,10 +10,10 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
-public class RNPayjpLibraryPackage implements ReactPackage {
+public class RNPayjpPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new RNPayjpLibraryModule(reactContext));
+      return Arrays.<NativeModule>asList(new RNPayjpModule(reactContext));
     }
 
     // Deprecated from RN 0.47
