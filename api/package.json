@@ -10,8 +10,7 @@
     "clean": "rimraf dist/",
     "watch": "tsc -p . --watch",
     "validate": "openapi-generator validate -i payjp.yaml",
-    "generate": "openapi-generator generate -i payjp.yaml -g typescript-fetch",
-    "copy": "cp -r src/* ../packages/payjp-react-native/src/api"
+    "generate": "openapi-generator generate -i payjp.yaml -g typescript-fetch"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^0.0.19-4.1.2",
