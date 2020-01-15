@@ -1,0 +1,49 @@
+# .circleci/config.yml
+version: 2
+
+cache_keys:
+  yarn_cache:
+    primary: &primary_key_of_yarn_cache yarn-v1-{{ arch }}-{{ checksum "yarn.lock" }}
+    keys: &all_keys_of_yarn_cache
+      - *primary_key_of_yarn_cache
+      - yarn-v1-{{ arch }}-
+      - yarn-v1-
+  node_cache:
+    primary: &primary_key_of_node_cache node-v1-{{ arch }}-{{ checksum "package.json" }}
+    keys: &all_keys_of_node_cache
+      - *primary_key_of_node_cache
+      - node-v1-{{ arch }}-
+      - node-v1-
+
+docker_env:
+  node_defaults: &node_defaults
+    working_directory: ~/code
+    docker:
+      - image: circleci/node:8
+
+jobs:
+  build:
+    <<: *node_defaults
+    steps:
+      - checkout
+      - restore_cache: &restore_yarn_cache
+          keys: *all_keys_of_yarn_cache
+      - restore_cache: &restore_node_cache
+          keys: *all_keys_of_node_cache
+      - run: yarn install
+      - save_cache: &save_yarn_cache
+          paths:
+            - ~/.cache/yarn
+          key: *primary_key_of_yarn_cache
+      - save_cache: &save_node_cache
+          paths:
+            - node_modules
+          key: *primary_key_of_node_cache
+      - run: yarn eslint
+      - run: yarn build 
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - build

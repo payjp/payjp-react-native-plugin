@@ -1,0 +1,221 @@
+openapi: "3.0.0"
+info:
+  version: 0.1.0
+  title: PAY.JP Token API
+servers:
+  - url: https://api.pay.jp/v1
+paths:
+  /tokens:
+    post:
+      summary: Create new token
+      operationId: createToken
+      tags:
+        - token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenForm'
+      responses:
+        '200':
+          description: The token you created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        '400':
+          description: Request Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: API key Authorization Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '402':
+          description: Payment Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /tokens/{token_id}:
+    get:
+      summary: Info for a specific token
+      operationId: getTokenById
+      tags:
+        - token
+      parameters:
+        - name: token_id
+          in: path
+          required: true
+          description: The id of the token to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+        '400':
+          description: Request Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '401':
+          description: API key Authorization Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '402':
+          description: Payment Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    TokenForm:
+      required:
+        - card[number]
+        - card[exp_month]
+        - card[exp_year]
+      properties:
+        card[number]:
+          type: string
+        card[exp_month]:
+          type: string
+        card[exp_year]:
+          type: string
+        card[cvc]:
+          type: string
+        card[name]:
+          type: string
+    Token:
+      required:
+        - id
+        - card
+        - created
+        - livemode
+        - object
+        - used
+      properties:
+        id:
+          type: string
+        card:
+          $ref: "#/components/schemas/Card"
+        created:
+          type: integer
+        livemode:
+          type: boolean
+        object:
+          type: string
+        used:
+          type: boolean
+    CardBrand:
+      type: string
+      enum:
+        - "Visa"
+        - "MasterCard"
+        - "JCB"
+        - "American Express"
+        - "Diners Club"
+        - "Discover"
+    Card:
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        created:
+          type: integer
+        name:
+          type: string
+          nullable: true
+        last4:
+          type: string
+        exp_month:
+          type: integer
+        exp_year:
+          type: integer
+        brand:
+          $ref: "#/components/schemas/CardBrand"
+        cvc_check:
+          type: string
+        fingerprint:
+          type: string
+        address_state:
+          type: string
+          nullable: true
+        address_city:
+          type: string
+          nullable: true
+        address_line1:
+          type: string
+          nullable: true
+        address_line2:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        address_zip:
+          type: string
+          nullable: true
+        address_zip_check:
+          type: string
+        customer:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+    ErrorResponse:
+      required:
+        - error
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+    Error:
+      required:
+        - message
+        - type
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        type:
+          type: string

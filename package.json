@@ -1,7 +1,70 @@
 {
-  "name": "root",
+  "name": "payjp-react-native",
+  "version": "0.0.0",
   "private": true,
+  "description": "PAY.JP SDK for React Native",
+  "keywords": [
+    "PAY.JP",
+    "payment processing",
+    "react native"
+  ],
+  "author": "yatatsu",
+  "homepage": "https://github.com/payjp/payjp-react-native",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "test": "__tests__"
+  },
+  "files": [
+    "lib/src",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payjp/payjp-react-native.git"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "rimraf lib/",
+    "watch": "tsc -p . --watch",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "eslint": "eslint --cache \"{src,test}/**/*.{ts,tsx}\"",
+    "eslint:fix": "eslint --fix --cache \"{src,test}/**/*.{ts,tsx}\"",
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'"
+  },
+  "bugs": {
+    "url": "https://github.com/payjp/payjp-react-native/issues"
+  },
+  "dependencies": {
+    "react": "~16.9.0",
+    "react-native": "~0.61.4"
+  },
   "devDependencies": {
-    "lerna": "^3.4.0"
+    "typescript": "^3.5.3",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.2",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.5",
+    "npm-run-all": "^4.1.5",
+    "@types/react": "~16.9.0",
+    "@types/react-native": "~0.60.23",
+    "prettier": "^1.18.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "post-commit": "git reset",
+      "pre-commit": "lint-staged"
+    }
   }
 }
