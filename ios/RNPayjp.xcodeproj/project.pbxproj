@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E7D5FD74FB3131134E85DB3 /* Pods_RNPayjp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF2E12A43591952530B21C /* Pods_RNPayjp.framework */; };
 		B3E7B58A1CC2AC0600A0062D /* RNPayjp.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNPayjp.m */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,9 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNPayjp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNPayjp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B8786366FD72906A55ABA6B /* Pods-RNPayjp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPayjp.debug.xcconfig"; path = "Target Support Files/Pods-RNPayjp/Pods-RNPayjp.debug.xcconfig"; sourceTree = "<group>"; };
+		76AF2E12A43591952530B21C /* Pods_RNPayjp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNPayjp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BBA2BD96861F9B8A2F65FF9 /* Pods-RNPayjp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPayjp.release.xcconfig"; path = "Target Support Files/Pods-RNPayjp/Pods-RNPayjp.release.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNPayjp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNPayjp.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNPayjp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNPayjp.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E7D5FD74FB3131134E85DB3 /* Pods_RNPayjp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,13 +52,33 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		51E0CE77006D7844A3C1AB81 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6B8786366FD72906A55ABA6B /* Pods-RNPayjp.debug.xcconfig */,
+				8BBA2BD96861F9B8A2F65FF9 /* Pods-RNPayjp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
 				B3E7B5881CC2AC0600A0062D /* RNPayjp.h */,
 				B3E7B5891CC2AC0600A0062D /* RNPayjp.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				51E0CE77006D7844A3C1AB81 /* Pods */,
+				6BED94C659FCCDEC280C686C /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		6BED94C659FCCDEC280C686C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76AF2E12A43591952530B21C /* Pods_RNPayjp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -63,6 +88,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNPayjp" */;
 			buildPhases = (
+				E19C2559790D1D7E4D56163D /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -106,6 +132,31 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E19C2559790D1D7E4D56163D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RNPayjp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
@@ -202,9 +253,10 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B8786366FD72906A55ABA6B /* Pods-RNPayjp.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
@@ -218,6 +270,7 @@
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BBA2BD96861F9B8A2F65FF9 /* Pods-RNPayjp.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

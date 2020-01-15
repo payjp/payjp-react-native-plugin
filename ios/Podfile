@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+use_frameworks!
+
+target 'RNPayjp' do
+  # Pods for RNPayjp
+  pod 'PAYJP' 
+
+end

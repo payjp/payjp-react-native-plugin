@@ -1,5 +1,6 @@
 
 #import "RNPayjp.h"
+@import PAYJP
 
 @implementation RNPayjp
 
@@ -9,5 +10,10 @@
 }
 RCT_EXPORT_MODULE()
 
+RCT_EXPORT_METHOD(initialize) {
+  PAYJPSDK.publicKey = PAYJPPublicKey;
+  PAYJPSDK.locale = [NSLocale currentLocale];
+  NSLog(@"initialize method called.");
+}
+
 @end
-  
