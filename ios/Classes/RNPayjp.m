@@ -1,6 +1,8 @@
 
 #import "RNPayjp.h"
-@import PAYJP
+@import PAYJP;
+
+NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
 
 @implementation RNPayjp
 
