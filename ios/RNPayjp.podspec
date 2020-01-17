@@ -16,9 +16,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   # s.resources = 'Images.xcassets'
 
-  s.dependency "React"
-  s.dependency "PAYJP"
-  #s.dependency "others"
+  s.dependency 'React'
+  s.dependency 'PAYJP'
 
 end
 

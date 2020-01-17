@@ -51,3 +51,17 @@ target 'example-tvOS' do
   end
 
 end
+
+# delete Assets.car
+post_install do |installer|
+  project_path = 'example.xcodeproj'
+  project = Xcodeproj::Project.open(project_path)
+  project.targets.each do |target|
+      build_phase = target.build_phases.find { |bp| bp.display_name == '[CP] Copy Pods Resources' }
+      assets_path = '${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car'
+      if build_phase.present? && build_phase.output_paths.include?(assets_path) == true
+          build_phase.output_paths.delete(assets_path)
+      end
+  end
+  project.save(project_path)
+end
