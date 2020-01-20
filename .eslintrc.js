@@ -14,13 +14,25 @@ module.exports = {
         node: true,
         es6: true
     },
+    settings: {
+        react: {
+            version: "detect"
+        }
+    },
     parserOptions: {
         sourceType: "module",
         ecmaFeatures: {
             jsx: true
         }
     },
-    rules: {},
+    rules: {
+        "@typescript-eslint/no-use-before-define": [
+            "error",
+            {
+                variables: false
+            }
+        ]
+    },
     globals: {
         __DEV__: true
     }
