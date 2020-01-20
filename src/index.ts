@@ -4,8 +4,17 @@ const hello = (): string => {
 
 export { hello };
 
-import { NativeModules } from "react-native";
+import { NativeModules, Platform } from "react-native";
 
-const { RNPayjpLibrary } = NativeModules;
+const { NativePayjpModules } = NativeModules;
 
-export { RNPayjpLibrary };
+const getOSVersion = async (): Promise<number | null> => {
+    return await NativePayjpModules.getOSVersion();
+};
+
+export const doStuff = Platform.select({
+    ios: {},
+    android: {
+        getOSVersion
+    }
+});

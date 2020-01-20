@@ -1,36 +1,45 @@
-
 buildscript {
-    repositories {
-        jcenter()
-    }
+    if (project == rootProject) {
+        repositories {
+            google()
+            jcenter()
+        }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.5.3'
+        }
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "23.0.1"
+    compileSdkVersion rootProject.properties.get('compileSdkVersion', 28)
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion rootProject.properties.get('targetSdkVersion', 28)
     }
     lintOptions {
-        abortOnError false
+        warning 'InvalidPackage'
+    }
+    libraryVariants.all {
+        it.generateBuildConfig.enabled = false
     }
 }
 
 repositories {
-    mavenCentral()
+    google()
+    maven {
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url("$rootDir/../node_modules/react-native/android")
+    }
+    jcenter()
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
+    //noinspection GradleDynamicVersion
+    api 'com.facebook.react:react-native:+'
+    implementation "jp.pay:payjp-android:1.1.2"
+    implementation "jp.pay:payjp-android-cardio:1.1.2"
 }
-  
