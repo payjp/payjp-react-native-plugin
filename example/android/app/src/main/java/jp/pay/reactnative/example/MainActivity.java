@@ -1,4 +1,4 @@
-package com.example;
+package jp.pay.reactnative.example;
 
 import com.facebook.react.ReactActivity;
 
