@@ -10,7 +10,7 @@
 
 import React from "react";
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from "react-native";
-import { hello, doStuff } from "payjp-react-native";
+import { hello } from "payjp-react-native";
 
 const App = (): React.ReactElement => {
     return (
