@@ -9,8 +9,8 @@
  */
 
 import React from "react";
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from "react-native";
-import { hello } from "payjp-react-native";
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button } from "react-native";
+import { test } from "payjp-react-native";
 
 const App = (): React.ReactElement => {
     return (
@@ -27,8 +27,8 @@ const App = (): React.ReactElement => {
                             </Text>
                         </View>
                         <View style={styles.sectionContainer}>
-                            <Text style={styles.sectionTitle}>OS Version</Text>
-                            <Text style={styles.sectionDescription}>{hello()}</Text>
+                            <Text style={styles.sectionTitle}>Native Call</Text>
+                            <Button title="click" onPress={(): void => test()} />
                         </View>
                     </View>
                 </ScrollView>

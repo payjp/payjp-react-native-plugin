@@ -39,7 +39,7 @@ repositories {
 
 dependencies {
     //noinspection GradleDynamicVersion
-    api 'com.facebook.react:react-native:+'
+    implementation 'com.facebook.react:react-native:+'
     implementation "jp.pay:payjp-android:1.1.2"
     implementation "jp.pay:payjp-android-cardio:1.1.2"
 }

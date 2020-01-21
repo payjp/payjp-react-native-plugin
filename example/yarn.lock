@@ -4649,6 +4649,12 @@ path-type@^3.0.0:
   dependencies:
     pify "^3.0.0"
 
+"payjp-react-native@file:..":
+  version "0.0.0"
+  dependencies:
+    react "~16.9.0"
+    react-native "^0.61.5"
+
 "payjp-react-native@file:../":
   version "0.0.0"
   dependencies:
