@@ -2,6 +2,8 @@ package jp.pay.reactnative;
 
 import android.text.TextUtils;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.os.LocaleListCompat;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,17 +13,23 @@ import com.facebook.react.module.annotations.ReactModule;
 import java.util.Locale;
 import jp.pay.android.Payjp;
 import jp.pay.android.PayjpConfiguration;
+import jp.pay.android.PayjpTokenBackgroundHandler;
 import jp.pay.android.cardio.PayjpCardScannerPlugin;
 
 @ReactModule(name = PayjpModule.MODULE_NAME)
 public class PayjpModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "Payjp";
 
-  private final ReactApplicationContext reactContext;
+  @NonNull private final ReactApplicationContext reactContext;
+  @Nullable private final PayjpTokenBackgroundHandler tokenBackgroundHandler;
 
-  public PayjpModule(ReactApplicationContext reactContext) {
+  public PayjpModule(
+      @NonNull ReactApplicationContext reactContext,
+      @Nullable PayjpTokenBackgroundHandler tokenBackgroundHandler
+  ) {
     super(reactContext);
     this.reactContext = reactContext;
+    this.tokenBackgroundHandler = tokenBackgroundHandler;
   }
 
   @Override
@@ -53,7 +61,7 @@ public class PayjpModule extends ReactContextBaseJavaModule {
             .setDebugEnabled(debugEnabled)
             .setCardScannerPlugin(PayjpCardScannerPlugin.INSTANCE)
             .setLocale(locale)
-            // TODO: .setTokenBackgroundHandler()
+            .setTokenBackgroundHandler(tokenBackgroundHandler)
             .build()
     );
   }

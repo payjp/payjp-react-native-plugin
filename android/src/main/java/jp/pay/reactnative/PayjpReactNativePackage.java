@@ -1,5 +1,6 @@
 package jp.pay.reactnative;
 
+import androidx.annotation.NonNull;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -12,10 +13,11 @@ import com.facebook.react.bridge.JavaScriptModule;
 
 public class PayjpReactNativePackage implements ReactPackage {
   @Override
-  public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+  public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
+    PayjpCardFormModule cardFormModule = new PayjpCardFormModule(reactContext);
     return Arrays.<NativeModule>asList(
-        new PayjpModule(reactContext),
-        new PayjpCardFormModule(reactContext)
+        new PayjpModule(reactContext, cardFormModule),
+        cardFormModule
     );
   }
 
@@ -25,7 +27,7 @@ public class PayjpReactNativePackage implements ReactPackage {
   }
 
   @Override
-  public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+  public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
     return Collections.emptyList();
   }
 }
