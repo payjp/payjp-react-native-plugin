@@ -17,13 +17,13 @@ const App = (): React.ReactElement => {
         PayjpCore.init({ publicKey: "pk_test_0383a1b8f91e8a6e3ea0e2a9" });
         const unsubscribe = PayjpCardForm.onCardFormUpdate({
             onCardFormCanceled: () => {
-                console.log("canceled");
+                console.warn("PAY.JP canceled");
             },
             onCardFormCompleted: () => {
-                console.log("completed");
+                console.warn("PAY.JP completed");
             },
             onCardFormProducedToken: token => {
-                console.log("token => ", token);
+                console.log("PAY.JP token => ", token);
                 PayjpCardForm.completeCardForm();
             }
         });

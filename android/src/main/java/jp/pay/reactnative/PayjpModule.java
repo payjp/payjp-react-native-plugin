@@ -38,11 +38,6 @@ public class PayjpModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void test() {
-    Toast.makeText(reactContext.getApplicationContext(), "payjp", Toast.LENGTH_SHORT).show();
-  }
-
-  @ReactMethod
   public void initialize(ReadableMap arguments) {
     final String publicKey = arguments.getString("publicKey");
     if (publicKey == null) {

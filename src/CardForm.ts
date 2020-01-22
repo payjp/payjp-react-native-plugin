@@ -8,6 +8,21 @@ type OnCardFormCanceled = () => void;
 type OnCardFormCompleted = () => void;
 type OnCardFormProducedToken = (token: any) => void; // TODO: type
 
+type OnCardFormUpdateObserver = {
+    /**
+     * カードフォームがキャンセルされたとき
+     */
+    onCardFormCanceled: OnCardFormCanceled;
+    /**
+     * カードフォームが完了したとき
+     */
+    onCardFormCompleted: OnCardFormCompleted;
+    /**
+     * カードフォームでトークンが生成されたとき
+     */
+    onCardFormProducedToken: OnCardFormProducedToken;
+};
+
 const onCardFormCanceledSet: Set<OnCardFormCanceled> = new Set();
 const onCardFormCompletedSet: Set<OnCardFormCompleted> = new Set();
 const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
@@ -44,13 +59,9 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  * @param options カードフォームの更新を受け取るリスナー
  * @returns unsubscribe function リスナーを解除する（多くの場合アンマウント時にコールする）関数
  */
-export const onCardFormUpdate = (options: {
-    onCardFormCanceled: OnCardFormCanceled;
-    onCardFormCompleted: OnCardFormCompleted;
-    onCardFormProducedToken: OnCardFormProducedToken;
-}): (() => void) => {
-    const { onCardFormCanceled, onCardFormCompleted, onCardFormProducedToken } = options;
-    const unsubscribeNative = connectCardForm();
+export const onCardFormUpdate = (observer: OnCardFormUpdateObserver): (() => void) => {
+    const { onCardFormCanceled, onCardFormCompleted, onCardFormProducedToken } = observer;
+    //    const unsubscribeNative = connectCardForm();
     onCardFormCanceledSet.add(onCardFormCanceled);
     onCardFormCompletedSet.add(onCardFormCompleted);
     onCardFormProducedTokenSet.add(onCardFormProducedToken);
