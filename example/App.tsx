@@ -8,11 +8,28 @@
  * @format
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button } from "react-native";
-import { test } from "payjp-react-native";
+import { PayjpCore, PayjpCardForm } from "payjp-react-native";
 
 const App = (): React.ReactElement => {
+    useEffect(() => {
+        PayjpCore.init({ publicKey: "pk_test_0383a1b8f91e8a6e3ea0e2a9" });
+        const unsubscribe = PayjpCardForm.onCardFormUpdate({
+            onCardFormCanceled: () => {
+                console.log("canceled");
+            },
+            onCardFormCompleted: () => {
+                console.log("completed");
+            },
+            onCardFormProducedToken: token => {
+                console.log("token => ", token);
+                PayjpCardForm.completeCardForm();
+            }
+        });
+        return (): void => unsubscribe();
+    }, []);
+
     return (
         <>
             <StatusBar barStyle="dark-content" />
@@ -27,8 +44,13 @@ const App = (): React.ReactElement => {
                             </Text>
                         </View>
                         <View style={styles.sectionContainer}>
-                            <Text style={styles.sectionTitle}>Native Call</Text>
-                            <Button title="click" onPress={(): void => test()} />
+                            <Text style={styles.sectionTitle}>Card Form</Text>
+                            <Button
+                                title="click"
+                                onPress={(): void => {
+                                    PayjpCardForm.startCardForm();
+                                }}
+                            />
                         </View>
                     </View>
                 </ScrollView>

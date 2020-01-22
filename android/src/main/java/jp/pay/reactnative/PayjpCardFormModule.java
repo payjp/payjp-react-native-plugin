@@ -41,6 +41,7 @@ public class PayjpCardFormModule extends ReactContextBaseJavaModule implements
     this.reactContext = reactContext;
     this.mainThreadHandler = new Handler(Looper.getMainLooper());
     this.reference = new AtomicReference<>();
+    reactContext.addActivityEventListener(this);
   }
 
   @Override
