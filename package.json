@@ -11,14 +11,16 @@
   "author": "yatatsu",
   "homepage": "https://github.com/payjp/payjp-react-native",
   "license": "MIT",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
   "directories": {
     "test": "__tests__"
   },
   "files": [
     "lib/src",
-    "src"
+    "src",
+    "react-native.config.js",
+    "android/"
   ],
   "repository": {
     "type": "git",
@@ -38,7 +40,7 @@
   },
   "dependencies": {
     "react": "~16.9.0",
-    "react-native": "~0.61.4"
+    "react-native": "^0.61.5"
   },
   "devDependencies": {
     "@types/react": "~16.9.0",

@@ -1,21 +1,68 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { hello } from "payjp-react-native";
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * Generated with the TypeScript template
+ * https://github.com/react-native-community/react-native-template-typescript
+ *
+ * @format
+ */
 
-export default function App(): React.ReactElement {
+import React from "react";
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button } from "react-native";
+import { test } from "payjp-react-native";
+
+const App = (): React.ReactElement => {
     return (
-        <View style={styles.container}>
-            <Text>Open up App.tsx to start working on your app!</Text>
-            <Text>{hello()}</Text>
-        </View>
+        <>
+            <StatusBar barStyle="dark-content" />
+            <SafeAreaView>
+                <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
+                    <View style={styles.body}>
+                        <View style={styles.sectionContainer}>
+                            <Text style={styles.sectionTitle}>Step One</Text>
+                            <Text style={styles.sectionDescription}>
+                                Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then come
+                                back to see your edits.
+                            </Text>
+                        </View>
+                        <View style={styles.sectionContainer}>
+                            <Text style={styles.sectionTitle}>Native Call</Text>
+                            <Button title="click" onPress={(): void => test()} />
+                        </View>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        </>
     );
-}
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center"
+    scrollView: {},
+    body: {},
+    sectionContainer: {
+        marginTop: 32,
+        paddingHorizontal: 24
+    },
+    sectionTitle: {
+        fontSize: 24,
+        fontWeight: "600"
+    },
+    sectionDescription: {
+        marginTop: 8,
+        fontSize: 18,
+        fontWeight: "400"
+    },
+    highlight: {
+        fontWeight: "700"
+    },
+    footer: {
+        fontSize: 12,
+        fontWeight: "600",
+        padding: 4,
+        paddingRight: 12,
+        textAlign: "right"
     }
 });
+
+export default App;

@@ -6,6 +6,8 @@ export { hello };
 
 import { NativeModules } from "react-native";
 
-const { RNPayjpLibrary } = NativeModules;
+const { Payjp } = NativeModules;
 
-export { RNPayjpLibrary };
+export const test = async (): Promise<number | null> => {
+    return await Payjp.test();
+};
