@@ -10,7 +10,8 @@
 #else
 #import <React/RCTBridgeModule.h>
 #endif
+@import PAYJP;
 
-@interface PayjpCardForm : NSObject <RCTBridgeModule>
+@interface PayjpCardForm : NSObject <RCTBridgeModule, PAYCardFormViewControllerDelegate>
 
 @end
