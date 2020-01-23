@@ -8,4 +8,3 @@
 @interface Payjp : NSObject <RCTBridgeModule>
 
 @end
-  

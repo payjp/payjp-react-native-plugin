@@ -2,16 +2,18 @@
 #import "Payjp.h"
 @import PAYJP;
 
-NSString *const PAYJPPublicKey = @"pk_test_0383a1b8f91e8a6e3ea0e2a9";
-
 @implementation Payjp
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(initialize) {
-  PAYJPSDK.publicKey = PAYJPPublicKey;
-  PAYJPSDK.locale = [NSLocale currentLocale];
+RCT_EXPORT_METHOD(initialize:(NSDictionary *)arguments) {
+  PAYJPSDK.publicKey = [arguments valueForKey:@"publicKey"];
+  NSString *localeString = [arguments valueForKey:@"locale"];
+  if (localeString != nil) {
+      PAYJPSDK.locale = [NSLocale localeWithLocaleIdentifier:localeString];
+  } else {
+      PAYJPSDK.locale = [NSLocale currentLocale];
+  }
 }
 
 @end
-  
