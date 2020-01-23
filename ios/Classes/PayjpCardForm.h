@@ -10,8 +10,9 @@
 #else
 #import <React/RCTBridgeModule.h>
 #endif
+#import <React/RCTEventEmitter.h>
 @import PAYJP;
 
-@interface PayjpCardForm : NSObject <RCTBridgeModule, PAYCardFormViewControllerDelegate>
+@interface PayjpCardForm : RCTEventEmitter <RCTBridgeModule, PAYCardFormViewControllerDelegate>
 
 @end

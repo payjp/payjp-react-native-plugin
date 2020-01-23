@@ -10,6 +10,12 @@
 
 @implementation PayjpCardForm
 
+- (NSArray<NSString *> *)supportedEvents {
+    return @[@"onCardFormCanceled",
+             @"onCardFormCompleted",
+             @"onCardFormProducedToken"];
+}
+
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId) {
@@ -25,6 +31,14 @@ RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId) {
         UINavigationController *navigationController = [UINavigationController.new initWithRootViewController:cardForm];
         [hostViewController presentViewController:navigationController animated:YES completion:nil];
     }
+}
+
+RCT_EXPORT_METHOD(completeCardForm) {
+    NSLog(@"completeCardForm");
+}
+
+RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message) {
+    NSLog(@"showTokenProcessingError %@", message);
 }
 
 - (void)cardFormViewController:(PAYCardFormViewController *)_
