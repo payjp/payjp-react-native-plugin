@@ -24,6 +24,7 @@ const App = (): React.ReactElement => {
             },
             onCardFormProducedToken: token => {
                 console.log("PAY.JP token => ", token);
+                // NOTE: Send token to your server.
                 PayjpCardForm.completeCardForm();
             }
         });

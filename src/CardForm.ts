@@ -61,7 +61,7 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  */
 export const onCardFormUpdate = (observer: OnCardFormUpdateObserver): (() => void) => {
     const { onCardFormCanceled, onCardFormCompleted, onCardFormProducedToken } = observer;
-    //    const unsubscribeNative = connectCardForm();
+    const unsubscribeNative = connectCardForm();
     onCardFormCanceledSet.add(onCardFormCanceled);
     onCardFormCompletedSet.add(onCardFormCompleted);
     onCardFormProducedTokenSet.add(onCardFormProducedToken);
