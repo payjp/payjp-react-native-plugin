@@ -39,7 +39,7 @@ jobs:
           paths:
             - node_modules
           key: *primary_key_of_node_cache
-      - run: yarn eslint
+      - run: yarn lint
       - run: yarn build 
 
 workflows:

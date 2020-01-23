@@ -13,7 +13,7 @@
     "test": "openapi-generator validate -i openapi/token-api.yaml",
     "generate": "./generate.sh",
     "postinstall": "npm run pull",
-    "copy": "cp -r src/models ../src/models",
+    "copy": "cp -r src/models ../src",
     "bootstrap": "npm run generate && npm run copy"
   },
   "devDependencies": {
