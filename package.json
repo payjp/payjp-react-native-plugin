@@ -38,7 +38,7 @@
   "bugs": {
     "url": "https://github.com/payjp/payjp-react-native/issues"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "~16.9.0",
     "react-native": "^0.61.5"
   },
