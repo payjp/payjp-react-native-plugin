@@ -1,4 +1,5 @@
 import { NativeModules, NativeEventEmitter } from "react-native";
+import { Token } from "./models";
 
 const { PayjpCardForm } = NativeModules;
 
@@ -6,7 +7,7 @@ const cardFormEventEmitter = new NativeEventEmitter(PayjpCardForm);
 
 type OnCardFormCanceled = () => void;
 type OnCardFormCompleted = () => void;
-type OnCardFormProducedToken = (token: any) => void; // TODO: type
+type OnCardFormProducedToken = (token: Token) => void;
 
 type OnCardFormUpdateObserver = {
     /**
