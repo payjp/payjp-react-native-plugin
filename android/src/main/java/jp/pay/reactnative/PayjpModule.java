@@ -1,7 +1,6 @@
 package jp.pay.reactnative;
 
 import android.text.TextUtils;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.os.LocaleListCompat;
@@ -35,11 +34,6 @@ public class PayjpModule extends ReactContextBaseJavaModule {
   @Override
   public String getName() {
     return MODULE_NAME;
-  }
-
-  @ReactMethod
-  public void test() {
-    Toast.makeText(reactContext.getApplicationContext(), "payjp", Toast.LENGTH_SHORT).show();
   }
 
   @ReactMethod

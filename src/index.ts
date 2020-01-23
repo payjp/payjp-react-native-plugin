@@ -1,13 +1,4 @@
-const hello = (): string => {
-    return "hello react native!!";
-};
+import * as PayjpCardForm from "./CardForm";
+import * as PayjpCore from "./Core";
 
-export { hello };
-
-import { NativeModules } from "react-native";
-
-const { Payjp } = NativeModules;
-
-export const test = async (): Promise<number | null> => {
-    return await Payjp.test();
-};
+export { PayjpCore, PayjpCardForm };
