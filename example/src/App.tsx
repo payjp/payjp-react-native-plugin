@@ -10,11 +10,26 @@
 
 import React, { useEffect } from "react";
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button } from "react-native";
-import { PayjpCore, PayjpCardForm } from "payjp-react-native";
+import { PayjpCore, PayjpCardForm, Token } from "payjp-react-native";
+import { postTokenToBackEnd } from "./SampleApi";
+
+// TODO: REPLACE WITH YOUR PAY.JP PUBLIC KEY
+const PAYJP_PUBLIC_KEY = "pk_test_0383a1b8f91e8a6e3ea0e2a9";
+
+const onProducedToken = async (token: Token): Promise<void> => {
+    try {
+        const response = await postTokenToBackEnd(token);
+        console.log(response);
+        await PayjpCardForm.completeCardForm();
+    } catch (e) {
+        console.warn(e.message);
+        await PayjpCardForm.showTokenProcessingError(e.message);
+    }
+};
 
 const App = (): React.ReactElement => {
     useEffect(() => {
-        PayjpCore.init({ publicKey: "pk_test_0383a1b8f91e8a6e3ea0e2a9" });
+        PayjpCore.init({ publicKey: PAYJP_PUBLIC_KEY });
         const unsubscribe = PayjpCardForm.onCardFormUpdate({
             onCardFormCanceled: () => {
                 console.warn("PAY.JP canceled");
@@ -24,8 +39,7 @@ const App = (): React.ReactElement => {
             },
             onCardFormProducedToken: token => {
                 console.log("PAY.JP token => ", token);
-                // NOTE: Send token to your server.
-                PayjpCardForm.completeCardForm();
+                onProducedToken(token);
             }
         });
         return (): void => unsubscribe();
