@@ -19,18 +19,20 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId) {
-    PAYCardFormViewController *cardForm = [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
-                                                                                                  tenantId:tenantId];
-    cardForm.delegate = self;
-    
-    UIViewController *hostViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
-    if ([hostViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = (UINavigationController*)hostViewController;
-        [navigationController pushViewController:cardForm animated:YES];
-    } else {
-        UINavigationController *navigationController = [UINavigationController.new initWithRootViewController:cardForm];
-        [hostViewController presentViewController:navigationController animated:YES completion:nil];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        PAYCardFormViewController *cardForm = [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
+                                                                                                      tenantId:tenantId];
+        cardForm.delegate = self;
+        UIViewController *hostViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+        if ([hostViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navigationController = (UINavigationController*)hostViewController;
+            [navigationController pushViewController:cardForm animated:YES];
+        } else {
+            UINavigationController *navigationController = [UINavigationController.new initWithRootViewController:cardForm];
+            navigationController.presentationController.delegate = cardForm;
+            [hostViewController presentViewController:navigationController animated:YES completion:nil];
+        }
+    });
 }
 
 RCT_EXPORT_METHOD(completeCardForm) {
