@@ -251,7 +251,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - RNPayjp (from `../../ios`)
+  - RNPayjp (from `../node_modules/payjp-react-native/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -309,7 +309,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   RNPayjp:
-    :path: "../../ios"
+    :path: "../node_modules/payjp-react-native/ios"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -343,6 +343,6 @@ SPEC CHECKSUMS:
   RNPayjp: f24e9ab072bd9f0bfb7b6c9bae9ff21e3cf3cada
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 8fd90042dd3614c7e0fc63744b0861b046640512
+PODFILE CHECKSUM: 2b6fd3e5cc54da008ec5e3f86278818aff5c41bd
 
 COCOAPODS: 1.8.4
