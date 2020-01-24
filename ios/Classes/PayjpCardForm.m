@@ -16,10 +16,14 @@
              @"onCardFormProducedToken"];
 }
 
+- (dispatch_queue_t)methodQueue {
+  return dispatch_get_main_queue();
+}
+
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId) {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async([self methodQueue], ^{
         PAYCardFormViewController *cardForm = [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
                                                                                                       tenantId:tenantId];
         cardForm.delegate = self;
@@ -51,7 +55,7 @@ RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message) {
         break;
       case CardFormResultSuccess:
         NSLog(@"CardFormResultSuccess");
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async([self methodQueue], ^{
           UIViewController *hostViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
           if ([hostViewController isKindOfClass:[UINavigationController class]]) {
               UINavigationController *navigationController = (UINavigationController*)hostViewController;
