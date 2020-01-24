@@ -1,10 +1,6 @@
 import { NativeModules, NativeEventEmitter } from "react-native";
 import { Token } from "./models";
 
-const { PayjpCardForm } = NativeModules;
-
-const cardFormEventEmitter = new NativeEventEmitter(PayjpCardForm);
-
 type OnCardFormCanceled = () => void;
 type OnCardFormCompleted = () => void;
 type OnCardFormProducedToken = (token: Token) => void;
@@ -24,6 +20,8 @@ type OnCardFormUpdateObserver = {
     onCardFormProducedToken: OnCardFormProducedToken;
 };
 
+const { PayjpCardForm } = NativeModules;
+const cardFormEventEmitter = new NativeEventEmitter(PayjpCardForm);
 const onCardFormCanceledSet: Set<OnCardFormCanceled> = new Set();
 const onCardFormCompletedSet: Set<OnCardFormCompleted> = new Set();
 const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
@@ -56,8 +54,9 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
 
 /**
  * カードフォームの更新を受け取ります。
+ * 登録したリスナーを解除するには、返却される関数を実行します。
  *
- * @param options カードフォームの更新を受け取るリスナー
+ * @param observer カードフォームの更新を受け取るリスナー
  * @returns unsubscribe function リスナーを解除する（多くの場合アンマウント時にコールする）関数
  */
 export const onCardFormUpdate = (observer: OnCardFormUpdateObserver): (() => void) => {
