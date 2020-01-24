@@ -7,7 +7,9 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(initialize:(NSDictionary *)arguments) {
+RCT_EXPORT_METHOD(initialize:(NSDictionary *)arguments
+                     resolve:(RCTPromiseResolveBlock)resolve
+                      reject:(__unused RCTPromiseRejectBlock)reject) {
     NSString *publicKey = arguments[@"publicKey"];
     NSAssert([publicKey isKindOfClass:[NSString class]], @"publicKey is null.");
     PAYJPSDK.publicKey = publicKey;
@@ -23,6 +25,7 @@ RCT_EXPORT_METHOD(initialize:(NSDictionary *)arguments) {
     } else {
         PAYJPSDK.locale = [NSLocale currentLocale];
     }
+    resolve([NSNull null]);
 }
 
 @end

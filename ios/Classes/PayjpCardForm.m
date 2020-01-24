@@ -22,7 +22,9 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId) {
+RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId
+                        resolve:(RCTPromiseResolveBlock)resolve
+                         reject:(__unused RCTPromiseRejectBlock)reject) {
     dispatch_async([self methodQueue], ^{
         PAYCardFormViewController *cardForm = [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
                                                                                                       tenantId:tenantId];
@@ -36,15 +38,21 @@ RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId) {
             navigationController.presentationController.delegate = cardForm;
             [hostViewController presentViewController:navigationController animated:YES completion:nil];
         }
+        resolve([NSNull null]);
     });
 }
 
-RCT_EXPORT_METHOD(completeCardForm) {
+RCT_EXPORT_METHOD(completeCard:(RCTPromiseResolveBlock)resolve
+                        reject:(__unused RCTPromiseRejectBlock)reject) {
     NSLog(@"completeCardForm");
+    resolve([NSNull null]);
 }
 
-RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message) {
+RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
+                                   resolve:(RCTPromiseResolveBlock)resolve
+                                    reject:(__unused RCTPromiseRejectBlock)reject) {
     NSLog(@"showTokenProcessingError %@", message);
+    resolve([NSNull null]);
 }
 
 - (void)cardFormViewController:(PAYCardFormViewController *)_

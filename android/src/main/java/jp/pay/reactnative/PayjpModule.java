@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.os.LocaleListCompat;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -37,7 +38,7 @@ public class PayjpModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void initialize(ReadableMap arguments) {
+  public void initialize(ReadableMap arguments, @NonNull Promise promise) {
     final String publicKey = arguments.getString("publicKey");
     if (publicKey == null) {
       throw new IllegalArgumentException("publicKey is null.");
@@ -58,5 +59,6 @@ public class PayjpModule extends ReactContextBaseJavaModule {
             .setTokenBackgroundHandler(tokenBackgroundHandler)
             .build()
     );
+    promise.resolve(null);
   }
 }

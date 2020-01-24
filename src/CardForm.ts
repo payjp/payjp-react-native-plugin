@@ -35,14 +35,14 @@ const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
  * @param tenantId PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. https://pay.jp/docs/platform-tenant-checkout ).
  */
 export const startCardForm = async (tenantId?: string): Promise<void> => {
-    PayjpCardForm.startCardForm(tenantId);
+    await PayjpCardForm.startCardForm(tenantId);
 };
 
 /**
  * カードフォーム画面を閉じます。
  */
 export const completeCardForm = async (): Promise<void> => {
-    PayjpCardForm.completeCardForm();
+    await PayjpCardForm.completeCardForm();
 };
 
 /**
@@ -51,7 +51,7 @@ export const completeCardForm = async (): Promise<void> => {
  * @param message エラーメッセージ
  */
 export const showTokenProcessingError = async (message: string): Promise<void> => {
-    PayjpCardForm.showTokenProcessingError(message);
+    await PayjpCardForm.showTokenProcessingError(message);
 };
 
 /**
