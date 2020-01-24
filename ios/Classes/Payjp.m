@@ -9,11 +9,11 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(initialize:(NSDictionary *)arguments) {
     NSString *publicKey = arguments[@"publicKey"];
-    NSAssert([publicKey isKindOfClass:[NSString class]], @"publicKey is null.");
+    NSAssert(![publicKey isKindOfClass:[NSNull class]], @"publicKey is null.");
     PAYJPSDK.publicKey = publicKey;
     
     NSString *localeString = arguments[@"locale"];
-    if ([localeString isKindOfClass:[NSString class]]) {
+    if (![localeString isKindOfClass:[NSNull class]]) {
         NSLocale *locale = [RCTConvert NSLocale:localeString];
         if (locale != nil) {
             PAYJPSDK.locale = locale;
