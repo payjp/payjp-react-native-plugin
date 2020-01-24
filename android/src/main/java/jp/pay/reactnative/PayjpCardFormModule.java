@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -50,28 +51,35 @@ public class PayjpCardFormModule extends ReactContextBaseJavaModule implements
   }
 
   @ReactMethod
-  public void startCardForm(@Nullable String tenantIdString) {
-    final Activity activity = reactContext.getCurrentActivity();
-    if (activity != null) {
-      final TenantId tenantId = tenantIdString != null ? new TenantId(tenantIdString) : null;
-      Payjp.cardForm().start(activity, CODE_START_CARD_FORM, tenantId);
-    }
+  public void startCardForm(@Nullable final String tenantIdString, @NonNull final Promise promise) {
+    mainThreadHandler.post(new Runnable() {
+      @Override public void run() {
+        final Activity activity = reactContext.getCurrentActivity();
+        if (activity != null) {
+          final TenantId tenantId = tenantIdString != null ? new TenantId(tenantIdString) : null;
+          Payjp.cardForm().start(activity, CODE_START_CARD_FORM, tenantId);
+        }
+        promise.resolve(null);
+      }
+    });
   }
 
   @ReactMethod
-  public void showTokenProcessingError(@NonNull String message) {
+  public void showTokenProcessingError(@NonNull String message, @NonNull Promise promise) {
     reference.set(new CardFormStatus.Error(message));
     if (countDownLatch != null) {
       countDownLatch.countDown();
     }
+    promise.resolve(null);
   }
 
   @ReactMethod
-  public void completeCardForm() {
+  public void completeCardForm(@NonNull Promise promise) {
     reference.set(new CardFormStatus.Complete());
     if (countDownLatch != null) {
       countDownLatch.countDown();
     }
+    promise.resolve(null);
   }
 
   @Override
