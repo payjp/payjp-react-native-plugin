@@ -8,6 +8,12 @@
 #import "PayjpCardForm.h"
 @import PAYJP;
 
+@interface PayjpCardForm()
+
+@property (nonatomic, copy) void (^completionHandler)(NSError * _Nullable);
+
+@end
+
 @implementation PayjpCardForm
 
 - (NSArray<NSString *> *)supportedEvents {
@@ -45,6 +51,10 @@ RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId
 RCT_EXPORT_METHOD(completeCard:(RCTPromiseResolveBlock)resolve
                         reject:(__unused RCTPromiseRejectBlock)reject) {
     NSLog(@"completeCardForm");
+    if (self.completionHandler != nil) {
+        self.completionHandler(nil);
+    }
+    self.completionHandler = nil;
     resolve([NSNull null]);
 }
 
@@ -52,6 +62,12 @@ RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
                                    resolve:(RCTPromiseResolveBlock)resolve
                                     reject:(__unused RCTPromiseRejectBlock)reject) {
     NSLog(@"showTokenProcessingError %@", message);
+    if (self.completionHandler != nil) {
+        NSDictionary *info = @{NSLocalizedDescriptionKey : message};
+        NSError *error = [NSError errorWithDomain:@"payjp" code:0 userInfo:info];
+        self.completionHandler(error);
+    }
+    self.completionHandler = nil;
     resolve([NSNull null]);
 }
 
@@ -80,6 +96,7 @@ RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
                    didProduced:(PAYToken *)token
              completionHandler:(void (^)(NSError * _Nullable))completionHandler {
     NSLog(@"token = %@", token);
+    self.completionHandler = completionHandler;
 }
 
 @end
