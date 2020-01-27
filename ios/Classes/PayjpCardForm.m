@@ -10,7 +10,8 @@
 
 @interface PayjpCardForm()
 
-@property (nonatomic, copy) void (^completionHandler)(NSError * _Nullable);
+typedef void (^CardFormCompletionHandler)(NSError * _Nullable);
+@property (nonatomic, copy) CardFormCompletionHandler completionHandler;
 
 @end
 
