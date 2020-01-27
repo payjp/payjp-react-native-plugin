@@ -8,7 +8,7 @@
 #import "PayjpCardForm.h"
 @import PAYJP;
 
-NSString *const TokenProccessingErrorDomain = @"jp.pay.TokenProccessingErrorDomain";
+NSString *const TokenProcessingErrorDomain = @"jp.pay.TokenProcessingErrorDomain";
 
 @interface PayjpCardForm()
 
@@ -65,7 +65,7 @@ RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
                                     reject:(__unused RCTPromiseRejectBlock)reject) {
     if (self.completionHandler != nil) {
         NSDictionary *info = @{NSLocalizedDescriptionKey : message};
-        NSError *error = [NSError errorWithDomain:TokenProccessingErrorDomain
+        NSError *error = [NSError errorWithDomain:TokenProcessingErrorDomain
                                              code:0
                                          userInfo:info];
         self.completionHandler(error);
