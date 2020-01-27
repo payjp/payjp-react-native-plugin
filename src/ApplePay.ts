@@ -1,63 +1,64 @@
 import { NativeModules, NativeEventEmitter } from "react-native";
 import { Token } from "./models";
 
-type ErrorInfo = {
+/**
+ * エラー情報
+ */
+export type ErrorInfo = {
     errorType: string;
     errorCode: number;
     errorMessage: string;
 };
 
-type OnApplePayProducedToken = (token: Token) => void;
-type OnApplePayFailedRequestToken = (errorInfo: ErrorInfo) => void;
-type OnApplePayCompleted = () => void;
+/**
+ * PAY.JPトークンが生成されたときのリスナー
+ * @param token PAY.JPトークン
+ */
+export type OnApplePayProducedToken = (token: Token) => void;
 
-type OnApplePayUpdateObserver = {
-    /**
-     * PAY.JPトークンが生成されたときのリスナー
-     */
-    onApplePayProducedToken: OnApplePayProducedToken;
-    /**
-     * トークンのリクエストに失敗したときのリスナー
-     */
-    onApplePayFailedRequestToken: OnApplePayFailedRequestToken;
-    /**
-     * Apple Payが完了したときのリスナー
-     */
-    onApplePayCompleted: OnApplePayCompleted;
-};
+/**
+ * トークンのリクエストに失敗したときのリスナー
+ * @param errorInfo エラー情報
+ */
+export type OnApplePayFailedRequestToken = (errorInfo: ErrorInfo) => void;
+
+/**
+ * Apple Payが完了したときのリスナー
+ */
+export type OnApplePayCompleted = () => void;
 
 /**
  * Apple Payで支払いをリクエストするときに必要な情報
- * @see https://developer.apple.com/documentation/passkit/pkpaymentrequest
+ * @see {@link https://developer.apple.com/documentation/passkit/pkpaymentrequest}
  */
-type ApplePayAuthorizationOption = {
+export type ApplePayAuthorizationOption = {
     /**
      * AppleのMerchantId
      * 例: `merchant.com.example.www`
      */
-    appleMerchantId: string;
+    readonly appleMerchantId: string;
     /**
      * 通貨を表す(ISO 4217)
      * 例: `JPY`
      */
-    currencyCode: string;
+    readonly currencyCode: string;
     /**
      * 国を表すコード(ISO 3166)
      * 例: `JP`
      */
-    countryCode: string;
+    readonly countryCode: string;
     /**
      * 表示されるサマリーアイテムの名前
      */
-    summaryItemLabel: string;
+    readonly summaryItemLabel: string;
     /**
      * 表示されるサマリーアイテムの金額
      */
-    summaryItemAmount: string;
+    readonly summaryItemAmount: string;
     /**
      * 住所を要求するかどうか
      */
-    requiredBillingAddress?: boolean;
+    readonly requiredBillingAddress?: boolean;
 };
 
 const { PayjpApplePay } = NativeModules;
@@ -68,6 +69,8 @@ const onApplePayCompletedSet: Set<OnApplePayCompleted> = new Set();
 
 /**
  * ApplePayが利用可能かどうか
+ *
+ * cf. [canMakePayments](https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/1616192-canmakepayments)
  */
 export const isApplePayAvailable = async (): Promise<boolean> => {
     return PayjpApplePay.isApplePayAvailable();
@@ -76,7 +79,8 @@ export const isApplePayAvailable = async (): Promise<boolean> => {
 /**
  * Apple Payの支払い認証フローを開始します。
  * AppleのMerchant IDが必要です。
- * フローの更新イベントを受け取るには、`onApplePayUpdate` にリスナーを登録してください。
+ * フローの更新イベントを受け取るには、{@link onApplePayUpdate} にリスナーを登録してください。
+ * Apple Payのペイメントシートを閉じるには {@link completeApplePay} を呼ぶ必要があります。
  *
  * @param option Apple PayのPaymentRequestに必要な情報
  */
@@ -89,12 +93,11 @@ export const makeApplePayToken = async (option: ApplePayAuthorizationOption): Pr
 };
 
 /**
- * Apple Payによる支払いフローが成功したかどうかを伝えます。
- * {@link isSuccess} がtrueの場合はそのままApple Payのフローが終了し、
- * falseの場合はエラーUIを表示します。
+ * Apple Payによる支払いの成功可否を伝え、支払いフローを完了させます。
+ * `isSuccess` がtrueの場合は成功の、falseの場合はエラーのUIを表示します。
  *
  * @param isSuccess Apple Payによるオーソリゼーションに成功したか（trueなら成功）
- * @param errorMessage {@link isSuccess} がfalseのときに表示するエラーメッセージ
+ * @param errorMessage エラーメッセージ
  */
 export const completeApplePay = async (isSuccess: boolean, errorMessage: string | null = null): Promise<void> => {
     await PayjpApplePay.completeApplePay(isSuccess, errorMessage);
@@ -107,7 +110,11 @@ export const completeApplePay = async (isSuccess: boolean, errorMessage: string 
  * @param observer Apple Payによる支払いフローの更新を受け取るリスナー
  * @returns unsubscribe function リスナーを解除する関数
  */
-export const onApplePayUpdate = (observer: OnApplePayUpdateObserver): (() => void) => {
+export const onApplePayUpdate = (observer: {
+    onApplePayProducedToken: OnApplePayProducedToken;
+    onApplePayFailedRequestToken: OnApplePayFailedRequestToken;
+    onApplePayCompleted: OnApplePayCompleted;
+}): (() => void) => {
     const { onApplePayProducedToken, onApplePayFailedRequestToken, onApplePayCompleted } = observer;
     const disconnect = connectApplePayEvent();
     onApplePayProducedTokenSet.add(onApplePayProducedToken);

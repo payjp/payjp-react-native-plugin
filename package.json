@@ -38,7 +38,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --cache \"{src,test}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint --fix --cache \"{src,test}/**/*.{ts,tsx}\"",
-    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'"
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
+    "docs": "typedoc --out docs src/",
+    "prepublishOnly": "npm run clean build docs"
   },
   "bugs": {
     "url": "https://github.com/payjp/payjp-react-native/issues"
@@ -60,6 +62,7 @@
     "lint-staged": "^9.2.5",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
+    "typedoc": "^0.16.9",
     "typescript": "^3.7.5"
   },
   "lint-staged": {
