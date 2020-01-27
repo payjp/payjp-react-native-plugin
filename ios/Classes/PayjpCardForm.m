@@ -8,6 +8,15 @@
 #import "PayjpCardForm.h"
 @import PAYJP;
 
+NSString *const TokenProcessingErrorDomain = @"jp.pay.TokenProcessingErrorDomain";
+
+@interface PayjpCardForm()
+
+typedef void (^CardFormCompletionHandler)(NSError * _Nullable);
+@property (nonatomic, copy) CardFormCompletionHandler completionHandler;
+
+@end
+
 @implementation PayjpCardForm
 
 - (NSArray<NSString *> *)supportedEvents {
@@ -42,16 +51,26 @@ RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId
     });
 }
 
-RCT_EXPORT_METHOD(completeCard:(RCTPromiseResolveBlock)resolve
-                        reject:(__unused RCTPromiseRejectBlock)reject) {
-    NSLog(@"completeCardForm");
+RCT_EXPORT_METHOD(completeCardForm:(RCTPromiseResolveBlock)resolve
+                            reject:(__unused RCTPromiseRejectBlock)reject) {
+    if (self.completionHandler != nil) {
+        self.completionHandler(nil);
+    }
+    self.completionHandler = nil;
     resolve([NSNull null]);
 }
 
 RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
                                    resolve:(RCTPromiseResolveBlock)resolve
                                     reject:(__unused RCTPromiseRejectBlock)reject) {
-    NSLog(@"showTokenProcessingError %@", message);
+    if (self.completionHandler != nil) {
+        NSDictionary *info = @{NSLocalizedDescriptionKey : message};
+        NSError *error = [NSError errorWithDomain:TokenProcessingErrorDomain
+                                             code:0
+                                         userInfo:info];
+        self.completionHandler(error);
+    }
+    self.completionHandler = nil;
     resolve([NSNull null]);
 }
 
@@ -59,10 +78,10 @@ RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
                didCompleteWith:(enum CardFormResult)result {
     switch (result) {
       case CardFormResultCancel:
-        NSLog(@"CardFormResultCancel");
+        [self sendEventWithName:@"onCardFormCanceled" body:nil];
         break;
       case CardFormResultSuccess:
-        NSLog(@"CardFormResultSuccess");
+        [self sendEventWithName:@"onCardFormCompleted" body:nil];
         dispatch_async([self methodQueue], ^{
           UIViewController *hostViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
           if ([hostViewController isKindOfClass:[UINavigationController class]]) {
@@ -79,7 +98,8 @@ RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
 - (void)cardFormViewController:(PAYCardFormViewController *)_
                    didProduced:(PAYToken *)token
              completionHandler:(void (^)(NSError * _Nullable))completionHandler {
-    NSLog(@"token = %@", token);
+    self.completionHandler = completionHandler;
+    [self sendEventWithName:@"onCardFormProducedToken" body:token.rawValue];
 }
 
 @end
