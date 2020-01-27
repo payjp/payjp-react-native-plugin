@@ -1,14 +1,18 @@
 {
   "name": "payjp-react-native",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "PAY.JP SDK for React Native",
+  "description": "A React Native plugin for PAY.JP SDK",
   "keywords": [
     "PAY.JP",
     "payment processing",
     "react native"
   ],
-  "author": "yatatsu",
+  "author": {
+    "name": "PAY.JP",
+    "email": "support@pay.jp",
+    "url": "https://pay.jp"
+  },
   "homepage": "https://github.com/payjp/payjp-react-native",
   "license": "MIT",
   "main": "lib/src/index.js",
@@ -19,8 +23,9 @@
   "files": [
     "lib/src",
     "src",
-    "react-native.config.js",
-    "android/"
+    "android/",
+    "ios",
+    "payjp-react-native.podspec"
   ],
   "repository": {
     "type": "git",
