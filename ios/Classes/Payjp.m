@@ -3,6 +3,8 @@
 #import <React/RCTConvert.h>
 @import PAYJP;
 
+NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
+
 @implementation Payjp
 
 RCT_EXPORT_MODULE()
