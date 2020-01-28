@@ -6,23 +6,20 @@
 //
 
 #import "PayjpCardForm.h"
+#import "Payjp.h"
 @import PAYJP;
 
-NSString *const TokenProcessingErrorDomain = @"jp.pay.TokenProcessingErrorDomain";
+@interface PayjpCardForm ()
 
-@interface PayjpCardForm()
-
-typedef void (^CardFormCompletionHandler)(NSError * _Nullable);
-@property (nonatomic, copy) CardFormCompletionHandler completionHandler;
+typedef void (^CardFormCompletionHandler)(NSError *_Nullable);
+@property(nonatomic, copy) CardFormCompletionHandler completionHandler;
 
 @end
 
 @implementation PayjpCardForm
 
 - (NSArray<NSString *> *)supportedEvents {
-    return @[@"onCardFormCanceled",
-             @"onCardFormCompleted",
-             @"onCardFormProducedToken"];
+  return @[ @"onCardFormCanceled", @"onCardFormCompleted", @"onCardFormProducedToken" ];
 }
 
 - (dispatch_queue_t)methodQueue {
@@ -31,75 +28,80 @@ typedef void (^CardFormCompletionHandler)(NSError * _Nullable);
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId
-                        resolve:(RCTPromiseResolveBlock)resolve
-                         reject:(__unused RCTPromiseRejectBlock)reject) {
-    dispatch_async([self methodQueue], ^{
-        PAYCardFormViewController *cardForm = [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
-                                                                                                      tenantId:tenantId];
-        cardForm.delegate = self;
-        UIViewController *hostViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
-        if ([hostViewController isKindOfClass:[UINavigationController class]]) {
-            UINavigationController *navigationController = (UINavigationController*)hostViewController;
-            [navigationController pushViewController:cardForm animated:YES];
-        } else {
-            UINavigationController *navigationController = [UINavigationController.new initWithRootViewController:cardForm];
-            navigationController.presentationController.delegate = cardForm;
-            [hostViewController presentViewController:navigationController animated:YES completion:nil];
-        }
-        resolve([NSNull null]);
-    });
+RCT_EXPORT_METHOD(startCardForm
+                  : (NSString *)tenantId resolve
+                  : (RCTPromiseResolveBlock)resolve reject
+                  : (__unused RCTPromiseRejectBlock)reject) {
+  dispatch_async([self methodQueue], ^{
+    PAYCardFormViewController *cardForm =
+        [PAYCardFormViewController createCardFormViewControllerWithStyle:nil tenantId:tenantId];
+    cardForm.delegate = self;
+    UIViewController *hostViewController =
+        UIApplication.sharedApplication.keyWindow.rootViewController;
+    if ([hostViewController isKindOfClass:[UINavigationController class]]) {
+      UINavigationController *navigationController = (UINavigationController *)hostViewController;
+      [navigationController pushViewController:cardForm animated:YES];
+    } else {
+      UINavigationController *navigationController =
+          [UINavigationController.new initWithRootViewController:cardForm];
+      navigationController.presentationController.delegate = cardForm;
+      [hostViewController presentViewController:navigationController animated:YES completion:nil];
+    }
+    resolve([NSNull null]);
+  });
 }
 
-RCT_EXPORT_METHOD(completeCardForm:(RCTPromiseResolveBlock)resolve
-                            reject:(__unused RCTPromiseRejectBlock)reject) {
-    if (self.completionHandler != nil) {
-        self.completionHandler(nil);
-    }
-    self.completionHandler = nil;
-    resolve([NSNull null]);
+RCT_EXPORT_METHOD(completeCardForm
+                  : (RCTPromiseResolveBlock)resolve reject
+                  : (__unused RCTPromiseRejectBlock)reject) {
+  if (self.completionHandler != nil) {
+    self.completionHandler(nil);
+  }
+  self.completionHandler = nil;
+  resolve([NSNull null]);
 }
 
-RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
-                                   resolve:(RCTPromiseResolveBlock)resolve
-                                    reject:(__unused RCTPromiseRejectBlock)reject) {
-    if (self.completionHandler != nil) {
-        NSDictionary *info = @{NSLocalizedDescriptionKey : message};
-        NSError *error = [NSError errorWithDomain:TokenProcessingErrorDomain
-                                             code:0
-                                         userInfo:info];
-        self.completionHandler(error);
-    }
-    self.completionHandler = nil;
-    resolve([NSNull null]);
+RCT_EXPORT_METHOD(showTokenProcessingError
+                  : (NSString *)message resolve
+                  : (RCTPromiseResolveBlock)resolve reject
+                  : (__unused RCTPromiseRejectBlock)reject) {
+  if (self.completionHandler != nil) {
+    NSDictionary *info = @{NSLocalizedDescriptionKey : message};
+    NSError *error = [NSError errorWithDomain:RNPAYErrorDomain code:0 userInfo:info];
+    self.completionHandler(error);
+  }
+  self.completionHandler = nil;
+  resolve([NSNull null]);
 }
 
 - (void)cardFormViewController:(PAYCardFormViewController *)_
                didCompleteWith:(enum CardFormResult)result {
-    switch (result) {
-      case CardFormResultCancel:
-        [self sendEventWithName:@"onCardFormCanceled" body:nil];
-        break;
-      case CardFormResultSuccess:
-        [self sendEventWithName:@"onCardFormCompleted" body:nil];
-        dispatch_async([self methodQueue], ^{
-          UIViewController *hostViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
-          if ([hostViewController isKindOfClass:[UINavigationController class]]) {
-              UINavigationController *navigationController = (UINavigationController*)hostViewController;
-              [navigationController popViewControllerAnimated:YES];
-          } else {
-              [hostViewController dismissViewControllerAnimated:YES completion:nil];
-          }
-        });
-        break;
-    }
+  switch (result) {
+    case CardFormResultCancel:
+      [self sendEventWithName:@"onCardFormCanceled" body:nil];
+      break;
+    case CardFormResultSuccess:
+      [self sendEventWithName:@"onCardFormCompleted" body:nil];
+      dispatch_async([self methodQueue], ^{
+        UIViewController *hostViewController =
+            UIApplication.sharedApplication.keyWindow.rootViewController;
+        if ([hostViewController isKindOfClass:[UINavigationController class]]) {
+          UINavigationController *navigationController =
+              (UINavigationController *)hostViewController;
+          [navigationController popViewControllerAnimated:YES];
+        } else {
+          [hostViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+      });
+      break;
+  }
 }
 
 - (void)cardFormViewController:(PAYCardFormViewController *)_
                    didProduced:(PAYToken *)token
-             completionHandler:(void (^)(NSError * _Nullable))completionHandler {
-    self.completionHandler = completionHandler;
-    [self sendEventWithName:@"onCardFormProducedToken" body:token.rawValue];
+             completionHandler:(void (^)(NSError *_Nullable))completionHandler {
+  self.completionHandler = completionHandler;
+  [self sendEventWithName:@"onCardFormProducedToken" body:token.rawValue];
 }
 
 @end

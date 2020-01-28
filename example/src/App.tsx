@@ -9,12 +9,14 @@
  */
 
 import React, { useEffect } from "react";
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button } from "react-native";
-import { PayjpCore, PayjpCardForm, Token } from "payjp-react-native";
+import { Alert, SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, Platform } from "react-native";
+import { PayjpCore, PayjpCardForm, Token, PayjpApplePay } from "payjp-react-native";
 import { postTokenToBackEnd } from "./SampleApi";
 
 // TODO: REPLACE WITH YOUR PAY.JP PUBLIC KEY
 const PAYJP_PUBLIC_KEY = "pk_test_0383a1b8f91e8a6e3ea0e2a9";
+// TODO: REPLACE WITH YOUR APPLE MERCHANT ID
+const APPLE_MERCHANT_ID = "merchant.jp.pay.example2";
 
 const onProducedToken = async (token: Token): Promise<void> => {
     try {
@@ -27,10 +29,21 @@ const onProducedToken = async (token: Token): Promise<void> => {
     }
 };
 
+const onProducedTokenByApplePay = async (token: Token): Promise<void> => {
+    try {
+        const response = await postTokenToBackEnd(token);
+        console.log(response);
+        await PayjpApplePay.completeApplePay(true);
+    } catch (e) {
+        console.warn(e.message);
+        await PayjpApplePay.completeApplePay(false, e.message);
+    }
+};
+
 const App = (): React.ReactElement => {
     useEffect(() => {
         PayjpCore.init({ publicKey: PAYJP_PUBLIC_KEY });
-        const unsubscribe = PayjpCardForm.onCardFormUpdate({
+        const unsubscribeCardForm = PayjpCardForm.onCardFormUpdate({
             onCardFormCanceled: () => {
                 console.warn("PAY.JP canceled");
             },
@@ -42,7 +55,29 @@ const App = (): React.ReactElement => {
                 onProducedToken(token);
             }
         });
-        return (): void => unsubscribe();
+        const unsubscribeApplePay =
+            Platform.OS == "ios"
+                ? PayjpApplePay.onApplePayUpdate({
+                      onApplePayCompleted: () => {
+                          console.warn("PAY.JP ApplePay completed.");
+                      },
+                      onApplePayFailedRequestToken: error => {
+                          console.warn("error => ", error);
+                          PayjpApplePay.completeApplePay(false, error.errorMessage);
+                      },
+                      onApplePayProducedToken: token => {
+                          console.log("PAY.JP token => ", token);
+                          onProducedTokenByApplePay(token);
+                      }
+                  })
+                : (): void => {
+                      // only ios
+                  };
+
+        return (): void => {
+            unsubscribeCardForm();
+            unsubscribeApplePay();
+        };
     }, []);
 
     return (
@@ -54,19 +89,47 @@ const App = (): React.ReactElement => {
                         <View style={styles.sectionContainer}>
                             <Text style={styles.sectionTitle}>Step One</Text>
                             <Text style={styles.sectionDescription}>
-                                Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then come
-                                back to see your edits.
+                                Edit <Text style={styles.highlight}>App.tsx</Text> to replace{" "}
+                                <Text style={styles.highlight}>PAYJP_PUBLIC_KEY</Text> with your PAY.JP public key.
                             </Text>
                         </View>
                         <View style={styles.sectionContainer}>
                             <Text style={styles.sectionTitle}>Card Form</Text>
+                            <Text style={styles.sectionDescription}>Click following button to start card form.</Text>
                             <Button
-                                title="click"
+                                title="Add Credit Card"
                                 onPress={(): void => {
                                     PayjpCardForm.startCardForm();
                                 }}
                             />
                         </View>
+                        {Platform.OS === "ios" ? (
+                            <View style={styles.sectionContainer}>
+                                <Text style={styles.sectionTitle}>Apple Pay</Text>
+                                <Text style={styles.sectionDescription}>
+                                    Edit <Text style={styles.highlight}>APPLE_MERCHANT_ID</Text> in App.tsx, then start
+                                    Apple Pay.
+                                </Text>
+                                <Button
+                                    title="Buy with Apple Pay"
+                                    onPress={async (): Promise<void> => {
+                                        const available = await PayjpApplePay.isApplePayAvailable();
+                                        if (available) {
+                                            await PayjpApplePay.makeApplePayToken({
+                                                appleMerchantId: APPLE_MERCHANT_ID,
+                                                currencyCode: "JPY",
+                                                countryCode: "JP",
+                                                summaryItemLabel: "PAY.JP T-shirt",
+                                                summaryItemAmount: "100",
+                                                requiredBillingAddress: false
+                                            });
+                                        } else {
+                                            Alert.alert("Apple Pay", "この端末では利用できません。", [{ text: "OK" }]);
+                                        }
+                                    }}
+                                />
+                            </View>
+                        ) : null}
                     </View>
                 </ScrollView>
             </SafeAreaView>
