@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "PAYJP"
+  s.dependency 'PAYJP', '~> 1.1.3'
+  s.dependency 'CardIO', '~> 5.4.1'
 
 end
