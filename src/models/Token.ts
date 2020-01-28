@@ -32,7 +32,7 @@ import { Card, CardFromJSON, CardFromJSONTyped, CardToJSON } from "./";
  */
 export interface Token {
     /**
-     *
+     * tok_で始まる一意なオブジェクトを示す文字列
      * @type {string}
      * @memberof Token
      */
@@ -44,25 +44,25 @@ export interface Token {
      */
     card: Card;
     /**
-     *
+     * このトークン作成時のタイムスタンプ
      * @type {number}
      * @memberof Token
      */
     created: number;
     /**
-     *
+     * 本番環境かどうか
      * @type {boolean}
      * @memberof Token
      */
     livemode: boolean;
     /**
-     *
+     * \\\"token\\\"の固定文字列
      * @type {string}
      * @memberof Token
      */
     object: string;
     /**
-     *
+     * このトークンが使用済みかどうか
      * @type {boolean}
      * @memberof Token
      */
