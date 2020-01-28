@@ -321,7 +321,7 @@ SPEC CHECKSUMS:
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   PAYJP: 7bc916d5d44b24fa49023a2be62796959f4c3878
-  payjp-react-native: 7e93731623fd9d0c0578a53f226112b253b6b589
+  payjp-react-native: c8a5da21e8107bb87172c13c51410a3cd55fa389
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
