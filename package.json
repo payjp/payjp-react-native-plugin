@@ -23,7 +23,7 @@
   "files": [
     "lib/src",
     "src",
-    "android/",
+    "android",
     "ios",
     "payjp-react-native.podspec"
   ],
@@ -59,6 +59,7 @@
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
     "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
     "typescript": "^3.7.5"
   },
   "lint-staged": {
