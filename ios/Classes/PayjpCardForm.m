@@ -31,8 +31,8 @@ typedef void (^CardFormCompletionHandler)(NSError * _Nullable);
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(__unused RCTPromiseRejectBlock)reject) {
+                        resolve:(RCTPromiseResolveBlock)resolve
+                         reject:(__unused RCTPromiseRejectBlock)reject) {
     dispatch_async([self methodQueue], ^{
         PAYCardFormViewController *cardForm = [PAYCardFormViewController createCardFormViewControllerWithStyle:nil
                                                                                                       tenantId:tenantId];
@@ -51,7 +51,7 @@ RCT_EXPORT_METHOD(startCardForm:(NSString *)tenantId
 }
 
 RCT_EXPORT_METHOD(completeCardForm:(RCTPromiseResolveBlock)resolve
-                  reject:(__unused RCTPromiseRejectBlock)reject) {
+                            reject:(__unused RCTPromiseRejectBlock)reject) {
     if (self.completionHandler != nil) {
         self.completionHandler(nil);
     }
@@ -60,8 +60,8 @@ RCT_EXPORT_METHOD(completeCardForm:(RCTPromiseResolveBlock)resolve
 }
 
 RCT_EXPORT_METHOD(showTokenProcessingError:(NSString *)message
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(__unused RCTPromiseRejectBlock)reject) {
+                                   resolve:(RCTPromiseResolveBlock)resolve
+                                    reject:(__unused RCTPromiseRejectBlock)reject) {
     if (self.completionHandler != nil) {
         NSDictionary *info = @{NSLocalizedDescriptionKey : message};
         NSError *error = [NSError errorWithDomain:RNPAYErrorDomain
