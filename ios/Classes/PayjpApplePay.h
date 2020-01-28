@@ -11,6 +11,7 @@
 @import PAYJP;
 @import PassKit;
 
-@interface PayjpApplePay : RCTEventEmitter <RCTBridgeModule, PKPaymentAuthorizationViewControllerDelegate>
+@interface PayjpApplePay
+    : RCTEventEmitter <RCTBridgeModule, PKPaymentAuthorizationViewControllerDelegate>
 
 @end
