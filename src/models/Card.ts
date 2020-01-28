@@ -32,43 +32,43 @@ import { CardBrand, CardBrandFromJSON, CardBrandFromJSONTyped, CardBrandToJSON }
  */
 export interface Card {
     /**
-     *
+     * car_で始まり一意なオブジェクトを示す、最大32桁の文字列
      * @type {string}
      * @memberof Card
      */
     id: string;
     /**
-     *
+     * \\\"card\\\"の固定文字列
      * @type {string}
      * @memberof Card
      */
     object?: string;
     /**
-     *
+     * カード作成時のタイムスタンプ
      * @type {number}
      * @memberof Card
      */
     created?: number;
     /**
-     *
+     * カード保有者名
      * @type {string}
      * @memberof Card
      */
     name?: string | null;
     /**
-     *
+     * カード番号の下四桁
      * @type {string}
      * @memberof Card
      */
     last4?: string;
     /**
-     *
+     * 有効期限月
      * @type {number}
      * @memberof Card
      */
     expMonth?: number;
     /**
-     *
+     * 有効期限年
      * @type {number}
      * @memberof Card
      */
@@ -80,67 +80,67 @@ export interface Card {
      */
     brand?: CardBrand;
     /**
-     *
+     * CVCコードチェックの結果
      * @type {string}
      * @memberof Card
      */
     cvcCheck?: string;
     /**
-     *
+     * このクレジットカード番号に紐づく値。 同一番号のカードからは同一の値が生成されることが保証されており、 トークン化の度にトークンIDは変わりますが、この値は変わりません。
      * @type {string}
      * @memberof Card
      */
     fingerprint?: string;
     /**
-     *
+     * 都道府県
      * @type {string}
      * @memberof Card
      */
     addressState?: string | null;
     /**
-     *
+     * 市区町村
      * @type {string}
      * @memberof Card
      */
     addressCity?: string | null;
     /**
-     *
+     * 番地など
      * @type {string}
      * @memberof Card
      */
     addressLine1?: string | null;
     /**
-     *
+     * 建物名など
      * @type {string}
      * @memberof Card
      */
     addressLine2?: string | null;
     /**
-     *
+     * 2桁のISOコード(e.g. JP)
      * @type {string}
      * @memberof Card
      */
     country?: string | null;
     /**
-     *
+     * 郵便番号
      * @type {string}
      * @memberof Card
      */
     addressZip?: string | null;
     /**
-     *
+     * 郵便番号存在チェックの結果
      * @type {string}
      * @memberof Card
      */
     addressZipCheck?: string;
     /**
-     *
+     * 顧客オブジェクトのID
      * @type {string}
      * @memberof Card
      */
     customer?: string | null;
     /**
-     *
+     * キーバリューの任意データ
      * @type {object}
      * @memberof Card
      */
