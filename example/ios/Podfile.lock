@@ -1,5 +1,6 @@
 PODS:
   - boost-for-react-native (1.63.0)
+  - CardIO (5.4.1)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.61.5)
   - FBReactNativeSpec (0.61.5):
@@ -19,9 +20,10 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - PAYJP (1.1.2)
+  - PAYJP (1.1.3)
   - payjp-react-native (0.1.0):
-    - PAYJP
+    - CardIO (~> 5.4.1)
+    - PAYJP (~> 1.1.3)
     - React
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -257,6 +259,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - CardIO
     - PAYJP
 
 EXTERNAL SOURCES:
@@ -315,6 +318,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
@@ -343,6 +347,6 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 2b6fd3e5cc54da008ec5e3f86278818aff5c41bd
+PODFILE CHECKSUM: 635ef5393d68f83dcd4da860b42a1d05d1d6c671
 
 COCOAPODS: 1.8.4

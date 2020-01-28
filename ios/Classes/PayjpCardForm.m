@@ -32,6 +32,8 @@ RCT_EXPORT_METHOD(startCardForm
                   : (NSString *)tenantId resolve
                   : (RCTPromiseResolveBlock)resolve reject
                   : (__unused RCTPromiseRejectBlock)reject) {
+  NSString *description = [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSCameraUsageDescription"];
+  NSAssert([description length], @"The app's Info.plist must contain an NSCameraUsageDescription key to use scanner in card form.");
   dispatch_async([self methodQueue], ^{
     PAYCardFormViewController *cardForm =
         [PAYCardFormViewController createCardFormViewControllerWithStyle:nil tenantId:tenantId];
