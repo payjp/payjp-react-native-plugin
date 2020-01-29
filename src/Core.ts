@@ -1,3 +1,4 @@
+// LICENSE : MIT
 import { NativeModules } from "react-native";
 
 const { Payjp } = NativeModules;
