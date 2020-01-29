@@ -1,3 +1,4 @@
+// LICENSE : MIT
 import { NativeModules, NativeEventEmitter } from "react-native";
 import { Token } from "./models";
 
