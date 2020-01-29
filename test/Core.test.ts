@@ -3,7 +3,7 @@ import { NativeModules } from "react-native";
 
 jest.mock("react-native", () => ({
     NativeModules: {
-        Payjp: { initialize: jest.fn() }
+        RNPAYCore: { initialize: jest.fn() }
     }
 }));
 
@@ -17,8 +17,8 @@ describe("Test", () => {
         };
         try {
             await PayjpCore.init(option);
-            expect(NativeModules.Payjp.initialize).toHaveBeenCalledTimes(1);
-            expect(NativeModules.Payjp.initialize).toHaveBeenCalledWith(option);
+            expect(NativeModules.RNPAYCore.initialize).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCore.initialize).toHaveBeenCalledWith(option);
             done();
         } catch (e) {
             console.error(e);
