@@ -19,8 +19,8 @@ export type OnCardFormCompleted = () => void;
  */
 export type OnCardFormProducedToken = (token: Token) => void;
 
-const { PayjpCardForm } = NativeModules;
-const cardFormEventEmitter = new NativeEventEmitter(PayjpCardForm);
+const { RNPAYCardForm } = NativeModules;
+const cardFormEventEmitter = new NativeEventEmitter(RNPAYCardForm);
 const onCardFormCanceledSet: Set<OnCardFormCanceled> = new Set();
 const onCardFormCompletedSet: Set<OnCardFormCompleted> = new Set();
 const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
@@ -32,14 +32,14 @@ const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
  * @param tenantId PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. {@link https://pay.jp/docs/platform-tenant-checkout} ).
  */
 export const startCardForm = async (tenantId?: string): Promise<void> => {
-    await PayjpCardForm.startCardForm(tenantId);
+    await RNPAYCardForm.startCardForm(tenantId);
 };
 
 /**
  * カードフォーム画面を閉じます。
  */
 export const completeCardForm = async (): Promise<void> => {
-    await PayjpCardForm.completeCardForm();
+    await RNPAYCardForm.completeCardForm();
 };
 
 /**
@@ -48,7 +48,7 @@ export const completeCardForm = async (): Promise<void> => {
  * @param message エラーメッセージ
  */
 export const showTokenProcessingError = async (message: string): Promise<void> => {
-    await PayjpCardForm.showTokenProcessingError(message);
+    await RNPAYCardForm.showTokenProcessingError(message);
 };
 
 /**

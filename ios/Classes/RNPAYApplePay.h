@@ -21,9 +21,11 @@
  * SOFTWARE.
  */
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+@import PAYJP;
+@import PassKit;
 
-FOUNDATION_EXPORT NSString *const RNPAYErrorDomain;
-
-@interface Payjp : NSObject <RCTBridgeModule>
+@interface RNPAYApplePay
+    : RCTEventEmitter <RCTBridgeModule, PKPaymentAuthorizationViewControllerDelegate>
 
 @end

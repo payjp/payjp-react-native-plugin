@@ -50,7 +50,7 @@ import jp.pay.android.ui.PayjpCardFormResultCallback;
 @ReactModule(name = PayjpCardFormModule.MODULE_NAME)
 public class PayjpCardFormModule extends ReactContextBaseJavaModule implements
     ActivityEventListener, PayjpTokenBackgroundHandler {
-  public static final String MODULE_NAME = "PayjpCardForm";
+  public static final String MODULE_NAME = "RNPAYCardForm";
   private static final int CODE_START_CARD_FORM = 1;
 
   @NonNull private final ReactApplicationContext reactContext;

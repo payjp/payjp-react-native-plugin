@@ -23,9 +23,7 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 @import PAYJP;
-@import PassKit;
 
-@interface PayjpApplePay
-    : RCTEventEmitter <RCTBridgeModule, PKPaymentAuthorizationViewControllerDelegate>
+@interface RNPAYCardForm : RCTEventEmitter <RCTBridgeModule, PAYCardFormViewControllerDelegate>
 
 @end

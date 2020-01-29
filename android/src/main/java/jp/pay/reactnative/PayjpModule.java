@@ -40,7 +40,7 @@ import jp.pay.android.cardio.PayjpCardScannerPlugin;
 
 @ReactModule(name = PayjpModule.MODULE_NAME)
 public class PayjpModule extends ReactContextBaseJavaModule {
-  public static final String MODULE_NAME = "Payjp";
+  public static final String MODULE_NAME = "RNPAYCore";
 
   @NonNull private final ReactApplicationContext reactContext;
   @Nullable private final PayjpTokenBackgroundHandler tokenBackgroundHandler;

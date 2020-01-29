@@ -62,8 +62,8 @@ export type ApplePayAuthorizationOption = {
     readonly requiredBillingAddress?: boolean;
 };
 
-const { PayjpApplePay } = NativeModules;
-const applePayEventEmitter = new NativeEventEmitter(PayjpApplePay);
+const { RNPAYApplePay } = NativeModules;
+const applePayEventEmitter = new NativeEventEmitter(RNPAYApplePay);
 const onApplePayProducedTokenSet: Set<OnApplePayProducedToken> = new Set();
 const onApplePayFailedRequestTokenSet: Set<OnApplePayFailedRequestToken> = new Set();
 const onApplePayCompletedSet: Set<OnApplePayCompleted> = new Set();
@@ -74,7 +74,7 @@ const onApplePayCompletedSet: Set<OnApplePayCompleted> = new Set();
  * cf. [canMakePayments](https://developer.apple.com/documentation/passkit/pkpaymentauthorizationviewcontroller/1616192-canmakepayments)
  */
 export const isApplePayAvailable = async (): Promise<boolean> => {
-    return PayjpApplePay.isApplePayAvailable();
+    return RNPAYApplePay.isApplePayAvailable();
 };
 
 /**
@@ -90,7 +90,7 @@ export const makeApplePayToken = async (option: ApplePayAuthorizationOption): Pr
         ...option,
         requiredBillingAddress: option.requiredBillingAddress || false
     };
-    await PayjpApplePay.makeApplePayToken(filledOption);
+    await RNPAYApplePay.makeApplePayToken(filledOption);
 };
 
 /**
@@ -101,7 +101,7 @@ export const makeApplePayToken = async (option: ApplePayAuthorizationOption): Pr
  * @param errorMessage エラーメッセージ
  */
 export const completeApplePay = async (isSuccess: boolean, errorMessage: string | null = null): Promise<void> => {
-    await PayjpApplePay.completeApplePay(isSuccess, errorMessage);
+    await RNPAYApplePay.completeApplePay(isSuccess, errorMessage);
 };
 
 /**

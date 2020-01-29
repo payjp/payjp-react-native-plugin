@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		324D29FB23DE726F00552CD4 /* Payjp.m in Sources */ = {isa = PBXBuildFile; fileRef = 324D29F723DE726F00552CD4 /* Payjp.m */; };
-		324D29FC23DE726F00552CD4 /* PayjpCardForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 324D29F823DE726F00552CD4 /* PayjpCardForm.m */; };
-		324D2A0123DE735D00552CD4 /* PayjpApplePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 324D2A0023DE735D00552CD4 /* PayjpApplePay.m */; };
+		324D29FB23DE726F00552CD4 /* RNPAYCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 324D29F723DE726F00552CD4 /* RNPAYCore.m */; };
+		324D29FC23DE726F00552CD4 /* RNPAYCardForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 324D29F823DE726F00552CD4 /* RNPAYCardForm.m */; };
+		324D2A0123DE735D00552CD4 /* RNPAYApplePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 324D2A0023DE735D00552CD4 /* RNPAYApplePay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,12 +26,12 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNPayjp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNPayjp.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		324D29F723DE726F00552CD4 /* Payjp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Payjp.m; sourceTree = "<group>"; };
-		324D29F823DE726F00552CD4 /* PayjpCardForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayjpCardForm.m; sourceTree = "<group>"; };
-		324D29F923DE726F00552CD4 /* Payjp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Payjp.h; sourceTree = "<group>"; };
-		324D29FA23DE726F00552CD4 /* PayjpCardForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayjpCardForm.h; sourceTree = "<group>"; };
-		324D29FF23DE732500552CD4 /* PayjpApplePay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayjpApplePay.h; sourceTree = "<group>"; };
-		324D2A0023DE735D00552CD4 /* PayjpApplePay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayjpApplePay.m; sourceTree = "<group>"; };
+		324D29F723DE726F00552CD4 /* RNPAYCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNPAYCore.m; sourceTree = "<group>"; };
+		324D29F823DE726F00552CD4 /* RNPAYCardForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNPAYCardForm.m; sourceTree = "<group>"; };
+		324D29F923DE726F00552CD4 /* RNPAYCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNPAYCore.h; sourceTree = "<group>"; };
+		324D29FA23DE726F00552CD4 /* RNPAYCardForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNPAYCardForm.h; sourceTree = "<group>"; };
+		324D29FF23DE732500552CD4 /* RNPAYApplePay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNPAYApplePay.h; sourceTree = "<group>"; };
+		324D2A0023DE735D00552CD4 /* RNPAYApplePay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNPAYApplePay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +56,12 @@
 		324D29F623DE726F00552CD4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				324D29F923DE726F00552CD4 /* Payjp.h */,
-				324D29F723DE726F00552CD4 /* Payjp.m */,
-				324D29FF23DE732500552CD4 /* PayjpApplePay.h */,
-				324D2A0023DE735D00552CD4 /* PayjpApplePay.m */,
-				324D29FA23DE726F00552CD4 /* PayjpCardForm.h */,
-				324D29F823DE726F00552CD4 /* PayjpCardForm.m */,
+				324D29F923DE726F00552CD4 /* RNPAYCore.h */,
+				324D29F723DE726F00552CD4 /* RNPAYCore.m */,
+				324D29FF23DE732500552CD4 /* RNPAYApplePay.h */,
+				324D2A0023DE735D00552CD4 /* RNPAYApplePay.m */,
+				324D29FA23DE726F00552CD4 /* RNPAYCardForm.h */,
+				324D29F823DE726F00552CD4 /* RNPAYCardForm.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -131,9 +131,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				324D29FB23DE726F00552CD4 /* Payjp.m in Sources */,
-				324D2A0123DE735D00552CD4 /* PayjpApplePay.m in Sources */,
-				324D29FC23DE726F00552CD4 /* PayjpCardForm.m in Sources */,
+				324D29FB23DE726F00552CD4 /* RNPAYCore.m in Sources */,
+				324D2A0123DE735D00552CD4 /* RNPAYApplePay.m in Sources */,
+				324D29FC23DE726F00552CD4 /* RNPAYCardForm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
