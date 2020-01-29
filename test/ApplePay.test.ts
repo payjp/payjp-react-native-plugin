@@ -6,8 +6,15 @@ jest.mock("react-native", () => {
     const emitter = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         listeners: {} as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        removers: {} as any,
         addListener: jest.fn((eventName, callback) => {
             emitter.listeners[eventName] = callback;
+            const remover = {
+                remove: jest.fn()
+            };
+            emitter.removers[eventName] = remover;
+            return remover;
         })
     };
     const mockReactNative = {
@@ -135,6 +142,25 @@ describe("PayjpApplePay", () => {
             NativeModules.MockEventEmitter.listeners.onApplePayProducedToken(token);
             expect(onApplePayProducedToken).toHaveBeenCalledTimes(1);
             expect(onApplePayProducedToken).toHaveBeenCalledWith(token);
+            done();
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it("unsubscribe listener", async done => {
+        expect.assertions(3);
+        try {
+            const unsubscribe = PayjpApplePay.onApplePayUpdate({
+                onApplePayCompleted: jest.fn(),
+                onApplePayFailedRequestToken: jest.fn(),
+                onApplePayProducedToken: jest.fn()
+            });
+            unsubscribe();
+            const removers = NativeModules.MockEventEmitter.removers;
+            expect(removers.onApplePayCompleted.remove).toHaveBeenCalledTimes(1);
+            expect(removers.onApplePayFailedRequestToken.remove).toHaveBeenCalledTimes(1);
+            expect(removers.onApplePayProducedToken.remove).toHaveBeenCalledTimes(1);
             done();
         } catch (e) {
             console.error(e);

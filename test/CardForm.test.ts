@@ -6,8 +6,15 @@ jest.mock("react-native", () => {
     const emitter = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         listeners: {} as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        removers: {} as any,
         addListener: jest.fn((eventName, callback) => {
             emitter.listeners[eventName] = callback;
+            const remover = {
+                remove: jest.fn()
+            };
+            emitter.removers[eventName] = remover;
+            return remover;
         })
     };
     const mockReactNative = {
@@ -124,6 +131,25 @@ describe("PayjpCardForm", () => {
             NativeModules.MockEventEmitter.listeners.onCardFormProducedToken(token);
             expect(onCardFormProducedToken).toHaveBeenCalledTimes(1);
             expect(onCardFormProducedToken).toHaveBeenCalledWith(token);
+            done();
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it("unsubscribe listener", async done => {
+        expect.assertions(3);
+        try {
+            const unsubscribe = PayjpCardForm.onCardFormUpdate({
+                onCardFormCanceled: jest.fn(),
+                onCardFormCompleted: jest.fn(),
+                onCardFormProducedToken: jest.fn()
+            });
+            unsubscribe();
+            const removers = NativeModules.MockEventEmitter.removers;
+            expect(removers.onCardFormCanceled.remove).toHaveBeenCalledTimes(1);
+            expect(removers.onCardFormCompleted.remove).toHaveBeenCalledTimes(1);
+            expect(removers.onCardFormProducedToken.remove).toHaveBeenCalledTimes(1);
             done();
         } catch (e) {
             console.error(e);
