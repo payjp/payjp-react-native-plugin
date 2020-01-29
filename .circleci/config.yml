@@ -19,7 +19,7 @@ docker_env:
   node_defaults: &node_defaults
     working_directory: ~/code
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10
 
 jobs:
   build:
@@ -40,6 +40,7 @@ jobs:
             - node_modules
           key: *primary_key_of_node_cache
       - run: yarn lint
+      - run: yarn test
       - run: yarn build 
 
 workflows:
