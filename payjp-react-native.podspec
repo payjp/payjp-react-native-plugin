@@ -14,8 +14,10 @@ Pod::Spec.new do |s|
   s.source_files = "ios/Classes/**/*.{h,m}"
   s.public_header_files = "ios/Classes/**/*.h"
   s.requires_arc = true
-
+  s.static_framework = true
+  
   s.dependency "React"
-  s.dependency "PAYJP"
+  s.dependency 'PAYJP', '~> 1.1.3'
+  s.dependency 'CardIO', '~> 5.4.1'
 
 end
