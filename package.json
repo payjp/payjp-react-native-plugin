@@ -18,7 +18,7 @@
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
   "directories": {
-    "test": "__tests__"
+    "test": "test"
   },
   "files": [
     "lib/src",
@@ -90,10 +90,6 @@
   },
   "jest": {
     "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
     "transform": {
       "^.+\\.ts$": "ts-jest",
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
@@ -101,10 +97,6 @@
     "testPathIgnorePatterns": [
       "<rootDir>/lib/",
       "<rootDir>/node_modules/",
-      "<rootDir>/example/"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/lib/",
       "<rootDir>/example/"
     ],
     "globals": {
