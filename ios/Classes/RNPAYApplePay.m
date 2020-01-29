@@ -20,17 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "PayjpApplePay.h"
-#import "Payjp.h"
+#import "RNPAYApplePay.h"
+#import "RNPAYCore.h"
 @import PAYJP;
 
-@interface PayjpApplePay ()
+@interface RNPAYApplePay ()
 
 @property(nonatomic, copy) id completionHandler;
 
 @end
 
-@implementation PayjpApplePay
+@implementation RNPAYApplePay
 
 #pragma mark - Module Setting
 

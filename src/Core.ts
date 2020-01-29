@@ -1,7 +1,7 @@
 // LICENSE : MIT
 import { NativeModules } from "react-native";
 
-const { Payjp } = NativeModules;
+const { RNPAYCore } = NativeModules;
 
 type InitOption = {
     /**
@@ -30,7 +30,7 @@ type InitOption = {
  * @param options オプション
  */
 export const init = async (options: InitOption): Promise<void> => {
-    await Payjp.initialize({
+    await RNPAYCore.initialize({
         publicKey: options.publicKey,
         locale: options.locale || null,
         debugEnabled: options.debugEnabled || false

@@ -20,18 +20,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "PayjpCardForm.h"
-#import "Payjp.h"
+#import "RNPAYCardForm.h"
+#import "RNPAYCore.h"
 @import PAYJP;
 
-@interface PayjpCardForm ()
+@interface RNPAYCardForm ()
 
 typedef void (^CardFormCompletionHandler)(NSError *_Nullable);
 @property(nonatomic, copy) CardFormCompletionHandler completionHandler;
 
 @end
 
-@implementation PayjpCardForm
+@implementation RNPAYCardForm
 
 - (NSArray<NSString *> *)supportedEvents {
   return @[ @"onCardFormCanceled", @"onCardFormCompleted", @"onCardFormProducedToken" ];
