@@ -2,3 +2,4 @@ node_modules/
 build/
 __obj/
 lib/
+docs/
