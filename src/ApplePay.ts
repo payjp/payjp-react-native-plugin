@@ -114,18 +114,18 @@ export const completeApplePay = async (isSuccess: boolean, errorMessage: string 
 export const onApplePayUpdate = (observer: {
     onApplePayProducedToken: OnApplePayProducedToken;
     onApplePayFailedRequestToken: OnApplePayFailedRequestToken;
-    onApplePayCompleted: OnApplePayCompleted;
+    onApplePayCompleted?: OnApplePayCompleted;
 }): (() => void) => {
     const { onApplePayProducedToken, onApplePayFailedRequestToken, onApplePayCompleted } = observer;
     const disconnect = connectApplePayEvent();
-    onApplePayProducedTokenSet.add(onApplePayProducedToken);
-    onApplePayFailedRequestTokenSet.add(onApplePayFailedRequestToken);
-    onApplePayCompletedSet.add(onApplePayCompleted);
+    onApplePayProducedToken && onApplePayProducedTokenSet.add(onApplePayProducedToken);
+    onApplePayFailedRequestToken && onApplePayFailedRequestTokenSet.add(onApplePayFailedRequestToken);
+    onApplePayCompleted && onApplePayCompletedSet.add(onApplePayCompleted);
     return (): void => {
         disconnect();
-        onApplePayProducedTokenSet.delete(onApplePayProducedToken);
-        onApplePayFailedRequestTokenSet.delete(onApplePayFailedRequestToken);
-        onApplePayCompletedSet.delete(onApplePayCompleted);
+        onApplePayProducedToken && onApplePayProducedTokenSet.delete(onApplePayProducedToken);
+        onApplePayFailedRequestToken && onApplePayFailedRequestTokenSet.delete(onApplePayFailedRequestToken);
+        onApplePayCompleted && onApplePayCompletedSet.delete(onApplePayCompleted);
     };
 };
 

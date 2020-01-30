@@ -69,20 +69,20 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  * @returns unsubscribe function リスナーを解除する（多くの場合アンマウント時にコールする）関数
  */
 export const onCardFormUpdate = (observer: {
-    onCardFormCanceled: OnCardFormCanceled;
-    onCardFormCompleted: OnCardFormCompleted;
+    onCardFormCanceled?: OnCardFormCanceled;
+    onCardFormCompleted?: OnCardFormCompleted;
     onCardFormProducedToken: OnCardFormProducedToken;
 }): (() => void) => {
     const { onCardFormCanceled, onCardFormCompleted, onCardFormProducedToken } = observer;
     const unsubscribeNative = connectCardForm();
-    onCardFormCanceledSet.add(onCardFormCanceled);
-    onCardFormCompletedSet.add(onCardFormCompleted);
-    onCardFormProducedTokenSet.add(onCardFormProducedToken);
+    onCardFormCanceled && onCardFormCanceledSet.add(onCardFormCanceled);
+    onCardFormCompleted && onCardFormCompletedSet.add(onCardFormCompleted);
+    onCardFormProducedToken && onCardFormProducedTokenSet.add(onCardFormProducedToken);
     return (): void => {
         unsubscribeNative();
-        onCardFormCanceledSet.delete(onCardFormCanceled);
-        onCardFormCompletedSet.delete(onCardFormCompleted);
-        onCardFormProducedTokenSet.delete(onCardFormProducedToken);
+        onCardFormCanceled && onCardFormCanceledSet.delete(onCardFormCanceled);
+        onCardFormCompleted && onCardFormCompletedSet.delete(onCardFormCompleted);
+        onCardFormProducedToken && onCardFormProducedTokenSet.delete(onCardFormProducedToken);
     };
 };
 
