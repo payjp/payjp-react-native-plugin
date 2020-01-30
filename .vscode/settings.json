@@ -13,7 +13,8 @@
   "cSpell.words": [
     "livemode",
     "payjp",
-    "podspec"
+    "podspec",
+    "RNPAY"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

@@ -2,3 +2,4 @@ lib/
 node_modules/
 generator/
 src/models/
+scripts/examples_postinstall.js
