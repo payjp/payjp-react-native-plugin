@@ -13,7 +13,7 @@
     "email": "support@pay.jp",
     "url": "https://pay.jp"
   },
-  "homepage": "https://github.com/payjp/payjp-react-native",
+  "homepage": "https://github.com/payjp/payjp-react-native-plugin",
   "license": "MIT",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
@@ -29,7 +29,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/payjp/payjp-react-native.git"
+    "url": "git+https://github.com/payjp/payjp-react-native-plugin.git"
   },
   "scripts": {
     "build": "tsc -p .",
@@ -43,7 +43,7 @@
     "prepublishOnly": "npm run clean build docs"
   },
   "bugs": {
-    "url": "https://github.com/payjp/payjp-react-native/issues"
+    "url": "https://github.com/payjp/payjp-react-native-plugin/issues"
   },
   "peerDependencies": {
     "react": "~16.9.0",

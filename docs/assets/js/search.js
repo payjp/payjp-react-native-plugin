@@ -1003,8 +1003,8 @@ typedoc.search.data = {
         {
             id: 125,
             kind: 32,
-            name: "PayjpApplePay",
-            url: "modules/_applepay_.html#payjpapplepay",
+            name: "RNPAYApplePay",
+            url: "modules/_applepay_.html#rnpayapplepay",
             classes: "tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported",
             parent: '"ApplePay"'
         },
@@ -1132,8 +1132,8 @@ typedoc.search.data = {
         {
             id: 142,
             kind: 32,
-            name: "PayjpCardForm",
-            url: "modules/_cardform_.html#payjpcardform",
+            name: "RNPAYCardForm",
+            url: "modules/_cardform_.html#rnpaycardform",
             classes: "tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported",
             parent: '"CardForm"'
         },
@@ -1213,8 +1213,8 @@ typedoc.search.data = {
         {
             id: 153,
             kind: 32,
-            name: "Payjp",
-            url: "modules/_core_.html#payjp",
+            name: "RNPAYCore",
+            url: "modules/_core_.html#rnpaycore",
             classes: "tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported",
             parent: '"Core"'
         },
