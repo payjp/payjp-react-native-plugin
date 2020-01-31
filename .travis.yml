@@ -4,7 +4,7 @@ matrix:
     node_js: 10
     script:
     - yarn install && yarn lint && yarn test && yarn build
-    - cd example && yarn install && yarn lint && cd ..
+    - cd example && yarn install && yarn lint && && yarn test
   - language: android
     sudo: false
     jdk: oraclejdk8
