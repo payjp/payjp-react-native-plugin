@@ -1,3 +1,7 @@
+branches:
+  only: 
+    - waka/travis
+
 matrix:
   include:
   - language: node_js
