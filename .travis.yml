@@ -42,7 +42,7 @@ matrix:
       - yarn install
     script:
       - cd android
-      - ./gradlew clean build -x bundleReleaseJsAndAssets
+      - ./gradlew clean build
   - language: objective-c
     os: osx
     osx_image: xcode11.3
