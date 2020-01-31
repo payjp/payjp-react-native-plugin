@@ -40,6 +40,22 @@ const onProducedTokenByApplePay = async (token: Token): Promise<void> => {
     }
 };
 
+const onPressApplePay = async (): Promise<void> => {
+    const available = await PayjpApplePay.isApplePayAvailable();
+    if (available) {
+        await PayjpApplePay.makeApplePayToken({
+            appleMerchantId: APPLE_MERCHANT_ID,
+            currencyCode: "JPY",
+            countryCode: "JP",
+            summaryItemLabel: "PAY.JP T-shirt",
+            summaryItemAmount: "100",
+            requiredBillingAddress: false
+        });
+    } else {
+        Alert.alert("Apple Pay", "この端末では利用できません。", [{ text: "OK" }]);
+    }
+};
+
 const App = (): React.ReactElement => {
     useEffect(() => {
         PayjpCore.init({ publicKey: PAYJP_PUBLIC_KEY });
@@ -70,13 +86,11 @@ const App = (): React.ReactElement => {
                           onProducedTokenByApplePay(token);
                       }
                   })
-                : (): void => {
-                      // only ios
-                  };
+                : null;
 
         return (): void => {
             unsubscribeCardForm();
-            unsubscribeApplePay();
+            unsubscribeApplePay?.();
         };
     }, []);
 
@@ -110,24 +124,7 @@ const App = (): React.ReactElement => {
                                     Edit <Text style={styles.highlight}>APPLE_MERCHANT_ID</Text> in App.tsx, then start
                                     Apple Pay.
                                 </Text>
-                                <Button
-                                    title="Buy with Apple Pay"
-                                    onPress={async (): Promise<void> => {
-                                        const available = await PayjpApplePay.isApplePayAvailable();
-                                        if (available) {
-                                            await PayjpApplePay.makeApplePayToken({
-                                                appleMerchantId: APPLE_MERCHANT_ID,
-                                                currencyCode: "JPY",
-                                                countryCode: "JP",
-                                                summaryItemLabel: "PAY.JP T-shirt",
-                                                summaryItemAmount: "100",
-                                                requiredBillingAddress: false
-                                            });
-                                        } else {
-                                            Alert.alert("Apple Pay", "この端末では利用できません。", [{ text: "OK" }]);
-                                        }
-                                    }}
-                                />
+                                <Button title="Buy with Apple Pay" onPress={onPressApplePay} />
                             </View>
                         ) : null}
                     </View>
