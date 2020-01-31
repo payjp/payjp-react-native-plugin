@@ -39,7 +39,8 @@
     "lint:fix": "eslint --fix --cache \"{src,test}/**/*.{ts,tsx}\"",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
     "docs": "typedoc --out docs src/",
-    "prepublishOnly": "npm run clean build docs"
+    "version": "npm run docs",
+    "prepublishOnly": "npm run clean build"
   },
   "bugs": {
     "url": "https://github.com/payjp/payjp-react-native-plugin/issues"
