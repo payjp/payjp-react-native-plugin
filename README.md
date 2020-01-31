@@ -18,7 +18,7 @@
 
 ## API References
 
-[TBD]
+https://payjp.github.io/payjp-react-native-plugin/
 
 ## License
 
