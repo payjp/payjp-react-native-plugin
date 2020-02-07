@@ -29,7 +29,7 @@
 
 typedef void (^CardFormCompletionHandler)(NSError *_Nullable);
 @property(nonatomic, copy) CardFormCompletionHandler completionHandler;
-@property(strong, readwrite) PAYCardFormStyle *style;
+@property(nonatomic, strong) PAYCardFormStyle *style;
 
 @end
 
