@@ -51,6 +51,11 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
     await RNPAYCardForm.showTokenProcessingError(message);
 };
 
+/**
+ * カードフォームのスタイルをセットします。（iOS用）
+ *
+ * @param style スタイル情報
+ */
 export const setIOSCardFormStyle = async (style: any): Promise<void> => {
     await RNPAYCardForm.setStyle(style);
 };
