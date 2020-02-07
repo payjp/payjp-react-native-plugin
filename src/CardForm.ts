@@ -51,6 +51,10 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
     await RNPAYCardForm.showTokenProcessingError(message);
 };
 
+export const setIOSCardFormStyle = async (style: any): Promise<void> => {
+    await RNPAYCardForm.setStyle(style);
+};
+
 /**
  * カードフォームの更新を受け取ります。
  * 登録したリスナーを解除するには、返却される関数を実行します。

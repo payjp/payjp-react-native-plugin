@@ -18,6 +18,35 @@ const PAYJP_PUBLIC_KEY = "pk_test_0383a1b8f91e8a6e3ea0e2a9";
 // TODO: REPLACE WITH YOUR APPLE MERCHANT ID
 const APPLE_MERCHANT_ID = "merchant.jp.pay.example2";
 
+const iOSCardFormStyle = {
+    labelTextColor: {
+        r: 30,
+        g: 150,
+        b: 140
+    },
+    inputTextColor: {
+        r: 50,
+        g: 15,
+        b: 80
+    },
+    tintColor: {
+        r: 70,
+        g: 40,
+        b: 10
+    },
+    inputFieldBackgroundColor: {
+        r: 50,
+        g: 50,
+        b: 50,
+        a: 0.8
+    },
+    submitButtonColor: {
+        r: 100,
+        g: 200,
+        b: 100
+    }
+};
+
 const onProducedToken = async (token: Token): Promise<void> => {
     try {
         const response = await postTokenToBackEnd(token);
@@ -113,6 +142,9 @@ const App = (): React.ReactElement => {
                             <Button
                                 title="Add Credit Card"
                                 onPress={(): void => {
+                                    if (Platform.OS === "ios") {
+                                        PayjpCardForm.setIOSCardFormStyle(iOSCardFormStyle);
+                                    }
                                     PayjpCardForm.startCardForm();
                                 }}
                             />
