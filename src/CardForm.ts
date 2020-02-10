@@ -23,7 +23,7 @@ type RgbaColor = {
     r: number;
     g: number;
     b: number;
-    a: number;
+    a?: number;
 };
 
 const { RNPAYCardForm } = NativeModules;
@@ -64,11 +64,11 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  * @param style スタイル情報
  */
 export const setIOSCardFormStyle = async (style: {
-    labelTextColor: RgbaColor;
-    inputTextColor: RgbaColor;
-    tintColor: RgbaColor;
-    inputFieldBackgroundColor: RgbaColor;
-    submitButtonColor: RgbaColor;
+    labelTextColor?: RgbaColor;
+    inputTextColor?: RgbaColor;
+    tintColor?: RgbaColor;
+    inputFieldBackgroundColor?: RgbaColor;
+    submitButtonColor?: RgbaColor;
 }): Promise<void> => {
     await RNPAYCardForm.setStyle(style);
 };
