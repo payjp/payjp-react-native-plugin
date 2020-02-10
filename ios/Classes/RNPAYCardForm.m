@@ -101,6 +101,7 @@ RCT_EXPORT_METHOD(setStyle
                   : (NSDictionary *)style setThemeWithResolver
                   : (RCTPromiseResolveBlock)resolve rejecter
                   : (RCTPromiseRejectBlock)reject) {
+  __weak typeof(self) wself = self;
   dispatch_async([self methodQueue], ^{
     UIColor *labelTextColor = nil;
     UIColor *inputTextColor = nil;
@@ -125,11 +126,11 @@ RCT_EXPORT_METHOD(setStyle
       submitButtonColor = [RNPAYColorConverter fromJsonDictionary:style[@"submitButtonColor"]];
     }
 
-    self.style = [[PAYCardFormStyle alloc] initWithLabelTextColor:labelTextColor
-                                                   inputTextColor:inputTextColor
-                                                        tintColor:tintColor
-                                        inputFieldBackgroundColor:inputFieldBackgroundColor
-                                                submitButtonColor:submitButtonColor];
+    wself.style = [[PAYCardFormStyle alloc] initWithLabelTextColor:labelTextColor
+                                                    inputTextColor:inputTextColor
+                                                         tintColor:tintColor
+                                         inputFieldBackgroundColor:inputFieldBackgroundColor
+                                                 submitButtonColor:submitButtonColor];
 
     resolve([NSNull null]);
   });

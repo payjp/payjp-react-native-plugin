@@ -33,7 +33,12 @@
   CGFloat red = [colorDictionary[@"r"] floatValue] / 255;
   CGFloat green = [colorDictionary[@"g"] floatValue] / 255;
   CGFloat blue = [colorDictionary[@"b"] floatValue] / 255;
-  CGFloat alpha = colorDictionary[@"a"] ? [colorDictionary[@"a"] floatValue] : 1.0;
+
+  CGFloat alpha = 1.0;
+  id a = colorDictionary[@"a"];
+  if (a != [NSNull null]) {
+    alpha = colorDictionary[@"a"] ? [colorDictionary[@"a"] floatValue] : 1.0;
+  }
 
   return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
