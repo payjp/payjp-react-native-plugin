@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 #import "RNPAYCardForm.h"
-#import "ColorConverter.h"
+#import "RNPAYColorConverter.h"
 #import "RNPAYCore.h"
 @import PAYJP;
 
@@ -53,11 +53,12 @@ RCT_EXPORT_METHOD(startCardForm
       [NSBundle.mainBundle objectForInfoDictionaryKey:@"NSCameraUsageDescription"];
   NSAssert([description length], @"The app's Info.plist must contain an NSCameraUsageDescription "
                                  @"key to use scanner in card form.");
+  __weak typeof(self) wself = self;
   dispatch_async([self methodQueue], ^{
     PAYCardFormViewController *cardForm =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:self.style
+        [PAYCardFormViewController createCardFormViewControllerWithStyle:wself.style
                                                                 tenantId:tenantId];
-    cardForm.delegate = self;
+    cardForm.delegate = wself;
     UIViewController *hostViewController =
         UIApplication.sharedApplication.keyWindow.rootViewController;
     if ([hostViewController isKindOfClass:[UINavigationController class]]) {
@@ -103,38 +104,32 @@ RCT_EXPORT_METHOD(setStyle
   dispatch_async([self methodQueue], ^{
     UIColor *labelTextColor = nil;
     UIColor *inputTextColor = nil;
-    //        UIColor *errorTextColor = nil;
     UIColor *tintColor = nil;
     UIColor *inputFieldBackgroundColor = nil;
     UIColor *submitButtonColor = nil;
 
     if (style[@"labelTextColor"]) {
-      labelTextColor = [ColorConverter fromJsonDictionary:style[@"labelTextColor"]];
+      labelTextColor = [RNPAYColorConverter fromJsonDictionary:style[@"labelTextColor"]];
     }
     if (style[@"inputTextColor"]) {
-      inputTextColor = [ColorConverter fromJsonDictionary:style[@"inputTextColor"]];
+      inputTextColor = [RNPAYColorConverter fromJsonDictionary:style[@"inputTextColor"]];
     }
-    //        if (style[@"errorTextColor"]) {
-    //            errorTextColor = [ColorConverter fromJsonDictionary:style[@"errorTextColor"]];
-    //        }
     if (style[@"tintColor"]) {
-      tintColor = [ColorConverter fromJsonDictionary:style[@"tintColor"]];
+      tintColor = [RNPAYColorConverter fromJsonDictionary:style[@"tintColor"]];
     }
     if (style[@"inputFieldBackgroundColor"]) {
       inputFieldBackgroundColor =
-          [ColorConverter fromJsonDictionary:style[@"inputFieldBackgroundColor"]];
+          [RNPAYColorConverter fromJsonDictionary:style[@"inputFieldBackgroundColor"]];
     }
     if (style[@"submitButtonColor"]) {
-      submitButtonColor = [ColorConverter fromJsonDictionary:style[@"submitButtonColor"]];
+      submitButtonColor = [RNPAYColorConverter fromJsonDictionary:style[@"submitButtonColor"]];
     }
 
-    self.style = [[PAYCardFormStyle alloc]
-           initWithLabelTextColor:labelTextColor
-                   inputTextColor:inputTextColor
-                        //                                                       errorTextColor:errorTextColor
-                        tintColor:tintColor
-        inputFieldBackgroundColor:inputFieldBackgroundColor
-                submitButtonColor:submitButtonColor];
+    self.style = [[PAYCardFormStyle alloc] initWithLabelTextColor:labelTextColor
+                                                   inputTextColor:inputTextColor
+                                                        tintColor:tintColor
+                                        inputFieldBackgroundColor:inputFieldBackgroundColor
+                                                submitButtonColor:submitButtonColor];
 
     resolve([NSNull null]);
   });

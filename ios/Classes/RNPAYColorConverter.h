@@ -20,14 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef ColorConverter_h
-#define ColorConverter_h
 #import <UIKit/UIKit.h>
 
-@interface ColorConverter : NSObject
+@interface RNPAYColorConverter : NSObject
 
 + (UIColor*)fromJsonDictionary:(NSDictionary*)colorDictionary;
 
 @end
-
-#endif /* ColorConverter_h */

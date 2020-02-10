@@ -19,6 +19,13 @@ export type OnCardFormCompleted = () => void;
  */
 export type OnCardFormProducedToken = (token: Token) => void;
 
+type RgbaColor = {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+};
+
 const { RNPAYCardForm } = NativeModules;
 const cardFormEventEmitter = new NativeEventEmitter(RNPAYCardForm);
 const onCardFormCanceledSet: Set<OnCardFormCanceled> = new Set();
@@ -56,7 +63,13 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  *
  * @param style スタイル情報
  */
-export const setIOSCardFormStyle = async (style: any): Promise<void> => {
+export const setIOSCardFormStyle = async (style: {
+    labelTextColor: RgbaColor;
+    inputTextColor: RgbaColor;
+    tintColor: RgbaColor;
+    inputFieldBackgroundColor: RgbaColor;
+    submitButtonColor: RgbaColor;
+}): Promise<void> => {
     await RNPAYCardForm.setStyle(style);
 };
 

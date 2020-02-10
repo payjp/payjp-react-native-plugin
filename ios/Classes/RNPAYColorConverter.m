@@ -20,10 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "ColorConverter.h"
+#import "RNPAYColorConverter.h"
 #import <Foundation/Foundation.h>
 
-@implementation ColorConverter
+@implementation RNPAYColorConverter
 
 + (UIColor*)fromJsonDictionary:(NSDictionary*)colorDictionary {
   NSParameterAssert(colorDictionary[@"r"]);
