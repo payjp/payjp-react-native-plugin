@@ -9,7 +9,18 @@
  */
 
 import React, { useEffect } from "react";
-import { Alert, SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, Button, Platform } from "react-native";
+import {
+    Alert,
+    SafeAreaView,
+    StyleSheet,
+    ScrollView,
+    View,
+    Text,
+    StatusBar,
+    Button,
+    Platform,
+    processColor
+} from "react-native";
 import { PayjpCore, PayjpCardForm, Token, PayjpApplePay } from "payjp-react-native";
 import { postTokenToBackEnd } from "./SampleApi";
 
@@ -20,15 +31,12 @@ const APPLE_MERCHANT_ID = "merchant.jp.pay.example2";
 // Custom iOS CardForm style
 const iOSCardFormStyle = {
     labelTextColor: {
-        r: 30,
-        g: 200,
-        b: 140
+        r: 0,
+        g: 0.4,
+        b: 0.8
     },
-    submitButtonColor: {
-        r: 100,
-        g: 200,
-        b: 100
-    }
+    inputTextColor: processColor("#004488"),
+    submitButtonColor: processColor("#0055ff")
 };
 
 const onProducedToken = async (token: Token): Promise<void> => {

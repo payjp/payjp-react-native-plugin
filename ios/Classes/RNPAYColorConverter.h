@@ -24,6 +24,6 @@
 
 @interface RNPAYColorConverter : NSObject
 
-+ (UIColor*)fromJsonDictionary:(NSDictionary*)colorDictionary;
++ (UIColor*)fromJson:(id)json;
 
 @end

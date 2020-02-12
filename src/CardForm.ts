@@ -19,7 +19,15 @@ export type OnCardFormCompleted = () => void;
  */
 export type OnCardFormProducedToken = (token: Token) => void;
 
-type RgbaColor = {
+export type IOSCardFormStyle = {
+    labelTextColor?: RgbaColor | number;
+    inputTextColor?: RgbaColor | number;
+    tintColor?: RgbaColor | number;
+    inputFieldBackgroundColor?: RgbaColor | number;
+    submitButtonColor?: RgbaColor | number;
+};
+
+export type RgbaColor = {
     r: number;
     g: number;
     b: number;
@@ -63,14 +71,24 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  *
  * @param style スタイル情報
  */
-export const setIOSCardFormStyle = async (style: {
-    labelTextColor?: RgbaColor;
-    inputTextColor?: RgbaColor;
-    tintColor?: RgbaColor;
-    inputFieldBackgroundColor?: RgbaColor;
-    submitButtonColor?: RgbaColor;
-}): Promise<void> => {
-    await RNPAYCardForm.setStyle(style);
+export const setIOSCardFormStyle = async (style: IOSCardFormStyle): Promise<void> => {
+    const styleConverted: { [key: string]: (number | undefined)[] | number | undefined } = {};
+
+    for (const key in style) {
+        const styleKey = key as keyof IOSCardFormStyle;
+        const styleValue = style[styleKey];
+
+        if (typeof styleValue !== "number" && typeof styleValue !== "undefined") {
+            styleConverted[key] = (Object.keys(styleValue) as (keyof RgbaColor)[]).map(function(
+                colorKey: keyof RgbaColor
+            ) {
+                return styleValue[colorKey];
+            });
+        } else {
+            styleConverted[key] = styleValue;
+        }
+    }
+    await RNPAYCardForm.setStyle(styleConverted);
 };
 
 /**

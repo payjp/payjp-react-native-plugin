@@ -22,25 +22,16 @@
  */
 #import "RNPAYColorConverter.h"
 #import <Foundation/Foundation.h>
+#import <React/RCTConvert.h>
 
 @implementation RNPAYColorConverter
 
-+ (UIColor*)fromJsonDictionary:(NSDictionary*)colorDictionary {
-  NSParameterAssert(colorDictionary[@"r"]);
-  NSParameterAssert(colorDictionary[@"g"]);
-  NSParameterAssert(colorDictionary[@"b"]);
-
-  CGFloat red = [colorDictionary[@"r"] floatValue] / 255;
-  CGFloat green = [colorDictionary[@"g"] floatValue] / 255;
-  CGFloat blue = [colorDictionary[@"b"] floatValue] / 255;
-
-  CGFloat alpha = 1.0;
-  id a = colorDictionary[@"a"];
-  if (a != [NSNull null]) {
-    alpha = colorDictionary[@"a"] ? [colorDictionary[@"a"] floatValue] : 1.0;
++ (UIColor*)fromJson:(id)json {
+  // NSNullが含まれている場合は削除する
+  if ([json isKindOfClass:[NSArray class]]) {
+    [json removeObject:[NSNull null]];
   }
-
-  return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+  return [RCTConvert UIColor:json];
 }
 
 @end

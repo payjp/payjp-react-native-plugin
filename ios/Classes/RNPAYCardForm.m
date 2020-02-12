@@ -98,9 +98,9 @@ RCT_EXPORT_METHOD(showTokenProcessingError
 }
 
 RCT_EXPORT_METHOD(setStyle
-                  : (NSDictionary *)style setThemeWithResolver
-                  : (RCTPromiseResolveBlock)resolve rejecter
-                  : (RCTPromiseRejectBlock)reject) {
+                  : (NSDictionary *)style resolve
+                  : (RCTPromiseResolveBlock)resolve reject
+                  : (__unused RCTPromiseRejectBlock)reject) {
   __weak typeof(self) wself = self;
   dispatch_async([self methodQueue], ^{
     UIColor *labelTextColor = nil;
@@ -110,20 +110,20 @@ RCT_EXPORT_METHOD(setStyle
     UIColor *submitButtonColor = nil;
 
     if (style[@"labelTextColor"]) {
-      labelTextColor = [RNPAYColorConverter fromJsonDictionary:style[@"labelTextColor"]];
+      labelTextColor = [RNPAYColorConverter fromJson:style[@"labelTextColor"]];
     }
     if (style[@"inputTextColor"]) {
-      inputTextColor = [RNPAYColorConverter fromJsonDictionary:style[@"inputTextColor"]];
+      inputTextColor = [RNPAYColorConverter fromJson:style[@"inputTextColor"]];
     }
     if (style[@"tintColor"]) {
-      tintColor = [RNPAYColorConverter fromJsonDictionary:style[@"tintColor"]];
+      tintColor = [RNPAYColorConverter fromJson:style[@"tintColor"]];
     }
     if (style[@"inputFieldBackgroundColor"]) {
       inputFieldBackgroundColor =
-          [RNPAYColorConverter fromJsonDictionary:style[@"inputFieldBackgroundColor"]];
+          [RNPAYColorConverter fromJson:style[@"inputFieldBackgroundColor"]];
     }
     if (style[@"submitButtonColor"]) {
-      submitButtonColor = [RNPAYColorConverter fromJsonDictionary:style[@"submitButtonColor"]];
+      submitButtonColor = [RNPAYColorConverter fromJson:style[@"submitButtonColor"]];
     }
 
     wself.style = [[PAYCardFormStyle alloc] initWithLabelTextColor:labelTextColor
