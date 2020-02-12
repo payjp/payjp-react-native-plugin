@@ -19,6 +19,9 @@ export type OnCardFormCompleted = () => void;
  */
 export type OnCardFormProducedToken = (token: Token) => void;
 
+/**
+ * カードフォームスタイル（iOS用）
+ */
 export type IOSCardFormStyle = {
     labelTextColor?: RgbaColor | number;
     inputTextColor?: RgbaColor | number;
@@ -27,6 +30,9 @@ export type IOSCardFormStyle = {
     submitButtonColor?: RgbaColor | number;
 };
 
+/**
+ * RGBAカラー
+ */
 export type RgbaColor = {
     r: number;
     g: number;
@@ -72,20 +78,16 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  * @param style スタイル情報
  */
 export const setIOSCardFormStyle = async (style: IOSCardFormStyle): Promise<void> => {
-    const styleConverted: { [key: string]: (number | undefined)[] | number | undefined } = {};
-
+    const styleConverted: { [P in keyof IOSCardFormStyle]: number[] | number } = {};
     for (const key in style) {
         const styleKey = key as keyof IOSCardFormStyle;
         const styleValue = style[styleKey];
-
-        if (typeof styleValue !== "number" && typeof styleValue !== "undefined") {
-            styleConverted[key] = (Object.keys(styleValue) as (keyof RgbaColor)[]).map(function(
-                colorKey: keyof RgbaColor
-            ) {
-                return styleValue[colorKey];
-            });
-        } else {
-            styleConverted[key] = styleValue;
+        if (typeof styleValue === "number") {
+            styleConverted[styleKey] = styleValue;
+        } else if (styleValue) {
+            styleConverted[styleKey] = [styleValue.r, styleValue.g, styleValue.b, styleValue.a].filter(
+                e => typeof e === "number" && !Number.isNaN(e)
+            ) as number[];
         }
     }
     await RNPAYCardForm.setStyle(styleConverted);
