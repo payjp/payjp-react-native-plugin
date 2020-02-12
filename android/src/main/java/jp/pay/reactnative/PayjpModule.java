@@ -37,12 +37,12 @@ import jp.pay.android.Payjp;
 import jp.pay.android.PayjpConfiguration;
 import jp.pay.android.PayjpTokenBackgroundHandler;
 import jp.pay.android.cardio.PayjpCardScannerPlugin;
+import jp.pay.android.model.ClientInfo;
 
 @ReactModule(name = PayjpModule.MODULE_NAME)
 public class PayjpModule extends ReactContextBaseJavaModule {
   public static final String MODULE_NAME = "RNPAYCore";
 
-  @NonNull private final ReactApplicationContext reactContext;
   @Nullable private final PayjpTokenBackgroundHandler tokenBackgroundHandler;
 
   public PayjpModule(
@@ -50,7 +50,6 @@ public class PayjpModule extends ReactContextBaseJavaModule {
       @Nullable PayjpTokenBackgroundHandler tokenBackgroundHandler
   ) {
     super(reactContext);
-    this.reactContext = reactContext;
     this.tokenBackgroundHandler = tokenBackgroundHandler;
   }
 
@@ -73,12 +72,17 @@ public class PayjpModule extends ReactContextBaseJavaModule {
     } else {
       locale = Locale.getDefault();
     }
+    final ClientInfo clientInfo = new ClientInfo.Builder()
+        .setPlugin(BuildConfig.LIBRARY_PACKAGE_NAME + "/" + BuildConfig.VERSION_NAME)
+        .setPublisher("payjp")
+        .build();
     Payjp.init(
         new PayjpConfiguration.Builder(publicKey)
             .setDebugEnabled(debugEnabled)
             .setCardScannerPlugin(PayjpCardScannerPlugin.INSTANCE)
             .setLocale(locale)
             .setTokenBackgroundHandler(tokenBackgroundHandler)
+            .setClientInfo(clientInfo)
             .build()
     );
     promise.resolve(null);
