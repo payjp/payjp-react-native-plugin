@@ -20,36 +20,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package jp.pay.reactnative;
+package jp.pay.reactnative
 
-import androidx.annotation.NonNull;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.JavaScriptModule
+import com.facebook.react.bridge.NativeModule
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.uimanager.ViewManager
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
-import com.facebook.react.bridge.JavaScriptModule;
-
-public class PayjpReactNativePackage implements ReactPackage {
-  @Override
-  public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
-    PayjpCardFormModule cardFormModule = new PayjpCardFormModule(reactContext);
-    return Arrays.<NativeModule>asList(
-        new PayjpModule(reactContext, cardFormModule),
+class PayjpReactNativePackage : ReactPackage {
+  override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
+    val cardFormModule = PayjpCardFormModule(reactContext)
+    return listOf<NativeModule>(
+        PayjpModule(reactContext, cardFormModule),
         cardFormModule
-    );
+    )
   }
 
   // Deprecated from RN 0.47
-  public List<Class<? extends JavaScriptModule>> createJSModules() {
-    return Collections.emptyList();
-  }
+  fun createJSModules(): List<Class<out JavaScriptModule?>> = emptyList()
 
-  @Override
-  public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-    return Collections.emptyList();
-  }
+  override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> =
+    emptyList()
 }

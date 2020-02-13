@@ -1,15 +1,16 @@
 import groovy.json.*
 
 buildscript {
-    if (project == rootProject) {
-        repositories {
-            google()
-            jcenter()
-        }
+    ext.kotlin_version = rootProject.properties.get('kotlinVersion', '1.3.61')
 
-        dependencies {
-            classpath 'com.android.tools.build:gradle:3.5.3'
-        }
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -20,8 +21,8 @@ ext.readPackageJson = { File file ->
 
 ext.pluginVersion = readPackageJson(project.file("../package.json")).version
 
-
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.properties.get('compileSdkVersion', 28)
@@ -33,6 +34,9 @@ android {
     }
     lintOptions {
         warning 'InvalidPackage'
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -46,6 +50,7 @@ repositories {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
     implementation "jp.pay:payjp-android:1.1.3"
