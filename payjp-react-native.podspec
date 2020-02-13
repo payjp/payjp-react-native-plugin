@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
   
   s.dependency "React"
-  s.dependency 'PAYJP', '~> 1.1.4'
+  s.dependency 'PAYJP', '~> 1.1.5'
   s.dependency 'CardIO', '~> 5.4.1'
 
 end

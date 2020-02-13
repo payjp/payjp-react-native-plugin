@@ -20,10 +20,10 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - PAYJP (1.1.4)
+  - PAYJP (1.1.5)
   - payjp-react-native (0.2.1):
     - CardIO (~> 5.4.1)
-    - PAYJP (~> 1.1.4)
+    - PAYJP (~> 1.1.5)
     - React
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -324,8 +324,8 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  PAYJP: b2107cd450ab864c6005ed1d8602b2975f15538a
-  payjp-react-native: 2333a548d092bf93065e82ed0f37d510a8d5bf6e
+  PAYJP: 8a3a5c7cb14cbce42d00d8f416f9df6e3589cc3c
+  payjp-react-native: b6d9f94aecba95e03a7c355879b56e2e99d8d368
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
