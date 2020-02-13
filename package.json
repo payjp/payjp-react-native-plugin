@@ -41,7 +41,9 @@
     "docs": "typedoc --out docs src/",
     "preversion": "npm test",
     "version": "scripts/sync_version_ios.sh && npm run docs && touch docs/.nojekyll && git add .",
-    "prepublishOnly": "npm run clean && npm run build"
+    "prepublishOnly": "npm run clean && npm run build",
+    "prepare": "npm run build",
+    "dev-sync": "npm run build && cp -r *podspec lib android ios example/node_modules/payjp-react-native/"
   },
   "bugs": {
     "url": "https://github.com/payjp/payjp-react-native-plugin/issues"
