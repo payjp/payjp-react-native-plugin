@@ -40,7 +40,7 @@
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
     "docs": "typedoc --out docs src/",
     "preversion": "npm test",
-    "version": "npm run docs && touch docs/.nojekyll && git add .",
+    "version": "scripts/sync_version_ios.sh && npm run docs && touch docs/.nojekyll && git add .",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "bugs": {

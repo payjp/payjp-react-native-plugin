@@ -25,6 +25,7 @@
 @import PAYJP;
 
 NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
+NSString *const RNPAYPluginVersion = @"0.2.1";
 
 @implementation RNPAYCore
 
@@ -49,6 +50,9 @@ RCT_EXPORT_METHOD(initialize
   } else {
     PAYJPSDK.locale = [NSLocale currentLocale];
   }
+  NSString *plugin =
+      [NSString stringWithFormat:@"%@/%@", @"jp.pay.reactnative", RNPAYPluginVersion];
+  PAYJPSDK.clientInfo = [PAYClientInfo makeInfoWithPlugin:plugin publisher:@"payjp"];
   resolve([NSNull null]);
 }
 
