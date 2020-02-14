@@ -19,6 +19,27 @@ export type OnCardFormCompleted = () => void;
  */
 export type OnCardFormProducedToken = (token: Token) => void;
 
+/**
+ * カードフォームスタイル（iOS用）
+ */
+export type IOSCardFormStyle = {
+    labelTextColor?: RgbaColor | number;
+    inputTextColor?: RgbaColor | number;
+    tintColor?: RgbaColor | number;
+    inputFieldBackgroundColor?: RgbaColor | number;
+    submitButtonColor?: RgbaColor | number;
+};
+
+/**
+ * RGBAカラー
+ */
+export type RgbaColor = {
+    r: number;
+    g: number;
+    b: number;
+    a?: number;
+};
+
 const { RNPAYCardForm } = NativeModules;
 const cardFormEventEmitter = new NativeEventEmitter(RNPAYCardForm);
 const onCardFormCanceledSet: Set<OnCardFormCanceled> = new Set();
@@ -49,6 +70,27 @@ export const completeCardForm = async (): Promise<void> => {
  */
 export const showTokenProcessingError = async (message: string): Promise<void> => {
     await RNPAYCardForm.showTokenProcessingError(message);
+};
+
+/**
+ * カードフォームのスタイルをセットします。（iOS用）
+ *
+ * @param style スタイル情報
+ */
+export const setIOSCardFormStyle = async (style: IOSCardFormStyle): Promise<void> => {
+    const styleConverted: { [P in keyof IOSCardFormStyle]: number[] | number } = {};
+    for (const key in style) {
+        const styleKey = key as keyof IOSCardFormStyle;
+        const styleValue = style[styleKey];
+        if (typeof styleValue === "number") {
+            styleConverted[styleKey] = styleValue;
+        } else if (styleValue) {
+            styleConverted[styleKey] = [styleValue.r, styleValue.g, styleValue.b, styleValue.a].filter(
+                e => typeof e === "number" && !Number.isNaN(e)
+            ) as number[];
+        }
+    }
+    await RNPAYCardForm.setFormStyle(styleConverted);
 };
 
 /**

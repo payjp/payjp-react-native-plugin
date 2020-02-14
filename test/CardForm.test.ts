@@ -1,6 +1,6 @@
 // LICENSE : MIT
 import * as PayjpCardForm from "../src/CardForm";
-import { NativeModules } from "react-native";
+import { NativeModules, processColor } from "react-native";
 
 jest.mock("react-native", () => {
     const emitter = {
@@ -24,9 +24,11 @@ jest.mock("react-native", () => {
             RNPAYCardForm: {
                 startCardForm: jest.fn(),
                 completeCardForm: jest.fn(),
-                showTokenProcessingError: jest.fn()
+                showTokenProcessingError: jest.fn(),
+                setFormStyle: jest.fn()
             }
-        }
+        },
+        processColor: jest.fn()
     };
     return mockReactNative;
 });
@@ -150,6 +152,60 @@ describe("PayjpCardForm", () => {
             expect(removers.onCardFormCanceled.remove).toHaveBeenCalledTimes(1);
             expect(removers.onCardFormCompleted.remove).toHaveBeenCalledTimes(1);
             expect(removers.onCardFormProducedToken.remove).toHaveBeenCalledTimes(1);
+            done();
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it("setIOSCardFormStyle", async done => {
+        expect.assertions(2);
+        const style = {
+            labelTextColor: {
+                r: 0,
+                g: 0.4,
+                b: 0.8,
+                a: 0.5
+            },
+            inputTextColor: processColor("#004488"),
+            submitButtonColor: processColor("#0055ff")
+        };
+        const converted = {
+            labelTextColor: [0, 0.4, 0.8, 0.5],
+            inputTextColor: processColor("#004488"),
+            submitButtonColor: processColor("#0055ff")
+        };
+        try {
+            await PayjpCardForm.setIOSCardFormStyle(style);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledWith(converted);
+            done();
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it("setIOSCardFormStyle alpha is undefined", async done => {
+        expect.assertions(2);
+        const style = {
+            labelTextColor: {
+                r: 0,
+                g: 0.4,
+                b: 0.8,
+                a: undefined
+            },
+            inputTextColor: processColor("#004488"),
+            submitButtonColor: processColor("#0055ff")
+        };
+        const converted = {
+            labelTextColor: [0, 0.4, 0.8],
+            inputTextColor: processColor("#004488"),
+            submitButtonColor: processColor("#0055ff")
+        };
+        try {
+            await PayjpCardForm.setIOSCardFormStyle(style);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledWith(converted);
             done();
         } catch (e) {
             console.error(e);
