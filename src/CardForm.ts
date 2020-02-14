@@ -90,7 +90,7 @@ export const setIOSCardFormStyle = async (style: IOSCardFormStyle): Promise<void
             ) as number[];
         }
     }
-    await RNPAYCardForm.setStyle(styleConverted);
+    await RNPAYCardForm.setFormStyle(styleConverted);
 };
 
 /**

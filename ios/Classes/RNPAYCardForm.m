@@ -55,9 +55,9 @@ RCT_EXPORT_METHOD(startCardForm
                                  @"key to use scanner in card form.");
   __weak typeof(self) wself = self;
   dispatch_async([self methodQueue], ^{
-    PAYCardFormViewController *cardForm =
-        [PAYCardFormViewController createCardFormViewControllerWithStyle:wself.style
-                                                                tenantId:tenantId];
+    PAYCardFormViewController *cardForm = [PAYCardFormViewController
+        createCardFormViewControllerWithStyle:wself.style ?: PAYCardFormStyle.defalutStyle
+                                     tenantId:tenantId];
     cardForm.delegate = wself;
     UIViewController *hostViewController =
         UIApplication.sharedApplication.keyWindow.rootViewController;
@@ -97,7 +97,7 @@ RCT_EXPORT_METHOD(showTokenProcessingError
   resolve([NSNull null]);
 }
 
-RCT_EXPORT_METHOD(setStyle
+RCT_EXPORT_METHOD(setFormStyle
                   : (NSDictionary *)style resolve
                   : (RCTPromiseResolveBlock)resolve reject
                   : (__unused RCTPromiseRejectBlock)reject) {
@@ -105,6 +105,7 @@ RCT_EXPORT_METHOD(setStyle
   dispatch_async([self methodQueue], ^{
     UIColor *labelTextColor = nil;
     UIColor *inputTextColor = nil;
+    UIColor *errorTextColor = nil;
     UIColor *tintColor = nil;
     UIColor *inputFieldBackgroundColor = nil;
     UIColor *submitButtonColor = nil;
@@ -114,6 +115,9 @@ RCT_EXPORT_METHOD(setStyle
     }
     if (style[@"inputTextColor"]) {
       inputTextColor = [RNPAYColorConverter fromJson:style[@"inputTextColor"]];
+    }
+    if (style[@"errorTextColor"]) {
+      errorTextColor = [RNPAYColorConverter fromJson:style[@"errorTextColor"]];
     }
     if (style[@"tintColor"]) {
       tintColor = [RNPAYColorConverter fromJson:style[@"tintColor"]];
@@ -128,6 +132,7 @@ RCT_EXPORT_METHOD(setStyle
 
     wself.style = [[PAYCardFormStyle alloc] initWithLabelTextColor:labelTextColor
                                                     inputTextColor:inputTextColor
+                                                    errorTextColor:errorTextColor
                                                          tintColor:tintColor
                                          inputFieldBackgroundColor:inputFieldBackgroundColor
                                                  submitButtonColor:submitButtonColor];

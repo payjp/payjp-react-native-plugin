@@ -25,7 +25,7 @@ jest.mock("react-native", () => {
                 startCardForm: jest.fn(),
                 completeCardForm: jest.fn(),
                 showTokenProcessingError: jest.fn(),
-                setStyle: jest.fn()
+                setFormStyle: jest.fn()
             }
         },
         processColor: jest.fn()
@@ -177,8 +177,8 @@ describe("PayjpCardForm", () => {
         };
         try {
             await PayjpCardForm.setIOSCardFormStyle(style);
-            expect(NativeModules.RNPAYCardForm.setStyle).toHaveBeenCalledTimes(1);
-            expect(NativeModules.RNPAYCardForm.setStyle).toHaveBeenCalledWith(converted);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledWith(converted);
             done();
         } catch (e) {
             console.error(e);
@@ -204,8 +204,8 @@ describe("PayjpCardForm", () => {
         };
         try {
             await PayjpCardForm.setIOSCardFormStyle(style);
-            expect(NativeModules.RNPAYCardForm.setStyle).toHaveBeenCalledTimes(1);
-            expect(NativeModules.RNPAYCardForm.setStyle).toHaveBeenCalledWith(converted);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledWith(converted);
             done();
         } catch (e) {
             console.error(e);
