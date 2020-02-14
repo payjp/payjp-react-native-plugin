@@ -80,6 +80,9 @@ const onPressApplePay = async (): Promise<void> => {
 const App = (): React.ReactElement => {
     useEffect(() => {
         PayjpCore.init({ publicKey: PAYJP_PUBLIC_KEY });
+        if (Platform.OS === "ios") {
+            PayjpCardForm.setIOSCardFormStyle(iOSCardFormStyle);
+        }
         const unsubscribeCardForm = PayjpCardForm.onCardFormUpdate({
             onCardFormCanceled: () => {
                 console.warn("PAY.JP canceled");
@@ -134,9 +137,6 @@ const App = (): React.ReactElement => {
                             <Button
                                 title="Add Credit Card"
                                 onPress={(): void => {
-                                    if (Platform.OS === "ios") {
-                                        PayjpCardForm.setIOSCardFormStyle(iOSCardFormStyle);
-                                    }
                                     PayjpCardForm.startCardForm();
                                 }}
                             />
