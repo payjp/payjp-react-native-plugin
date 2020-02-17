@@ -25,7 +25,7 @@
 @import PAYJP;
 
 NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.2.2";
+NSString *const RNPAYPluginVersion = @"0.2.3";
 
 @implementation RNPAYCore
 
