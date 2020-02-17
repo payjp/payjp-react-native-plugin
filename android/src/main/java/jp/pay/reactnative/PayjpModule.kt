@@ -61,7 +61,7 @@ class PayjpModule(
           ?.get(0)
     } ?: Locale.getDefault()
     val clientInfo = ClientInfo.Builder()
-        .setPlugin("${BuildConfig.LIBRARY_PACKAGE_NAME}/${BuildConfig.VERSION_NAME}")
+        .setPlugin("jp.pay.reactnative/${BuildConfig.VERSION_NAME}")
         .setPublisher("payjp")
         .build()
     Payjp.init(
