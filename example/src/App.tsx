@@ -23,13 +23,14 @@ import {
 } from "react-native";
 import { PayjpCore, PayjpCardForm, Token, PayjpApplePay } from "payjp-react-native";
 import { postTokenToBackEnd } from "./SampleApi";
+import { IOSCardFormStyle } from "payjp-react-native/lib/src/CardForm";
 
 // TODO: REPLACE WITH YOUR PAY.JP PUBLIC KEY
 const PAYJP_PUBLIC_KEY = "pk_test_0383a1b8f91e8a6e3ea0e2a9";
 // TODO: REPLACE WITH YOUR APPLE MERCHANT ID
 const APPLE_MERCHANT_ID = "merchant.jp.pay.example2";
 // Custom iOS CardForm style
-const iOSCardFormStyle = {
+const iOSCardFormStyle: IOSCardFormStyle = {
     labelTextColor: {
         r: 0,
         g: 0.4,
