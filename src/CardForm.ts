@@ -25,6 +25,7 @@ export type OnCardFormProducedToken = (token: Token) => void;
 export type IOSCardFormStyle = {
     labelTextColor?: RgbaColor | number;
     inputTextColor?: RgbaColor | number;
+    errorTextColor?: RgbaColor | number;
     tintColor?: RgbaColor | number;
     inputFieldBackgroundColor?: RgbaColor | number;
     submitButtonColor?: RgbaColor | number;
