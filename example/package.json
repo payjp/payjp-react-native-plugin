@@ -46,7 +46,7 @@
     ]
   },
   "detox": {
-    "test-runner": "mocha",
+    "test-runner": "jest",
     "configurations": {
       "ios.sim.debug": {
         "binaryPath": "ios/build/example/Build/Products/Debug-iphonesimulator/example.app",
