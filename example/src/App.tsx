@@ -136,6 +136,7 @@ const App = (): React.ReactElement => {
                             <Text style={styles.sectionTitle}>Card Form</Text>
                             <Text style={styles.sectionDescription}>Click following button to start card form.</Text>
                             <Button
+                                testID="start_card_form"
                                 title="Add Credit Card"
                                 onPress={(): void => {
                                     PayjpCardForm.startCardForm();
