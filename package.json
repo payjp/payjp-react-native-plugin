@@ -1,56 +1,14 @@
 {
   "name": "payjp-react-native",
-  "version": "0.2.3",
   "description": "A React Native plugin for PAY.JP SDK",
-  "keywords": [
-    "PAY.JP",
-    "payment processing",
-    "react native"
-  ],
+  "version": "0.2.3",
   "author": {
     "name": "PAY.JP",
     "email": "support@pay.jp",
     "url": "https://pay.jp"
   },
-  "homepage": "https://github.com/payjp/payjp-react-native-plugin",
-  "license": "MIT",
-  "main": "lib/src/index.js",
-  "types": "lib/src/index.d.ts",
-  "directories": {
-    "test": "test"
-  },
-  "files": [
-    "lib/src",
-    "src",
-    "android",
-    "ios",
-    "payjp-react-native.podspec"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/payjp/payjp-react-native-plugin.git"
-  },
-  "scripts": {
-    "build": "tsc -p .",
-    "clean": "rimraf lib/",
-    "watch": "tsc -p . --watch",
-    "test": "jest",
-    "lint": "eslint --cache \"{src,test}/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint --fix --cache \"{src,test}/**/*.{ts,tsx}\"",
-    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
-    "docs": "typedoc --out docs src/",
-    "preversion": "npm test",
-    "version": "scripts/sync_version_ios.sh && npm run docs && touch docs/.nojekyll && git add .",
-    "prepublishOnly": "npm run clean && npm run build",
-    "prepare": "npm run build",
-    "dev-sync": "npm run build && cp -r *podspec lib android ios example/node_modules/payjp-react-native/"
-  },
   "bugs": {
     "url": "https://github.com/payjp/payjp-react-native-plugin/issues"
-  },
-  "peerDependencies": {
-    "react": "~16.9.0",
-    "react-native": "^0.61.5"
   },
   "devDependencies": {
     "@types/jest": "^25.1.0",
@@ -75,16 +33,17 @@
     "typedoc": "^0.16.9",
     "typescript": "^3.7.5"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "git add"
-    ],
-    "ios/Classes/**/*.{h,m}": [
-      "clang-format -i -style=Google",
-      "git add"
-    ]
+  "directories": {
+    "test": "test"
   },
+  "files": [
+    "lib/src",
+    "src",
+    "android",
+    "ios",
+    "payjp-react-native.podspec"
+  ],
+  "homepage": "https://github.com/payjp/payjp-react-native-plugin",
   "husky": {
     "hooks": {
       "post-commit": "git reset",
@@ -111,5 +70,36 @@
     "testMatch": [
       "**/test/**/*.test.ts"
     ]
-  }
+  },
+  "keywords": [
+    "PAY.JP",
+    "payment processing",
+    "react native"
+  ],
+  "license": "MIT",
+  "main": "lib/src/index.js",
+  "peerDependencies": {
+    "react": "~16.9.0",
+    "react-native": "^0.61.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/payjp/payjp-react-native-plugin.git"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "rimraf lib/",
+    "dev-sync": "npm run build && cp -r *podspec lib android ios example/node_modules/payjp-react-native/",
+    "docs": "typedoc --out docs src/",
+    "lint": "eslint --cache \"{src,test}/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --fix --cache \"{src,test}/**/*.{ts,tsx}\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
+    "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
+    "preversion": "npm test",
+    "test": "jest",
+    "version": "scripts/sync_version_ios.sh && npm run docs && touch docs/.nojekyll && git add .",
+    "watch": "tsc -p . --watch"
+  },
+  "types": "lib/src/index.d.ts"
 }
