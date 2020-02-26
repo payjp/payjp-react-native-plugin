@@ -26,7 +26,7 @@ import PAYJP
 
 @objc(RNPAYCardForm)
 class PayjpCardForm: RCTEventEmitter {
-    private var style: FormStyle?
+    private var style: FormStyle = .defalutStyle
     private var completionHandler: ((Error?) -> Void)?
 }
 
@@ -54,7 +54,7 @@ class PayjpCardForm: RCTEventEmitter {
         assert(description?.isEmpty == false, "The app's Info.plist must contain an NSCameraUsageDescription key to use scanner in card form.")
         self.methodQueue.async { [weak self] in
             guard let self = self else { return }
-            let cardForm = CardFormViewController.createCardFormViewController(style: self.style ?? FormStyle.defalutStyle,
+            let cardForm = CardFormViewController.createCardFormViewController(style: self.style,
                                                                                tenantId: tenantId)
             cardForm.delegate = self
             if let hostViewController = UIApplication.shared.keyWindow?.rootViewController {
