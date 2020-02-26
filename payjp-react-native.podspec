@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.author       = { package['author']['name'] => package['author']['email'] }
   s.platform     = :ios, "9.0"
   s.source       = { :path => 'ios' }
-  s.source_files = "ios/Classes/**/*.{h,m}"
+  s.source_files = "ios/Classes/**/*.{h,m,swift}"
   s.public_header_files = "ios/Classes/**/*.h"
   s.requires_arc = true
   s.static_framework = true

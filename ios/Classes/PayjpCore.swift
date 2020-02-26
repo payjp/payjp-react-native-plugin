@@ -20,10 +20,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventEmitter.h>
-@import PAYJP;
 
-@interface RNPAYCardForm : RCTEventEmitter <RCTBridgeModule, PAYCardFormViewControllerDelegate>
+import Foundation
+import PAYJP
 
-@end
+@objc(RNPAYCore)
+class PayjpCore: NSObject {}
+
+// MARK: - Bridiging API
+
+@objc extension PayjpCore {
+
+    static func requiresMainQueueSetup() -> Bool {
+        return false
+    }
+
+    var methodQueue: DispatchQueue {
+        return DispatchQueue.main
+    }
+
+    func initialize(
+        _ arguments: [String: Any]?,
+        resolver: RCTPromiseResolveBlock,
+        rejecter: RCTPromiseRejectBlock
+    ) {
+        guard let publicKey = arguments?["publicKey"] as? String else {
+            assert(false, "publicKey is required")
+        }
+        PAYJPSDK.publicKey = publicKey
+        if let localeString = arguments?["locale"] as? String {
+            PAYJPSDK.locale = Locale.init(identifier: localeString)
+        } else {
+            PAYJPSDK.locale = Locale.current
+        }
+        let plugin = "jp.pay.reactnative/\(RNPAYErrorDomain)"
+        PAYJPSDK.clientInfo = ClientInfo.makeInfo(plugin: plugin, publisher: "payjp")
+        resolver(true)
+    }
+}
