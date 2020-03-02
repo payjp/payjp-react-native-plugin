@@ -45,7 +45,13 @@ class PayjpCore: NSObject {}
         rejecter: RCTPromiseRejectBlock
     ) {
         guard let publicKey = arguments?["publicKey"] as? String else {
-            assert(false, "publicKey is required")
+            let noPublicKeyMessage = "publicKey is required"
+            assertionFailure(noPublicKeyMessage)
+            let error = NSError.init(domain: RNPAYErrorDomain,
+                                     code: 0,
+                                     userInfo: [NSLocalizedDescriptionKey: noPublicKeyMessage])
+            rejecter("error", noPublicKeyMessage, error)
+            return
         }
         PAYJPSDK.publicKey = publicKey
         if let localeString = arguments?["locale"] as? String {
