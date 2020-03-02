@@ -3,11 +3,13 @@ git:
 
 matrix:
   include:
+  # unit test
   - language: node_js
     node_js: 10
     script:
       - yarn install && yarn lint && yarn test && yarn build
       - cd example && yarn install && yarn lint && yarn test --ci --updateSnapshot
+  # build check
   - language: android
     sudo: false
     jdk: oraclejdk8
@@ -44,6 +46,7 @@ matrix:
     script:
       - cd android
       - ./gradlew clean build
+  # e2e test
   - language: objective-c
     os: osx
     osx_image: xcode11.3
@@ -58,9 +61,13 @@ matrix:
       - cd example
       - yarn install
       - cd ios
-      - pod setup
-      - pod repo update
+      - pod install
+      - cd ..
+    install:
+      - brew tap wix/brew
+      - brew install applesimutils
+      - npm install -g react-native-cli
+      - npm install -g detox-cli
     script:
-      - xcodebuild -workspace example.xcworkspace -configuration Debug
-        -scheme example -destination 'platform=iOS Simulator,OS=12.2,name=iPhone X'
-        -derivedDataPath build/example
+      - detox build --configuration ios.sim.release
+      - detox test --configuration ios.sim.release --cleanup
