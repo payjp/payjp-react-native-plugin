@@ -26,7 +26,7 @@ import PAYJP
 
 @objc(RNPAYCardForm)
 class PayjpCardForm: RCTEventEmitter {
-    private var style: FormStyle = .defalutStyle
+    private var style: FormStyle = .defaultStyle
     private var completionHandler: ((Error?) -> Void)?
 }
 
