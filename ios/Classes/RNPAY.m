@@ -25,7 +25,7 @@
 #import <React/RCTEventEmitter.h>
 
 NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.2.3";
+NSString *const RNPAYPluginVersion = @"0.2.4";
 
 @interface RCT_EXTERN_MODULE (RNPAYCore, NSObject)
 
