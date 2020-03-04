@@ -10,7 +10,7 @@ PACKAGE_VERSION=$(cat package.json \
   | tr -d '[[:space:]]')
 
 REPLACE_TO="NSString \*const RNPAYPluginVersion = @\"$PACKAGE_VERSION\";"
-FILE="$ROOT/ios/Classes/RNPAYCore.m"
+FILE="$ROOT/ios/Classes/RNPAY.m"
 sed -i '' -e "s/NSString \*const RNPAYPluginVersion = .*/$REPLACE_TO/g" $FILE
 
 git add $FILE
