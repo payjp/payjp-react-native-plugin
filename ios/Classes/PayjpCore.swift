@@ -59,7 +59,7 @@ class PayjpCore: NSObject {}
         } else {
             PAYJPSDK.locale = Locale.current
         }
-        let plugin = "jp.pay.reactnative/\(RNPAYErrorDomain)"
+        let plugin = "jp.pay.reactnative/\(RNPAYPluginVersion)"
         PAYJPSDK.clientInfo = ClientInfo.makeInfo(plugin: plugin, publisher: "payjp")
         resolver(true)
     }
