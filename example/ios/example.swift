@@ -2,8 +2,7 @@
 //  example.swift
 //  example
 //
-//  Created by Tadashi Wakayanagi on 2020/01/28.
-//  Copyright © 2020 Facebook. All rights reserved.
+//  Created by Tatsuya Kitagawa on 2020/04/08.
 //
 
 import Foundation
