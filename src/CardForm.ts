@@ -87,7 +87,7 @@ export const setIOSCardFormStyle = async (style: IOSCardFormStyle): Promise<void
             styleConverted[styleKey] = styleValue;
         } else if (styleValue) {
             styleConverted[styleKey] = [styleValue.r, styleValue.g, styleValue.b, styleValue.a].filter(
-                e => typeof e === "number" && !Number.isNaN(e)
+                (e) => typeof e === "number" && !Number.isNaN(e)
             ) as number[];
         }
     }
@@ -131,13 +131,13 @@ export const onCardFormUpdate = (observer: {
 
 const connectCardForm = (): (() => void) => {
     const onCardFormCanceled = cardFormEventEmitter.addListener("onCardFormCanceled", () => {
-        onCardFormCanceledSet.forEach(observer => observer());
+        onCardFormCanceledSet.forEach((observer) => observer());
     });
     const onCardFormCompleted = cardFormEventEmitter.addListener("onCardFormCompleted", () => {
-        onCardFormCompletedSet.forEach(observer => observer());
+        onCardFormCompletedSet.forEach((observer) => observer());
     });
-    const onCardFormProducedToken = cardFormEventEmitter.addListener("onCardFormProducedToken", token => {
-        onCardFormProducedTokenSet.forEach(observer => observer(token));
+    const onCardFormProducedToken = cardFormEventEmitter.addListener("onCardFormProducedToken", (token) => {
+        onCardFormProducedTokenSet.forEach((observer) => observer(token));
     });
     return (): void => {
         onCardFormCanceled.remove();

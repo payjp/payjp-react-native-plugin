@@ -11,11 +11,11 @@ jest.mock("react-native", () => {
         addListener: jest.fn((eventName, callback) => {
             emitter.listeners[eventName] = callback;
             const remover = {
-                remove: jest.fn()
+                remove: jest.fn(),
             };
             emitter.removers[eventName] = remover;
             return remover;
-        })
+        }),
     };
     const mockReactNative = {
         NativeEventEmitter: jest.fn(() => emitter),
@@ -24,9 +24,9 @@ jest.mock("react-native", () => {
             RNPAYApplePay: {
                 isApplePayAvailable: jest.fn(() => true),
                 makeApplePayToken: jest.fn(),
-                completeApplePay: jest.fn()
-            }
-        }
+                completeApplePay: jest.fn(),
+            },
+        },
     };
     return mockReactNative;
 });
@@ -36,7 +36,7 @@ describe("PayjpApplePay", () => {
         jest.clearAllMocks();
     });
 
-    it("isApplePayAvailable", async done => {
+    it("isApplePayAvailable", async (done) => {
         expect.assertions(2);
         try {
             const isAvailable = await PayjpApplePay.isApplePayAvailable();
@@ -48,7 +48,7 @@ describe("PayjpApplePay", () => {
         }
     });
 
-    it("makeApplePayToken", async done => {
+    it("makeApplePayToken", async (done) => {
         expect.assertions(2);
         try {
             const request = {
@@ -57,7 +57,7 @@ describe("PayjpApplePay", () => {
                 countryCode: "JP",
                 summaryItemLabel: "PAY.JP T-shirt",
                 summaryItemAmount: "100",
-                requiredBillingAddress: true
+                requiredBillingAddress: true,
             };
             await PayjpApplePay.makeApplePayToken(request);
             expect(NativeModules.RNPAYApplePay.makeApplePayToken).toHaveBeenCalledTimes(1);
@@ -68,7 +68,7 @@ describe("PayjpApplePay", () => {
         }
     });
 
-    it("completeApplePay with success params", async done => {
+    it("completeApplePay with success params", async (done) => {
         expect.assertions(2);
         try {
             await PayjpApplePay.completeApplePay(true);
@@ -80,7 +80,7 @@ describe("PayjpApplePay", () => {
         }
     });
 
-    it("completeApplePay with failure params", async done => {
+    it("completeApplePay with failure params", async (done) => {
         expect.assertions(2);
         try {
             const message = "test";
@@ -93,14 +93,14 @@ describe("PayjpApplePay", () => {
         }
     });
 
-    it("listen onApplePayCompleted", async done => {
+    it("listen onApplePayCompleted", async (done) => {
         expect.assertions(1);
         try {
             const onApplePayCompleted = jest.fn();
             PayjpApplePay.onApplePayUpdate({
                 onApplePayCompleted,
                 onApplePayFailedRequestToken: jest.fn(),
-                onApplePayProducedToken: jest.fn()
+                onApplePayProducedToken: jest.fn(),
             });
             NativeModules.MockEventEmitter.listeners.onApplePayCompleted();
             expect(onApplePayCompleted).toHaveBeenCalledTimes(1);
@@ -110,7 +110,7 @@ describe("PayjpApplePay", () => {
         }
     });
 
-    it("listen onApplePayFailedRequestToken", async done => {
+    it("listen onApplePayFailedRequestToken", async (done) => {
         expect.assertions(2);
         try {
             const onApplePayFailedRequestToken = jest.fn();
@@ -118,7 +118,7 @@ describe("PayjpApplePay", () => {
             PayjpApplePay.onApplePayUpdate({
                 onApplePayCompleted: jest.fn(),
                 onApplePayFailedRequestToken,
-                onApplePayProducedToken: jest.fn()
+                onApplePayProducedToken: jest.fn(),
             });
             NativeModules.MockEventEmitter.listeners.onApplePayFailedRequestToken(errorInfo);
             expect(onApplePayFailedRequestToken).toHaveBeenCalledTimes(1);
@@ -129,7 +129,7 @@ describe("PayjpApplePay", () => {
         }
     });
 
-    it("listen onApplePayProducedToken", async done => {
+    it("listen onApplePayProducedToken", async (done) => {
         expect.assertions(2);
         try {
             const onApplePayProducedToken = jest.fn();
@@ -137,7 +137,7 @@ describe("PayjpApplePay", () => {
             PayjpApplePay.onApplePayUpdate({
                 onApplePayCompleted: jest.fn(),
                 onApplePayFailedRequestToken: jest.fn(),
-                onApplePayProducedToken
+                onApplePayProducedToken,
             });
             NativeModules.MockEventEmitter.listeners.onApplePayProducedToken(token);
             expect(onApplePayProducedToken).toHaveBeenCalledTimes(1);
@@ -148,13 +148,13 @@ describe("PayjpApplePay", () => {
         }
     });
 
-    it("unsubscribe listener", async done => {
+    it("unsubscribe listener", async (done) => {
         expect.assertions(3);
         try {
             const unsubscribe = PayjpApplePay.onApplePayUpdate({
                 onApplePayCompleted: jest.fn(),
                 onApplePayFailedRequestToken: jest.fn(),
-                onApplePayProducedToken: jest.fn()
+                onApplePayProducedToken: jest.fn(),
             });
             unsubscribe();
             const removers = NativeModules.MockEventEmitter.removers;

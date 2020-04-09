@@ -11,11 +11,11 @@ jest.mock("react-native", () => {
         addListener: jest.fn((eventName, callback) => {
             emitter.listeners[eventName] = callback;
             const remover = {
-                remove: jest.fn()
+                remove: jest.fn(),
             };
             emitter.removers[eventName] = remover;
             return remover;
-        })
+        }),
     };
     const mockReactNative = {
         NativeEventEmitter: jest.fn(() => emitter),
@@ -25,10 +25,10 @@ jest.mock("react-native", () => {
                 startCardForm: jest.fn(),
                 completeCardForm: jest.fn(),
                 showTokenProcessingError: jest.fn(),
-                setFormStyle: jest.fn()
-            }
+                setFormStyle: jest.fn(),
+            },
         },
-        processColor: jest.fn()
+        processColor: jest.fn(),
     };
     return mockReactNative;
 });
@@ -38,7 +38,7 @@ describe("PayjpCardForm", () => {
         jest.clearAllMocks();
     });
 
-    it("startCardForm", async done => {
+    it("startCardForm", async (done) => {
         expect.assertions(1);
         try {
             await PayjpCardForm.startCardForm();
@@ -49,7 +49,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("startCardForm with tenantId", async done => {
+    it("startCardForm with tenantId", async (done) => {
         expect.assertions(2);
         const tenantId = "ten_123";
         try {
@@ -62,7 +62,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("completeCardForm", async done => {
+    it("completeCardForm", async (done) => {
         expect.assertions(1);
         try {
             await PayjpCardForm.completeCardForm();
@@ -73,7 +73,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("showTokenProcessingError", async done => {
+    it("showTokenProcessingError", async (done) => {
         expect.assertions(2);
         const message = "test";
         try {
@@ -86,14 +86,14 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("listen onCardFormCanceled", async done => {
+    it("listen onCardFormCanceled", async (done) => {
         expect.assertions(1);
         try {
             const onCardFormCanceled = jest.fn();
             PayjpCardForm.onCardFormUpdate({
                 onCardFormCanceled,
                 onCardFormCompleted: jest.fn(),
-                onCardFormProducedToken: jest.fn()
+                onCardFormProducedToken: jest.fn(),
             });
             NativeModules.MockEventEmitter.listeners.onCardFormCanceled();
             expect(onCardFormCanceled).toHaveBeenCalledTimes(1);
@@ -103,14 +103,14 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("listen onCardFormCompleted", async done => {
+    it("listen onCardFormCompleted", async (done) => {
         expect.assertions(1);
         try {
             const onCardFormCompleted = jest.fn();
             PayjpCardForm.onCardFormUpdate({
                 onCardFormCanceled: jest.fn(),
                 onCardFormCompleted,
-                onCardFormProducedToken: jest.fn()
+                onCardFormProducedToken: jest.fn(),
             });
             NativeModules.MockEventEmitter.listeners.onCardFormCompleted();
             expect(onCardFormCompleted).toHaveBeenCalledTimes(1);
@@ -120,7 +120,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("listen onCardFormCompleted", async done => {
+    it("listen onCardFormCompleted", async (done) => {
         expect.assertions(2);
         try {
             const token = { id: "tok_123" };
@@ -128,7 +128,7 @@ describe("PayjpCardForm", () => {
             PayjpCardForm.onCardFormUpdate({
                 onCardFormCanceled: jest.fn(),
                 onCardFormCompleted: jest.fn(),
-                onCardFormProducedToken
+                onCardFormProducedToken,
             });
             NativeModules.MockEventEmitter.listeners.onCardFormProducedToken(token);
             expect(onCardFormProducedToken).toHaveBeenCalledTimes(1);
@@ -139,13 +139,13 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("unsubscribe listener", async done => {
+    it("unsubscribe listener", async (done) => {
         expect.assertions(3);
         try {
             const unsubscribe = PayjpCardForm.onCardFormUpdate({
                 onCardFormCanceled: jest.fn(),
                 onCardFormCompleted: jest.fn(),
-                onCardFormProducedToken: jest.fn()
+                onCardFormProducedToken: jest.fn(),
             });
             unsubscribe();
             const removers = NativeModules.MockEventEmitter.removers;
@@ -158,22 +158,22 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("setIOSCardFormStyle", async done => {
+    it("setIOSCardFormStyle", async (done) => {
         expect.assertions(2);
         const style = {
             labelTextColor: {
                 r: 0,
                 g: 0.4,
                 b: 0.8,
-                a: 0.5
+                a: 0.5,
             },
             inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff")
+            submitButtonColor: processColor("#0055ff"),
         };
         const converted = {
             labelTextColor: [0, 0.4, 0.8, 0.5],
             inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff")
+            submitButtonColor: processColor("#0055ff"),
         };
         try {
             await PayjpCardForm.setIOSCardFormStyle(style);
@@ -185,22 +185,22 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("setIOSCardFormStyle alpha is undefined", async done => {
+    it("setIOSCardFormStyle alpha is undefined", async (done) => {
         expect.assertions(2);
         const style = {
             labelTextColor: {
                 r: 0,
                 g: 0.4,
                 b: 0.8,
-                a: undefined
+                a: undefined,
             },
             inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff")
+            submitButtonColor: processColor("#0055ff"),
         };
         const converted = {
             labelTextColor: [0, 0.4, 0.8],
             inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff")
+            submitButtonColor: processColor("#0055ff"),
         };
         try {
             await PayjpCardForm.setIOSCardFormStyle(style);

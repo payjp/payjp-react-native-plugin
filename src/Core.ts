@@ -33,6 +33,6 @@ export const init = async (options: InitOption): Promise<void> => {
     await RNPAYCore.initialize({
         publicKey: options.publicKey,
         locale: options.locale || null,
-        debugEnabled: options.debugEnabled || false
+        debugEnabled: options.debugEnabled || false,
     });
 };

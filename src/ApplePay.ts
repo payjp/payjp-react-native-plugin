@@ -88,7 +88,7 @@ export const isApplePayAvailable = async (): Promise<boolean> => {
 export const makeApplePayToken = async (option: ApplePayAuthorizationOption): Promise<void> => {
     const filledOption = {
         ...option,
-        requiredBillingAddress: option.requiredBillingAddress || false
+        requiredBillingAddress: option.requiredBillingAddress || false,
     };
     await RNPAYApplePay.makeApplePayToken(filledOption);
 };
@@ -130,14 +130,14 @@ export const onApplePayUpdate = (observer: {
 };
 
 const connectApplePayEvent = (): (() => void) => {
-    const onApplePayProducedToken = applePayEventEmitter.addListener("onApplePayProducedToken", token => {
-        onApplePayProducedTokenSet.forEach(observer => observer(token));
+    const onApplePayProducedToken = applePayEventEmitter.addListener("onApplePayProducedToken", (token) => {
+        onApplePayProducedTokenSet.forEach((observer) => observer(token));
     });
-    const onApplePayFailedRequestToken = applePayEventEmitter.addListener("onApplePayFailedRequestToken", error => {
-        onApplePayFailedRequestTokenSet.forEach(observer => observer(error));
+    const onApplePayFailedRequestToken = applePayEventEmitter.addListener("onApplePayFailedRequestToken", (error) => {
+        onApplePayFailedRequestTokenSet.forEach((observer) => observer(error));
     });
     const onApplePayCompleted = applePayEventEmitter.addListener("onApplePayCompleted", () => {
-        onApplePayCompletedSet.forEach(observer => observer());
+        onApplePayCompletedSet.forEach((observer) => observer());
     });
     return (): void => {
         onApplePayProducedToken.remove();

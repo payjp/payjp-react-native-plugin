@@ -4,8 +4,8 @@ import { NativeModules } from "react-native";
 
 jest.mock("react-native", () => ({
     NativeModules: {
-        RNPAYCore: { initialize: jest.fn() }
-    }
+        RNPAYCore: { initialize: jest.fn() },
+    },
 }));
 
 describe("PayjpCore", () => {
@@ -13,12 +13,12 @@ describe("PayjpCore", () => {
         jest.clearAllMocks();
     });
 
-    it("initialize", async done => {
+    it("initialize", async (done) => {
         expect.assertions(2);
         const option = {
             publicKey: "pk_test_123",
             locale: "ja",
-            debugEnabled: true
+            debugEnabled: true,
         };
         try {
             await PayjpCore.init(option);
@@ -30,18 +30,18 @@ describe("PayjpCore", () => {
         }
     });
 
-    it("initialize with default args", async done => {
+    it("initialize with default args", async (done) => {
         expect.assertions(2);
         const publicKey = "pk_test_123";
         try {
             await PayjpCore.init({
-                publicKey
+                publicKey,
             });
             expect(NativeModules.RNPAYCore.initialize).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCore.initialize).toHaveBeenCalledWith({
                 publicKey,
                 locale: null,
-                debugEnabled: false
+                debugEnabled: false,
             });
             done();
         } catch (e) {
