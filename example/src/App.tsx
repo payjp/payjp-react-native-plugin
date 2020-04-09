@@ -19,7 +19,7 @@ import {
     StatusBar,
     Button,
     Platform,
-    processColor
+    processColor,
 } from "react-native";
 import { PayjpCore, PayjpCardForm, Token, PayjpApplePay } from "payjp-react-native";
 import { postTokenToBackEnd } from "./SampleApi";
@@ -34,10 +34,10 @@ const iOSCardFormStyle: IOSCardFormStyle = {
     labelTextColor: {
         r: 0,
         g: 0.4,
-        b: 0.8
+        b: 0.8,
     },
     inputTextColor: processColor("#004488"),
-    submitButtonColor: processColor("#0055ff")
+    submitButtonColor: processColor("#0055ff"),
 };
 
 const onProducedToken = async (token: Token): Promise<void> => {
@@ -71,7 +71,7 @@ const onPressApplePay = async (): Promise<void> => {
             countryCode: "JP",
             summaryItemLabel: "PAY.JP T-shirt",
             summaryItemAmount: "100",
-            requiredBillingAddress: false
+            requiredBillingAddress: false,
         });
     } else {
         Alert.alert("Apple Pay", "この端末では利用できません。", [{ text: "OK" }]);
@@ -91,10 +91,10 @@ const App = (): React.ReactElement => {
             onCardFormCompleted: () => {
                 console.warn("PAY.JP completed");
             },
-            onCardFormProducedToken: token => {
+            onCardFormProducedToken: (token) => {
                 console.log("PAY.JP token => ", token);
                 onProducedToken(token);
-            }
+            },
         });
         const unsubscribeApplePay =
             Platform.OS == "ios"
@@ -102,14 +102,14 @@ const App = (): React.ReactElement => {
                       onApplePayCompleted: () => {
                           console.warn("PAY.JP ApplePay completed.");
                       },
-                      onApplePayFailedRequestToken: error => {
+                      onApplePayFailedRequestToken: (error) => {
                           console.warn("error => ", error);
                           PayjpApplePay.completeApplePay(false, error.errorMessage);
                       },
-                      onApplePayProducedToken: token => {
+                      onApplePayProducedToken: (token) => {
                           console.log("PAY.JP token => ", token);
                           onProducedTokenByApplePay(token);
-                      }
+                      },
                   })
                 : null;
 
@@ -165,27 +165,27 @@ const styles = StyleSheet.create({
     body: {},
     sectionContainer: {
         marginTop: 32,
-        paddingHorizontal: 24
+        paddingHorizontal: 24,
     },
     sectionTitle: {
         fontSize: 24,
-        fontWeight: "600"
+        fontWeight: "600",
     },
     sectionDescription: {
         marginTop: 8,
         fontSize: 18,
-        fontWeight: "400"
+        fontWeight: "400",
     },
     highlight: {
-        fontWeight: "700"
+        fontWeight: "700",
     },
     footer: {
         fontSize: 12,
         fontWeight: "600",
         padding: 4,
         paddingRight: 12,
-        textAlign: "right"
-    }
+        textAlign: "right",
+    },
 });
 
 export default App;

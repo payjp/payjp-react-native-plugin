@@ -13,7 +13,7 @@ jest.mock("payjp-react-native", () => {
     const mockPayjp = {
         PayjpCore: { init: jest.fn() },
         PayjpCardForm: { onCardFormUpdate: jest.fn(), setIOSCardFormStyle: jest.fn() },
-        PayjpApplePay: { onApplePayUpdate: jest.fn() }
+        PayjpApplePay: { onApplePayUpdate: jest.fn() },
     };
     return mockPayjp;
 });

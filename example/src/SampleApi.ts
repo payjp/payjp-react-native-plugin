@@ -19,11 +19,11 @@ You can send token(${token.id}) to your own server to make Customer etc.`);
         method: "POST",
         headers: {
             Accept: "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            card: token.id
-        })
+            card: token.id,
+        }),
     });
     const json = await response.json();
     if (response.status >= 400) {
