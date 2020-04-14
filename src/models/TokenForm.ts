@@ -74,7 +74,7 @@ export function TokenFormFromJSONTyped(json: any, ignoreDiscriminator: boolean):
         cardExpMonth: json["card[exp_month]"],
         cardExpYear: json["card[exp_year]"],
         cardCvc: !exists(json, "card[cvc]") ? undefined : json["card[cvc]"],
-        cardName: !exists(json, "card[name]") ? undefined : json["card[name]"]
+        cardName: !exists(json, "card[name]") ? undefined : json["card[name]"],
     };
 }
 
@@ -90,6 +90,6 @@ export function TokenFormToJSON(value?: TokenForm | null): any {
         "card[exp_month]": value.cardExpMonth,
         "card[exp_year]": value.cardExpYear,
         "card[cvc]": value.cardCvc,
-        "card[name]": value.cardName
+        "card[name]": value.cardName,
     };
 }

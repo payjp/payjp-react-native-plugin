@@ -86,6 +86,12 @@ export interface Card {
      */
     cvcCheck?: string;
     /**
+     * 3Dセキュアの実施結果。 加盟店において3Dセキュアが有効でない等未実施の場合null。
+     * @type {string}
+     * @memberof Card
+     */
+    threeDSecureStatus?: string;
+    /**
      * このクレジットカード番号に紐づく値。 同一番号のカードからは同一の値が生成されることが保証されており、 トークン化の度にトークンIDは変わりますが、この値は変わりません。
      * @type {string}
      * @memberof Card
@@ -165,6 +171,7 @@ export function CardFromJSONTyped(json: any, ignoreDiscriminator: boolean): Card
         expYear: !exists(json, "exp_year") ? undefined : json["exp_year"],
         brand: !exists(json, "brand") ? undefined : CardBrandFromJSON(json["brand"]),
         cvcCheck: !exists(json, "cvc_check") ? undefined : json["cvc_check"],
+        threeDSecureStatus: !exists(json, "three_d_secure_status") ? undefined : json["three_d_secure_status"],
         fingerprint: !exists(json, "fingerprint") ? undefined : json["fingerprint"],
         addressState: !exists(json, "address_state") ? undefined : json["address_state"],
         addressCity: !exists(json, "address_city") ? undefined : json["address_city"],
@@ -174,7 +181,7 @@ export function CardFromJSONTyped(json: any, ignoreDiscriminator: boolean): Card
         addressZip: !exists(json, "address_zip") ? undefined : json["address_zip"],
         addressZipCheck: !exists(json, "address_zip_check") ? undefined : json["address_zip_check"],
         customer: !exists(json, "customer") ? undefined : json["customer"],
-        metadata: !exists(json, "metadata") ? undefined : json["metadata"]
+        metadata: !exists(json, "metadata") ? undefined : json["metadata"],
     };
 }
 
@@ -195,6 +202,7 @@ export function CardToJSON(value?: Card | null): any {
         exp_year: value.expYear,
         brand: CardBrandToJSON(value.brand),
         cvc_check: value.cvcCheck,
+        three_d_secure_status: value.threeDSecureStatus,
         fingerprint: value.fingerprint,
         address_state: value.addressState,
         address_city: value.addressCity,
@@ -204,6 +212,6 @@ export function CardToJSON(value?: Card | null): any {
         address_zip: value.addressZip,
         address_zip_check: value.addressZipCheck,
         customer: value.customer,
-        metadata: value.metadata
+        metadata: value.metadata,
     };
 }
