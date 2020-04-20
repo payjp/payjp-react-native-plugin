@@ -6,7 +6,7 @@ const { RNPAYCore } = NativeModules;
 type InitOption = {
     /**
      * PAY.JPのパブリックキー
-     * PAY.JPダッシュボードで取得します
+     * PAY.JP管理画面で取得します
      */
     publicKey: string;
 
@@ -21,6 +21,12 @@ type InitOption = {
      * Androidのみ有効
      */
     debugEnabled?: boolean;
+
+    /**
+     * 3Dセキュア利用時のみ必要なオプション
+     * PAY.JP管理画面で設定したリダイレクトURLと識別子を指定します
+     */
+    threeDSecureRedirect?: { url: string; key: string };
 };
 
 /**
@@ -32,7 +38,9 @@ type InitOption = {
 export const init = async (options: InitOption): Promise<void> => {
     await RNPAYCore.initialize({
         publicKey: options.publicKey,
-        locale: options.locale || null,
-        debugEnabled: options.debugEnabled || false,
+        locale: options.locale ?? null,
+        debugEnabled: options.debugEnabled ?? false,
+        threeDSecureRedirectUrl: options.threeDSecureRedirect?.url ?? null,
+        threeDSecureRedirectKey: options.threeDSecureRedirect?.key ?? null,
     });
 };

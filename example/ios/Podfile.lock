@@ -68,13 +68,28 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - GoogleUtilities/AppDelegateSwizzler (6.5.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.5.2)
+  - GoogleUtilities/Logger (6.5.2):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/Network (6.5.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.5.2)"
+  - GoogleUtilities/Reachability (6.5.2):
+    - GoogleUtilities/Logger
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
-  - PAYJP (1.1.6)
+  - PAYJP (1.2.0)
   - payjp-react-native (0.2.4):
     - CardIO (~> 5.4.1)
-    - PAYJP (~> 1.1.6)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.5.2)
+    - PAYJP (~> 1.2.0)
     - React
   - RCTRequired (0.62.1)
   - RCTTypeSafety (0.62.1):
@@ -351,6 +366,7 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
+    - GoogleUtilities
     - OpenSSL-Universal
     - PAYJP
     - YogaKit
@@ -426,9 +442,10 @@ SPEC CHECKSUMS:
   FlipperKit: 6dc9b8f4ef60d9e5ded7f0264db299c91f18832e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
-  PAYJP: 71cd9568120631aecf87dd0fdc9ccd2596e014e6
-  payjp-react-native: 3576d3e5efb3aaa2dc666cef268d45f600671ada
+  PAYJP: 88f67737cd9708ce6c75748ab2de6df10c3f10f3
+  payjp-react-native: ece392cc0ec9436d238c03867550f86f1a7a9642
   RCTRequired: e291538a455f5ad1afc2139a4288990be0cadd46
   RCTTypeSafety: 8b6237185765dd9a03a3647807e08864105b1f95
   React: 7b33e15fab929c47ac9c3c94c409258b13cfe452
@@ -451,6 +468,6 @@ SPEC CHECKSUMS:
   Yoga: 50fb6eb13d2152e7363293ff603385db380815b1
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 88f093ff2ba9bf5963e0cef636a0542ba0e8d103
+PODFILE CHECKSUM: 086ad5e998f14cc9c3818ebfc0d46b52ac180914
 
 COCOAPODS: 1.8.4

@@ -20,7 +20,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "RNPAY.h"
+#import "RNPAYColorConverter.h"
+#import <Foundation/Foundation.h>
+#import <React/RCTConvert.h>
 
-NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.3.0";
+@implementation RNPAYColorConverter
+
++ (UIColor*)fromJson:(id)json {
+  // NSNullが含まれている場合は削除する
+  if ([json isKindOfClass:[NSArray class]]) {
+    [json removeObject:[NSNull null]];
+  }
+  return [RCTConvert UIColor:json];
+}
+
+@end

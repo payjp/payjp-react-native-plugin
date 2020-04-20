@@ -9,15 +9,16 @@ Pod::Spec.new do |s|
   s.homepage     = package['homepage']
   s.license      = package['license']
   s.author       = { package['author']['name'] => package['author']['email'] }
-  s.platform     = :ios, "9.0"
+  s.platform     = :ios, "10.0"
   s.source       = { :path => 'ios' }
-  s.source_files = "ios/Classes/**/*.{h,m,swift}"
+  s.source_files = "ios/Classes/**/*.{h,m}"
   s.public_header_files = "ios/Classes/**/*.h"
   s.requires_arc = true
   s.static_framework = true
   
   s.dependency "React"
-  s.dependency 'PAYJP', '~> 1.1.6'
+  s.dependency 'PAYJP', '~> 1.2.0'
   s.dependency 'CardIO', '~> 5.4.1'
+  s.dependency 'GoogleUtilities/AppDelegateSwizzler', '~> 6.5.2'
 
 end
