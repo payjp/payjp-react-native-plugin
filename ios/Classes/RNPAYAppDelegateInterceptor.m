@@ -45,13 +45,4 @@
   return result;
 }
 
-- (BOOL)application:(UIApplication *)application
-              openURL:(NSURL *)URL
-    sourceApplication:(NSString *)sourceApplication
-           annotation:(id)annotation {
-  BOOL result =
-      [[PAYJPThreeDSecureProcessHandler sharedHandler] completeThreeDSecureProcessWithUrl:URL];
-  return result;
-}
-
 @end
