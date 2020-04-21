@@ -19,11 +19,18 @@ describe("PayjpCore", () => {
             publicKey: "pk_test_123",
             locale: "ja",
             debugEnabled: true,
+            threeDSecureRedirect: { url: "https://example.com", key: "example" },
         };
         try {
             await PayjpCore.init(option);
             expect(NativeModules.RNPAYCore.initialize).toHaveBeenCalledTimes(1);
-            expect(NativeModules.RNPAYCore.initialize).toHaveBeenCalledWith(option);
+            expect(NativeModules.RNPAYCore.initialize).toHaveBeenCalledWith({
+                publicKey: "pk_test_123",
+                locale: "ja",
+                debugEnabled: true,
+                threeDSecureRedirectUrl: "https://example.com",
+                threeDSecureRedirectKey: "example",
+            });
             done();
         } catch (e) {
             console.error(e);
@@ -42,6 +49,8 @@ describe("PayjpCore", () => {
                 publicKey,
                 locale: null,
                 debugEnabled: false,
+                threeDSecureRedirectUrl: null,
+                threeDSecureRedirectKey: null,
             });
             done();
         } catch (e) {
