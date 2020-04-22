@@ -80,7 +80,13 @@ const onPressApplePay = async (): Promise<void> => {
 
 const App = (): React.ReactElement => {
     useEffect(() => {
-        PayjpCore.init({ publicKey: PAYJP_PUBLIC_KEY });
+        PayjpCore.init({
+            publicKey: PAYJP_PUBLIC_KEY,
+            threeDSecureRedirect: {
+                url: "jp.pay.example://tds/finish",
+                key: "mobileapp",
+            },
+        });
         if (Platform.OS === "ios") {
             PayjpCardForm.setIOSCardFormStyle(iOSCardFormStyle);
         }

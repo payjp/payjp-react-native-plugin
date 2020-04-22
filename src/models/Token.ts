@@ -83,7 +83,7 @@ export function TokenFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tok
         created: json["created"],
         livemode: json["livemode"],
         object: json["object"],
-        used: json["used"]
+        used: json["used"],
     };
 }
 
@@ -100,6 +100,6 @@ export function TokenToJSON(value?: Token | null): any {
         created: value.created,
         livemode: value.livemode,
         object: value.object,
-        used: value.used
+        used: value.used,
     };
 }

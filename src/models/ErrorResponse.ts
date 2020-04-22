@@ -46,7 +46,7 @@ export function ErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boole
         return json;
     }
     return {
-        error: json["error"]
+        error: json["error"],
     };
 }
 
@@ -58,6 +58,6 @@ export function ErrorResponseToJSON(value?: ErrorResponse | null): any {
         return null;
     }
     return {
-        error: value.error
+        error: value.error,
     };
 }

@@ -20,7 +20,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "RNPAY.h"
+#import "RNPAYAppDelegateInterceptor.h"
+#import <GoogleUtilities/GULAppDelegateSwizzler.h>
+@import PAYJP;
 
-NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.3.0";
+@implementation RNPAYAppDelegateInterceptor
+
++ (instancetype)sharedInstance {
+  static dispatch_once_t once;
+  static RNPAYAppDelegateInterceptor *sharedInstance;
+  dispatch_once(&once, ^{
+    sharedInstance = [[RNPAYAppDelegateInterceptor alloc] init];
+    [GULAppDelegateSwizzler proxyOriginalDelegate];
+    [GULAppDelegateSwizzler registerAppDelegateInterceptor:sharedInstance];
+  });
+  return sharedInstance;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)URL
+            options:(NSDictionary<NSString *, id> *)options {
+  BOOL result =
+      [[PAYJPThreeDSecureProcessHandler sharedHandler] completeThreeDSecureProcessWithUrl:URL];
+  return result;
+}
+
+@end

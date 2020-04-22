@@ -20,20 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import UIKit
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+@import PAYJP;
 
-protocol ColorConvertable {
-    func convert() -> UIColor
-}
+@interface RNPAYCardForm : RCTEventEmitter <RCTBridgeModule, PAYCardFormViewControllerDelegate>
 
-extension Array: ColorConvertable {
-    func convert() -> UIColor {
-        return RCTConvert.uiColor(filter { !($0 is NSNull) })
-    }
-}
-
-extension NSNumber: ColorConvertable {
-    func convert() -> UIColor {
-        return RCTConvert.uiColor(self)
-    }
-}
+@end

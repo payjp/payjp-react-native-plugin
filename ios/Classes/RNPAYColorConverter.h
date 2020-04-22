@@ -20,7 +20,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "RNPAY.h"
+#import <UIKit/UIKit.h>
 
-NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.3.0";
+@interface RNPAYColorConverter : NSObject
+
++ (UIColor*)fromJson:(id)json;
+
+@end

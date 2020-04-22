@@ -60,7 +60,7 @@ export function ModelErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         code: !exists(json, "code") ? undefined : json["code"],
         message: json["message"],
-        type: json["type"]
+        type: json["type"],
     };
 }
 
@@ -74,6 +74,6 @@ export function ModelErrorToJSON(value?: ModelError | null): any {
     return {
         code: value.code,
         message: value.message,
-        type: value.type
+        type: value.type,
     };
 }

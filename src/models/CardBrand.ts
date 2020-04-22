@@ -23,7 +23,7 @@ export enum CardBrand {
     JCB = "JCB",
     AmericanExpress = "American Express",
     DinersClub = "Diners Club",
-    Discover = "Discover"
+    Discover = "Discover",
 }
 
 export function CardBrandFromJSON(json: any): CardBrand {

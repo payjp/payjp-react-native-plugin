@@ -20,7 +20,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "RNPAY.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.3.0";
+NS_ASSUME_NONNULL_BEGIN
+
+@interface RNPAYAppDelegateInterceptor : NSObject <UIApplicationDelegate>
+
++ (instancetype)sharedInstance;
+
+@end
+
+NS_ASSUME_NONNULL_END

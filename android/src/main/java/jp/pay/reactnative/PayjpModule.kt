@@ -38,7 +38,7 @@ import java.util.Locale
 
 @ReactModule(name = PayjpModule.MODULE_NAME)
 class PayjpModule(
-  reactContext: ReactApplicationContext,
+  private val reactContext: ReactApplicationContext,
   private val tokenBackgroundHandler: PayjpTokenBackgroundHandler?
 ) : ReactContextBaseJavaModule(reactContext) {
   companion object {
@@ -64,6 +64,7 @@ class PayjpModule(
         .setPlugin("jp.pay.reactnative/${BuildConfig.VERSION_NAME}")
         .setPublisher("payjp")
         .build()
+    val tdsRedirectKey = arguments.getString("threeDSecureRedirectKey")
     Payjp.init(
         PayjpConfiguration.Builder(publicKey)
             .setDebugEnabled(debugEnabled)
@@ -71,6 +72,7 @@ class PayjpModule(
             .setLocale(locale)
             .setCardScannerPlugin(PayjpCardScannerPlugin)
             .setClientInfo(clientInfo)
+            .setThreeDSecureRedirectName(tdsRedirectKey)
             .build()
     )
     promise.resolve(null)
