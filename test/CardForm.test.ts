@@ -1,5 +1,6 @@
 // LICENSE : MIT
 import * as PayjpCardForm from "../src/CardForm";
+import { CardFormViewType } from "../src/CardForm";
 import { NativeModules, processColor } from "react-native";
 
 jest.mock("react-native", () => {
@@ -55,7 +56,23 @@ describe("PayjpCardForm", () => {
         try {
             await PayjpCardForm.startCardForm(tenantId);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
-            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(tenantId);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(
+                tenantId,
+                CardFormViewType.MultiLine
+            );
+            done();
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it("startCardForm with cardFormViewType", async (done) => {
+        expect.assertions(2);
+        const viewType = CardFormViewType.CardDisplay;
+        try {
+            await PayjpCardForm.startCardForm(undefined, viewType);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(undefined, viewType);
             done();
         } catch (e) {
             console.error(e);

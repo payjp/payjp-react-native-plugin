@@ -46,7 +46,8 @@ typedef void (^CardFormCompletionHandler)(NSError *_Nullable);
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm
-                  : (NSString *)tenantId resolve
+                  : (NSString *)tenantId cardFormViewType
+                  : (NSString *)cardFormViewType resolve
                   : (RCTPromiseResolveBlock)resolve reject
                   : (__unused RCTPromiseRejectBlock)reject) {
   NSString *description =
@@ -54,11 +55,22 @@ RCT_EXPORT_METHOD(startCardForm
   NSAssert([description length], @"The app's Info.plist must contain an NSCameraUsageDescription "
                                  @"key to use scanner in card form.");
   __weak typeof(self) wself = self;
+
+  CardFormViewType viewType = CardFormViewTypeLabelStyled;
+  if (cardFormViewType == "multiLine") {
+    viewType = CardFormViewTypeLabelStyled;
+  } else if (cardFormViewType == "cardDisplay") {
+    viewType = CardFormViewTypeDisplayStyled;
+  } else if (cardFormViewType == "tableStyled") {
+    viewType = CardFormViewTypeTableStyled;
+  }
+
   dispatch_async([self methodQueue], ^{
     PAYCardFormViewController *cardForm = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:wself.style ?: PAYCardFormStyle.defaultStyle
                                      tenantId:tenantId
-                                     delegate:wself];
+                                     delegate:wself
+                                     viewType:viewType];
     UIViewController *hostViewController =
         UIApplication.sharedApplication.keyWindow.rootViewController;
     if ([hostViewController isKindOfClass:[UINavigationController class]]) {
@@ -109,6 +121,7 @@ RCT_EXPORT_METHOD(setFormStyle
     UIColor *tintColor = nil;
     UIColor *inputFieldBackgroundColor = nil;
     UIColor *submitButtonColor = nil;
+    UIColor *highlightColor = nil;
 
     if (style[@"labelTextColor"]) {
       labelTextColor = [RNPAYColorConverter fromJson:style[@"labelTextColor"]];
@@ -129,13 +142,17 @@ RCT_EXPORT_METHOD(setFormStyle
     if (style[@"submitButtonColor"]) {
       submitButtonColor = [RNPAYColorConverter fromJson:style[@"submitButtonColor"]];
     }
+    if (style[@"highlightColor"]) {
+      highlightColor = [RNPAYColorConverter fromJson:style[@"highlightColor"]];
+    }
 
     wself.style = [[PAYCardFormStyle alloc] initWithLabelTextColor:labelTextColor
                                                     inputTextColor:inputTextColor
                                                     errorTextColor:errorTextColor
                                                          tintColor:tintColor
                                          inputFieldBackgroundColor:inputFieldBackgroundColor
-                                                 submitButtonColor:submitButtonColor];
+                                                 submitButtonColor:submitButtonColor
+                                                    highlightColor:highlightColor];
 
     resolve([NSNull null]);
   });

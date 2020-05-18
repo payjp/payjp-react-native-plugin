@@ -23,7 +23,7 @@ import {
 } from "react-native";
 import { PayjpCore, PayjpCardForm, Token, PayjpApplePay } from "payjp-react-native";
 import { postTokenToBackEnd } from "./SampleApi";
-import { IOSCardFormStyle } from "payjp-react-native/lib/src/CardForm";
+import { IOSCardFormStyle, CardFormViewType } from "payjp-react-native/lib/src/CardForm";
 
 // TODO: REPLACE WITH YOUR PAY.JP PUBLIC KEY
 const PAYJP_PUBLIC_KEY = "pk_test_0383a1b8f91e8a6e3ea0e2a9";
@@ -143,9 +143,15 @@ const App = (): React.ReactElement => {
                             <Text style={styles.sectionDescription}>Click following button to start card form.</Text>
                             <Button
                                 testID="start_card_form"
-                                title="Add Credit Card"
+                                title="Add Credit Card（MultiLine）"
                                 onPress={(): void => {
                                     PayjpCardForm.startCardForm();
+                                }}
+                            />
+                            <Button
+                                title="Add Credit Card（CardDisplay）"
+                                onPress={(): void => {
+                                    PayjpCardForm.startCardForm(undefined, "cardDisplay");
                                 }}
                             />
                         </View>
