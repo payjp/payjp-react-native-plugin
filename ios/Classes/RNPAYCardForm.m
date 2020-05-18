@@ -57,11 +57,11 @@ RCT_EXPORT_METHOD(startCardForm
   __weak typeof(self) wself = self;
 
   CardFormViewType viewType = CardFormViewTypeLabelStyled;
-  if (cardFormViewType == "multiLine") {
+  if ([cardFormViewType isEqual:@"multiLine"]) {
     viewType = CardFormViewTypeLabelStyled;
-  } else if (cardFormViewType == "cardDisplay") {
+  } else if ([cardFormViewType isEqual:@"cardDisplay"]) {
     viewType = CardFormViewTypeDisplayStyled;
-  } else if (cardFormViewType == "tableStyled") {
+  } else if ([cardFormViewType isEqual:@"tableStyled"]) {
     viewType = CardFormViewTypeTableStyled;
   }
 
