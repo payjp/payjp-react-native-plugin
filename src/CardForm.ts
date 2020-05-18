@@ -45,7 +45,7 @@ export type RgbaColor = {
 /**
  * カードフォームの表示タイプ
  */
-export type CardFormViewType = "tableStyled" | "multiLine" | "cardDisplay";
+export type CardFormViewType = "multiLine" | "cardDisplay" | "tableStyled";
 
 const { RNPAYCardForm } = NativeModules;
 const cardFormEventEmitter = new NativeEventEmitter(RNPAYCardForm);
