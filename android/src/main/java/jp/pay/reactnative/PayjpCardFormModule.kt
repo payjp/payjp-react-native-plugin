@@ -68,12 +68,22 @@ class PayjpCardFormModule(
 
   @ReactMethod fun startCardForm(
     tenantIdString: String?,
+    cardFormFaceType: String?,
     promise: Promise
   ) {
+    var faceType: Int = PayjpCardForm.FACE_MULTI_LINE
+    when (cardFormFaceType) {
+      "multiLine" -> {
+        faceType = PayjpCardForm.FACE_MULTI_LINE
+      }
+      "cardDisplay" -> {
+        faceType = PayjpCardForm.FACE_CARD_DISPLAY
+      }
+    }
     mainThreadHandler.post {
       reactContext.currentActivity?.let { activity ->
         val tenantId = tenantIdString?.let { TenantId(it) }
-        cardForm().start(activity, CODE_START_CARD_FORM, tenantId)
+        cardForm().start(activity, CODE_START_CARD_FORM, tenantId, faceType)
       }
       promise.resolve(null)
     }
