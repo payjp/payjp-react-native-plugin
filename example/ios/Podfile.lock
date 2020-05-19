@@ -86,10 +86,10 @@ PODS:
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
   - PAYJP (1.2.1)
-  - payjp-react-native (0.2.4):
+  - payjp-react-native (0.4.0):
     - CardIO (~> 5.4.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.5.2)
-    - PAYJP (~> 1.2.0)
+    - PAYJP (~> 1.2.1)
     - React
   - RCTRequired (0.62.1)
   - RCTTypeSafety (0.62.1):
@@ -445,7 +445,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   PAYJP: c5a8c0f470498a26a26082ff879661d23db2dcbd
-  payjp-react-native: ece392cc0ec9436d238c03867550f86f1a7a9642
+  payjp-react-native: 16e6e44f3464fd6093ef2a075b4ee1501d5357a7
   RCTRequired: e291538a455f5ad1afc2139a4288990be0cadd46
   RCTTypeSafety: 8b6237185765dd9a03a3647807e08864105b1f95
   React: 7b33e15fab929c47ac9c3c94c409258b13cfe452
