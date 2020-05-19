@@ -44,8 +44,9 @@ export type RgbaColor = {
 
 /**
  * カードフォームの表示タイプ
+ * tableStyled はiOSのみ有効
  */
-export type CardFormViewType = "multiLine" | "cardDisplay" | "tableStyled";
+export type CardFormType = "multiLine" | "cardDisplay" | "tableStyled";
 
 const { RNPAYCardForm } = NativeModules;
 const cardFormEventEmitter = new NativeEventEmitter(RNPAYCardForm);
@@ -58,13 +59,10 @@ const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
  * 更新を受け取るには {@link onCardFormUpdate} にリスナーを登録してください。
  *
  * @param tenantId PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. {@link https://pay.jp/docs/platform-tenant-checkout} ).
- * @param cardFormViewType カードフォームの表示タイプ
+ * @param cardFormType カードフォームの表示タイプ（デフォルトはmultiLine）
  */
-export const startCardForm = async (
-    tenantId?: string,
-    cardFormViewType: CardFormViewType = "multiLine"
-): Promise<void> => {
-    await RNPAYCardForm.startCardForm(tenantId, cardFormViewType);
+export const startCardForm = async (tenantId?: string, cardFormType?: CardFormType): Promise<void> => {
+    await RNPAYCardForm.startCardForm(tenantId, cardFormType);
 };
 
 /**

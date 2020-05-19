@@ -47,7 +47,7 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm
                   : (NSString *)tenantId cardFormViewType
-                  : (NSString *)cardFormViewType resolve
+                  : (NSString *)cardFormType resolve
                   : (RCTPromiseResolveBlock)resolve reject
                   : (__unused RCTPromiseRejectBlock)reject) {
   NSString *description =
@@ -57,11 +57,9 @@ RCT_EXPORT_METHOD(startCardForm
   __weak typeof(self) wself = self;
 
   CardFormViewType viewType = CardFormViewTypeLabelStyled;
-  if ([cardFormViewType isEqual:@"multiLine"]) {
-    viewType = CardFormViewTypeLabelStyled;
-  } else if ([cardFormViewType isEqual:@"cardDisplay"]) {
+  if ([cardFormType isEqual:@"cardDisplay"]) {
     viewType = CardFormViewTypeDisplayStyled;
-  } else if ([cardFormViewType isEqual:@"tableStyled"]) {
+  } else if ([cardFormType isEqual:@"tableStyled"]) {
     viewType = CardFormViewTypeTableStyled;
   }
 
