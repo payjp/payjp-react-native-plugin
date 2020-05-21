@@ -46,7 +46,7 @@ typedef void (^CardFormCompletionHandler)(NSError *_Nullable);
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm
-                  : (NSString *)tenantId cardFormViewType
+                  : (NSString *)tenantId cardFormType
                   : (NSString *)cardFormType resolve
                   : (RCTPromiseResolveBlock)resolve reject
                   : (__unused RCTPromiseRejectBlock)reject) {
