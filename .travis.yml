@@ -70,4 +70,4 @@ matrix:
       - npm install -g detox-cli
     script:
       - detox build --configuration ios.sim.release
-      # - detox test --configuration ios.sim.release --cleanup
+      - detox test --configuration ios.sim.release --cleanup
