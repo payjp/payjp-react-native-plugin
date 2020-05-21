@@ -69,5 +69,5 @@ matrix:
       - npm install -g react-native-cli
       - npm install -g detox-cli
     script:
-      - detox build --configuration ios.sim.release -l verbose
-      - detox test --configuration ios.sim.release --cleanup -l verbose
+      - detox build --configuration ios.sim.release
+      # - detox test --configuration ios.sim.release --cleanup
