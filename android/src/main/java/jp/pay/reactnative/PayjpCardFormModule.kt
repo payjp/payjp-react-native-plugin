@@ -73,8 +73,10 @@ class PayjpCardFormModule(
     promise: Promise
   ) {
     var face: Int = PayjpCardForm.FACE_MULTI_LINE
-    if (cardFormType.equals("cardDisplay")) {
-      face = PayjpCardForm.FACE_CARD_DISPLAY
+    cardFormType?.let {
+      if (it == "cardDisplay") {
+        face = PayjpCardForm.FACE_CARD_DISPLAY
+      }
     }
     mainThreadHandler.post {
       reactContext.currentActivity?.let { activity ->
