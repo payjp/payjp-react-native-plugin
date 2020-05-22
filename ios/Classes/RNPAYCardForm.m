@@ -59,8 +59,6 @@ RCT_EXPORT_METHOD(startCardForm
   CardFormViewType viewType = CardFormViewTypeLabelStyled;
   if ([cardFormType isEqual:@"cardDisplay"]) {
     viewType = CardFormViewTypeDisplayStyled;
-  } else if ([cardFormType isEqual:@"tableStyled"]) {
-    viewType = CardFormViewTypeTableStyled;
   }
 
   dispatch_async([self methodQueue], ^{

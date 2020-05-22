@@ -72,18 +72,14 @@ class PayjpCardFormModule(
     cardFormType: String?,
     promise: Promise
   ) {
-    var faceType: Int = PayjpCardForm.FACE_MULTI_LINE
-    cardFormType?.let {
-      when (it) {
-        "cardDisplay" -> {
-          faceType = PayjpCardForm.FACE_CARD_DISPLAY
-        }
-      }
+    var face: Int = PayjpCardForm.FACE_MULTI_LINE
+    if (cardFormType.equals("cardDisplay")) {
+      face = PayjpCardForm.FACE_CARD_DISPLAY
     }
     mainThreadHandler.post {
       reactContext.currentActivity?.let { activity ->
         val tenantId = tenantIdString?.let { TenantId(it) }
-        cardForm().start(activity, CODE_START_CARD_FORM, tenantId, faceType)
+        cardForm().start(activity, CODE_START_CARD_FORM, tenantId, face)
       }
       promise.resolve(null)
     }
