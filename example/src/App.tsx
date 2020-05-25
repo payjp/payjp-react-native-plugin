@@ -146,7 +146,7 @@ const App = (): React.ReactElement => {
                                     testID="start_card_form"
                                     title="Add Credit Card（MultiLine）"
                                     onPress={(): void => {
-                                        PayjpCardForm.startCardForm({});
+                                        PayjpCardForm.startCardForm();
                                     }}
                                 />
                                 <Button

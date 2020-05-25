@@ -51,7 +51,13 @@ export type CardFormType = "multiLine" | "cardDisplay";
  * カードフォームのオプション
  */
 type CardFormOption = {
+    /**
+     * PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. {@link https://pay.jp/docs/platform-tenant-checkout} ).
+     */
     tenantId?: string;
+    /**
+     * カードフォームの表示タイプ（デフォルトはmultiLine）
+     */
     cardFormType?: CardFormType;
 };
 
@@ -65,11 +71,10 @@ const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
  * カードフォームを開始します。
  * 更新を受け取るには {@link onCardFormUpdate} にリスナーを登録してください。
  *
- * @param tenantId PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. {@link https://pay.jp/docs/platform-tenant-checkout} ).
- * @param cardFormType カードフォームの表示タイプ（デフォルトはmultiLine）
+ * @param options カードフォームのオプション
  */
-export const startCardForm = async ({ tenantId, cardFormType }: CardFormOption): Promise<void> => {
-    await RNPAYCardForm.startCardForm(tenantId, cardFormType);
+export const startCardForm = async (options?: CardFormOption): Promise<void> => {
+    await RNPAYCardForm.startCardForm(options?.tenantId, options?.cardFormType);
 };
 
 /**
