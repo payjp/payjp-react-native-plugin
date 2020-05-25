@@ -146,13 +146,13 @@ const App = (): React.ReactElement => {
                                     testID="start_card_form"
                                     title="Add Credit Card（MultiLine）"
                                     onPress={(): void => {
-                                        PayjpCardForm.startCardForm();
+                                        PayjpCardForm.startCardForm({});
                                     }}
                                 />
                                 <Button
                                     title="Add Credit Card（CardDisplay）"
                                     onPress={(): void => {
-                                        PayjpCardForm.startCardForm(undefined, "cardDisplay");
+                                        PayjpCardForm.startCardForm({ cardFormType: "cardDisplay" });
                                     }}
                                 />
                             </View>

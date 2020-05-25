@@ -47,6 +47,14 @@ export type RgbaColor = {
  */
 export type CardFormType = "multiLine" | "cardDisplay";
 
+/**
+ * カードフォームのオプション
+ */
+type CardFormOption = {
+    tenantId?: string;
+    cardFormType?: CardFormType;
+};
+
 const { RNPAYCardForm } = NativeModules;
 const cardFormEventEmitter = new NativeEventEmitter(RNPAYCardForm);
 const onCardFormCanceledSet: Set<OnCardFormCanceled> = new Set();
@@ -60,7 +68,7 @@ const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
  * @param tenantId PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. {@link https://pay.jp/docs/platform-tenant-checkout} ).
  * @param cardFormType カードフォームの表示タイプ（デフォルトはmultiLine）
  */
-export const startCardForm = async (tenantId?: string, cardFormType?: CardFormType): Promise<void> => {
+export const startCardForm = async ({ tenantId, cardFormType }: CardFormOption): Promise<void> => {
     await RNPAYCardForm.startCardForm(tenantId, cardFormType);
 };
 
