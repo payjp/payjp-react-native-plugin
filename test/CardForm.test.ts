@@ -54,7 +54,7 @@ describe("PayjpCardForm", () => {
         expect.assertions(2);
         const tenantId = "ten_123";
         try {
-            await PayjpCardForm.startCardForm(tenantId);
+            await PayjpCardForm.startCardForm({ tenantId: tenantId });
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(tenantId, undefined);
             done();
@@ -67,7 +67,7 @@ describe("PayjpCardForm", () => {
         expect.assertions(2);
         const formType: CardFormType = "cardDisplay";
         try {
-            await PayjpCardForm.startCardForm(undefined, formType);
+            await PayjpCardForm.startCardForm({ cardFormType: formType });
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(undefined, formType);
             done();
