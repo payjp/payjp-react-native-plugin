@@ -141,13 +141,21 @@ const App = (): React.ReactElement => {
                         <View style={styles.sectionContainer}>
                             <Text style={styles.sectionTitle}>Card Form</Text>
                             <Text style={styles.sectionDescription}>Click following button to start card form.</Text>
-                            <Button
-                                testID="start_card_form"
-                                title="Add Credit Card"
-                                onPress={(): void => {
-                                    PayjpCardForm.startCardForm();
-                                }}
-                            />
+                            <View style={styles.buttonContainer}>
+                                <Button
+                                    testID="start_card_form"
+                                    title="Add Credit Card（MultiLine）"
+                                    onPress={(): void => {
+                                        PayjpCardForm.startCardForm();
+                                    }}
+                                />
+                                <Button
+                                    title="Add Credit Card（CardDisplay）"
+                                    onPress={(): void => {
+                                        PayjpCardForm.startCardForm({ cardFormType: "cardDisplay" });
+                                    }}
+                                />
+                            </View>
                         </View>
                         {Platform.OS === "ios" ? (
                             <View style={styles.sectionContainer}>
@@ -191,6 +199,11 @@ const styles = StyleSheet.create({
         padding: 4,
         paddingRight: 12,
         textAlign: "right",
+    },
+    buttonContainer: {
+        height: 100,
+        flexDirection: "column",
+        justifyContent: "space-evenly",
     },
 });
 

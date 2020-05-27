@@ -35,6 +35,7 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import jp.pay.android.Payjp.cardForm
+import jp.pay.android.PayjpCardForm
 import jp.pay.android.PayjpTokenBackgroundHandler
 import jp.pay.android.PayjpTokenBackgroundHandler.CardFormStatus
 import jp.pay.android.model.TenantId
@@ -68,12 +69,19 @@ class PayjpCardFormModule(
 
   @ReactMethod fun startCardForm(
     tenantIdString: String?,
+    cardFormType: String?,
     promise: Promise
   ) {
+    var face: Int = PayjpCardForm.FACE_MULTI_LINE
+    cardFormType?.let {
+      if (it == "cardDisplay") {
+        face = PayjpCardForm.FACE_CARD_DISPLAY
+      }
+    }
     mainThreadHandler.post {
       reactContext.currentActivity?.let { activity ->
         val tenantId = tenantIdString?.let { TenantId(it) }
-        cardForm().start(activity, CODE_START_CARD_FORM, tenantId)
+        cardForm().start(activity, CODE_START_CARD_FORM, tenantId, face)
       }
       promise.resolve(null)
     }

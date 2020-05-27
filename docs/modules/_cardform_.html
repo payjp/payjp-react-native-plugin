@@ -73,6 +73,8 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported"><a href="_cardform_.html#cardformoption" class="tsd-kind-icon">Card<wbr>Form<wbr>Option</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="_cardform_.html#cardformtype-1" class="tsd-kind-icon">Card<wbr>Form<wbr>Type</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="_cardform_.html#ioscardformstyle" class="tsd-kind-icon">IOSCard<wbr>Form<wbr>Style</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="_cardform_.html#oncardformcanceled" class="tsd-kind-icon">On<wbr>Card<wbr>Form<wbr>Canceled</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="_cardform_.html#oncardformcompleted" class="tsd-kind-icon">On<wbr>Card<wbr>Form<wbr>Completed</a></li>
@@ -106,13 +108,64 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+					<a name="cardformoption" class="tsd-anchor"></a>
+					<h3>Card<wbr>Form<wbr>Option</h3>
+					<div class="tsd-signature tsd-kind-icon">Card<wbr>Form<wbr>Option<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>cardFormType<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#cardformtype-1" class="tsd-signature-type">CardFormType</a><span class="tsd-signature-symbol">; </span>tenantId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L53">CardForm.ts:53</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>カードフォームのオプション</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> card<wbr>Form<wbr>Type<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#cardformtype-1" class="tsd-signature-type">CardFormType</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>カードフォームの表示タイプ（デフォルトはmultiLine）</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> tenant<wbr>Id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. <a href="https://pay.jp/docs/platform-tenant-checkout" class="external">https://pay.jp/docs/platform-tenant-checkout</a> ).</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="cardformtype-1" class="tsd-anchor"></a>
+					<h3>Card<wbr>Form<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Card<wbr>Form<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"multiLine"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"cardDisplay"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L48">CardForm.ts:48</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>カードフォームの表示タイプ</p>
+						</div>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="ioscardformstyle" class="tsd-anchor"></a>
 					<h3>IOSCard<wbr>Form<wbr>Style</h3>
-					<div class="tsd-signature tsd-kind-icon">IOSCard<wbr>Form<wbr>Style<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>errorTextColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>inputFieldBackgroundColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>inputTextColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>labelTextColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>submitButtonColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>tintColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">IOSCard<wbr>Form<wbr>Style<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>errorTextColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>highlightColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>inputFieldBackgroundColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>inputTextColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>labelTextColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>submitButtonColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>tintColor<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L25">CardForm.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L25">CardForm.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -125,6 +178,9 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> error<wbr>Text<wbr>Color<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> highlight<wbr>Color<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> input<wbr>Field<wbr>Background<wbr>Color<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#rgbacolor" class="tsd-signature-type">RgbaColor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
@@ -150,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">On<wbr>Card<wbr>Form<wbr>Canceled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L8">CardForm.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L8">CardForm.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -180,7 +236,7 @@
 					<div class="tsd-signature tsd-kind-icon">On<wbr>Card<wbr>Form<wbr>Completed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L13">CardForm.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L13">CardForm.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -210,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">On<wbr>Card<wbr>Form<wbr>Produced<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/_models_token_.token.html" class="tsd-signature-type">Token</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L20">CardForm.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L20">CardForm.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -251,7 +307,7 @@
 					<div class="tsd-signature tsd-kind-icon">Rgba<wbr>Color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>a<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>g<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>r<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L37">CardForm.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L38">CardForm.ts:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -286,7 +342,7 @@
 					<div class="tsd-signature tsd-kind-icon">RNPAYCard<wbr>Form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L44">CardForm.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L64">CardForm.ts:64</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -296,7 +352,7 @@
 					<div class="tsd-signature tsd-kind-icon">card<wbr>Form<wbr>Event<wbr>Emitter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NativeEventEmitter</span><span class="tsd-signature-symbol"> = new NativeEventEmitter(RNPAYCardForm)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L45">CardForm.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L65">CardForm.ts:65</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -306,7 +362,7 @@
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Card<wbr>Form<wbr>Canceled<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="_cardform_.html#oncardformcanceled" class="tsd-signature-type">OnCardFormCanceled</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Set()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L46">CardForm.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L66">CardForm.ts:66</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -316,7 +372,7 @@
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Card<wbr>Form<wbr>Completed<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="_cardform_.html#oncardformcompleted" class="tsd-signature-type">OnCardFormCompleted</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Set()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L47">CardForm.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L67">CardForm.ts:67</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -326,7 +382,7 @@
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Card<wbr>Form<wbr>Produced<wbr>Token<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="_cardform_.html#oncardformproducedtoken" class="tsd-signature-type">OnCardFormProducedToken</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Set()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L48">CardForm.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L68">CardForm.ts:68</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -343,7 +399,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L63">CardForm.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L83">CardForm.ts:83</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -365,7 +421,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L132">CardForm.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L152">CardForm.ts:152</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h4>
@@ -394,7 +450,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L114">CardForm.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L134">CardForm.ts:134</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -459,7 +515,7 @@ unsubscribe();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L81">CardForm.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L101">CardForm.ts:101</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -492,7 +548,7 @@ unsubscribe();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L72">CardForm.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L92">CardForm.ts:92</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -519,13 +575,13 @@ unsubscribe();</code></pre>
 					<a name="startcardform" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Card<wbr>Form</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">start<wbr>Card<wbr>Form<span class="tsd-signature-symbol">(</span>tenantId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Card<wbr>Form<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="_cardform_.html#cardformoption" class="tsd-signature-type">CardFormOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/abc09146/src/CardForm.ts#L56">CardForm.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/payjp/payjp-react-native-plugin/blob/31856da/src/CardForm.ts#L76">CardForm.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -537,10 +593,10 @@ unsubscribe();</code></pre>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> tenantId: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="_cardform_.html#cardformoption" class="tsd-signature-type">CardFormOption</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>PAY.JP Platform Marketplace 利用の場合のみ必要です (cf. <a href="https://pay.jp/docs/platform-tenant-checkout" class="external">https://pay.jp/docs/platform-tenant-checkout</a> ).</p>
+											<p>カードフォームのオプション</p>
 										</div>
 									</div>
 								</li>
@@ -594,6 +650,12 @@ unsubscribe();</code></pre>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_cardform_.html#cardformoption" class="tsd-kind-icon">Card<wbr>Form<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="_cardform_.html#cardformtype-1" class="tsd-kind-icon">Card<wbr>Form<wbr>Type</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="_cardform_.html#ioscardformstyle" class="tsd-kind-icon">IOSCard<wbr>Form<wbr>Style</a>
 					</li>
