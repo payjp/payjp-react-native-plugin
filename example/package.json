@@ -4,7 +4,7 @@
   "dependencies": {
     "payjp-react-native": "file:../",
     "react": "16.11.0",
-    "react-native": "0.62.1"
+    "react-native": "0.62.2"
   },
   "detox": {
     "runner-config": "e2e/config.json",
