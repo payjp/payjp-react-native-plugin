@@ -11,7 +11,6 @@ matrix:
       - cd example && yarn install && yarn lint && yarn test --ci --updateSnapshot
   # build check
   - language: android
-    sudo: false
     jdk: oraclejdk8
     os: linux
     licenses:
