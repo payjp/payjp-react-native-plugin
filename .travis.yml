@@ -66,8 +66,9 @@ matrix:
     install:
       - brew tap wix/brew
       - brew install applesimutils
-      - npm install -g react-native-cli
-      - npm install -g detox-cli
+      - npm i -g npm
+      - npm i -g react-native-cli
+      - npm i -g detox-cli
     script:
       - detox build --configuration ios.sim.release
       - detox test --configuration ios.sim.release --cleanup
