@@ -50,6 +50,7 @@ matrix:
   - language: objective-c
     os: osx
     osx_image: xcode11.5
+    podfile: example/ios/Podfile
     cache:
       yarn: true
       cocoapods: true
