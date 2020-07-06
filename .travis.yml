@@ -11,19 +11,14 @@ matrix:
       - cd example && yarn install && yarn lint && yarn test --ci --updateSnapshot
   # build check
   - language: android
-    sudo: false
     jdk: oraclejdk8
     os: linux
-    licenses:
-      - 'android-sdk-preview-license-.+'
-      - 'android-sdk-license-.+'
-      - 'google-gdk-license-.+'
     before_cache:
       - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
       - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
     cache:
+      yarn: true
       directories:
-        - $HOME/.yarn-cache
         - $HOME/.gradle/caches/
         - $HOME/.gradle/wrapper/
         - $HOME/.android/build-cache
@@ -49,10 +44,11 @@ matrix:
   # e2e test
   - language: objective-c
     os: osx
-    osx_image: xcode11.3
+    osx_image: xcode11.5
+    podfile: example/ios/Podfile
     cache:
-      directories:
-      - $HOME/.yarn-cache
+      yarn: true
+      cocoapods: true
     before_install:
       - nvm install 10
       - curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -66,8 +62,9 @@ matrix:
     install:
       - brew tap wix/brew
       - brew install applesimutils
-      - npm install -g react-native-cli
-      - npm install -g detox-cli
+      - npm i -g npm
+      - npm i -g react-native-cli
+      - npm i -g detox-cli
     script:
       - detox build --configuration ios.sim.release
       - detox test --configuration ios.sim.release --cleanup
