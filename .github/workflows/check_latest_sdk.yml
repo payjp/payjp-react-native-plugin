@@ -27,7 +27,7 @@ jobs:
       - if: success()
         run: echo "no update"
       - id: create-branch
-        if: success()
+        if: failure()
         name: Create Branch
         run: |
           DATE=`date +"%Y%m%d"`
