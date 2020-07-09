@@ -32,6 +32,8 @@ jobs:
         run: |
           DATE=`date +"%Y%m%d"`
           BRANCH_NAME="auto-update$DATE"
+          git config --global user.email "misc@pay.jp"
+          git config --global user.name "pay kun"
           git checkout -b "$BRANCH_NAME"
           git add sdkconfig.json
           git commit -m "Bump up ios: ${{ steps.latest-ios.outputs.tag }}, android: ${{ steps.latest-android.outputs.tag }}"
