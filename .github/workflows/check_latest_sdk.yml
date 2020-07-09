@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Update with latest sdk
         run: |
-          jq '. + { ios: "${{ steps.latest-ios.outputs.tag }}", android: "${{ steps.latest-android.outputs.tag }}"' sdkconfig.json > tmp.json && mv tmp.json sdkconfig.json 
+          jq '. + { ios: "${{ steps.latest-ios.outputs.tag }}", android: "${{ steps.latest-android.outputs.tag }}"}' sdkconfig.json > tmp.json && mv tmp.json sdkconfig.json 
       - run: git diff --exit-code
       - if: success()
         run: echo "no update"
