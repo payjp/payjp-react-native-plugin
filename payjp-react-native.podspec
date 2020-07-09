@@ -1,6 +1,7 @@
 require 'json'
 
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
+payjp_sdk = JSON.parse(File.read(File.join(__dir__, 'sdkconfig.json')))
 
 Pod::Spec.new do |s|
   s.name         = package['name']
@@ -17,7 +18,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
   
   s.dependency "React"
-  s.dependency 'PAYJP', '~> 1.2.3'
+  s.dependency 'PAYJP', "~> #{payjp_sdk['ios']}"
   s.dependency 'CardIO', '~> 5.4.1'
   s.dependency 'GoogleUtilities/AppDelegateSwizzler', '~> 6.5.2'
 

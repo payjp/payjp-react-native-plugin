@@ -43,7 +43,8 @@
     "src",
     "android",
     "ios",
-    "payjp-react-native.podspec"
+    "payjp-react-native.podspec",
+    "sdkconfig.json"
   ],
   "homepage": "https://github.com/payjp/payjp-react-native-plugin",
   "husky": {
