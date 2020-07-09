@@ -14,12 +14,13 @@ buildscript {
     }
 }
 
-ext.readPackageJson = { File file ->
+ext.readJson = { File file ->
     def json = new JsonSlurper().parse(file)
     return json
 }
 
-ext.pluginVersion = readPackageJson(project.file("../package.json")).version
+ext.pluginVersion = readJson(project.file("../package.json")).version
+ext.payjpSdkVersion = readJson(project.file("../sdkconfig.json")).android
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
@@ -53,6 +54,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
-    implementation "jp.pay:payjp-android:1.2.1"
-    implementation "jp.pay:payjp-android-cardio:1.2.1"
+    implementation "jp.pay:payjp-android:$payjpSdkVersion"
+    implementation "jp.pay:payjp-android-cardio:$payjpSdkVersion"
 }
