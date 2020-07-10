@@ -26,12 +26,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Update Podfile.lock
+      - name: Set up project
         run: |
           yarn --frozen-lockfile
           cd example
           yarn --frozen-lockfile
-          cd ios
+      - name: Update Podfile.lock
+        run: |
+          gem install cocoapods
+          cd example/ios
           pod update PAYJP
       - run: git diff --exit-code
       - if: success()
