@@ -6,7 +6,7 @@ on: push
 
 jobs:
   check_latest:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: geertvdc/setup-hub@v1.0.0
       - id: latest-ios
@@ -23,25 +23,15 @@ jobs:
       - name: Update with latest sdk
         run: |
           jq '. + { ios: "${{ steps.latest-ios.outputs.tag }}", android: "${{ steps.latest-android.outputs.tag }}"}' sdkconfig.json > tmp.json && mv tmp.json sdkconfig.json
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Set up project
-        run: |
-          cd example
-          yarn --frozen-lockfile
-      - name: Update Podfile.lock
-        run: |
-          sudo gem install cocoapods
-          cd example/ios
-          pod update PAYJP
       - run: git diff --exit-code
       - if: success()
         run: echo "no update"
-      - id: create-branch
+      - name: Create PR
         if: failure()
-        name: Create Branch
         run: |
+          sudo gem install cocoapods
+          cd example && yarn --frozen-lockfile && cd ../
+          cd example/ios && pod update PAYJP && cd ../../
           DATE=`date +"%Y%m%d"`
           BRANCH_NAME="auto-update$DATE"
           git config --global user.email "misc@pay.jp"
