@@ -8,7 +8,6 @@ jobs:
   check_latest:
     runs-on: macos-latest
     steps:
-      - uses: geertvdc/setup-hub@v1.0.0
       - id: latest-ios
         uses: oprypin/find-latest-tag@v1
         with:
