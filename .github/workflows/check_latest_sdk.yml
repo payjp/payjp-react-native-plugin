@@ -6,7 +6,7 @@ on: push
 
 jobs:
   check_latest:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: geertvdc/setup-hub@v1.0.0
       - id: latest-ios
@@ -23,17 +23,12 @@ jobs:
       - name: Update with latest sdk
         run: |
           jq '. + { ios: "${{ steps.latest-ios.outputs.tag }}", android: "${{ steps.latest-android.outputs.tag }}"}' sdkconfig.json > tmp.json && mv tmp.json sdkconfig.json
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
       - name: Set up project
         run: |
-          yarn --frozen-lockfile
           cd example
           yarn --frozen-lockfile
       - name: Update Podfile.lock
         run: |
-          gem install cocoapods
           cd example/ios
           pod update PAYJP
       - run: git diff --exit-code
