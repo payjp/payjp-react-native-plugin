@@ -1,0 +1,53 @@
+name: Check dependencies outdated
+
+on:
+  push # TODO: trigger weekly
+
+jobs:
+  check_outdated:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache yarn
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Cache node
+        uses: actions/cache@v2
+        id: node-cache
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Cache Cocoapods
+        uses: actions/cache@v2
+        id: pods-cache
+        with:
+          path: example/ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - run: yarn --frozen-lockfile
+      - run: cd example && yarn --frozen-lockfile
+      - run: cd example/ios && pod install
+      - name: Validate outdated
+        id: validate
+        run: sh scripts/check_outdated_deps.sh > outdated.txt
+      - name: Create Issue
+        if: ${{ failure() }}
+        run: |
+          MESSAGE=$(cat outdated.txt)
+          hub issue create -m "[Bot]Found outdated dependencies." -m "$MESSAGE"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
