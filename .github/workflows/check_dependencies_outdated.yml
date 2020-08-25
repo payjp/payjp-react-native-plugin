@@ -1,7 +1,8 @@
 name: Check dependencies outdated
 
 on:
-  push # TODO: trigger weekly
+  schedule:
+    - cron: 0 0 * * 1
 
 jobs:
   check_outdated:
