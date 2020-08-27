@@ -68,29 +68,31 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - GoogleUtilities/AppDelegateSwizzler (6.5.2):
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.5.2)
-  - GoogleUtilities/Logger (6.5.2):
+  - GoogleUtilities/Environment (6.7.2):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.7.2):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (6.5.2):
+  - GoogleUtilities/Network (6.7.2):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.5.2)"
-  - GoogleUtilities/Reachability (6.5.2):
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
     - GoogleUtilities/Logger
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
   - PAYJP (1.2.5)
-  - payjp-react-native (0.4.2):
+  - payjp-react-native (0.4.3):
     - CardIO (~> 5.4.1)
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.5.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - PAYJP (~> 1.2.5)
     - React
+  - PromisesObjC (1.2.10)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
     - FBLazyVector (= 0.62.2)
@@ -383,6 +385,7 @@ SPEC REPOS:
     - GoogleUtilities
     - OpenSSL-Universal
     - PAYJP
+    - PromisesObjC
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -456,10 +459,11 @@ SPEC CHECKSUMS:
   FlipperKit: 6dc9b8f4ef60d9e5ded7f0264db299c91f18832e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   PAYJP: 7fafdc7e00ff76584761e064ce95d8fb1fed2e80
-  payjp-react-native: 18b4c511aa142c2df512a57aa11fd3efd76ffe79
+  payjp-react-native: cfce0a6a50f6a3288098c9c8390534b4824815cb
+  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
   React: 29a8b1a02bd764fb7644ef04019270849b9a7ac3

@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.dependency "React"
   s.dependency 'PAYJP', "~> #{payjp_sdk['ios']}"
   s.dependency 'CardIO', '~> 5.4.1'
-  s.dependency 'GoogleUtilities/AppDelegateSwizzler', '~> 6.5.2'
+  s.dependency 'GoogleUtilities/AppDelegateSwizzler', '~> 6.7'
 
 end
