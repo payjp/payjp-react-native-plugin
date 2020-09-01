@@ -1,8 +1,6 @@
 name: Check dependencies outdated
 
-on:
-  schedule:
-    - cron: 0 0 * * 1
+on: push
 
 jobs:
   check_outdated:
