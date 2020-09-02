@@ -42,13 +42,15 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: cd example && yarn --frozen-lockfile
       - run: cd example/ios && pod install
-      - name: Validate outdated
-        id: validate
-        run: sh scripts/check_outdated_deps.sh > outdated.txt
+      - uses: yatatsu/pod-outdated-check-action@v0.3.0
+        id: outdated
+        with:
+          project_directory: example/ios
+          podspec: payjp-react-native.podspec
+          exclude_pods: React,PAYJP
       - name: Create Issue
-        if: ${{ failure() }}
+        if: steps.outdated.outputs.has_any_outdated != 'false'
         run: |
-          MESSAGE=$(cat outdated.txt)
-          hub issue create -m "[Bot]Found outdated dependencies." -m "$MESSAGE"
+          hub issue create -m "Found outdated dependencies." -m "${{ steps.outdated.outputs.outdated_pod_info }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
