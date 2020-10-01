@@ -34,13 +34,14 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
-import jp.pay.android.Payjp.cardForm
+import jp.pay.android.Payjp
 import jp.pay.android.PayjpCardForm
 import jp.pay.android.PayjpTokenBackgroundHandler
 import jp.pay.android.PayjpTokenBackgroundHandler.CardFormStatus
 import jp.pay.android.model.TenantId
 import jp.pay.android.model.Token
 import jp.pay.android.model.toJsonValue
+import jp.pay.android.ui.PayjpCardFormResult
 import jp.pay.android.ui.PayjpCardFormResultCallback
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.atomic.AtomicReference
@@ -72,16 +73,14 @@ class PayjpCardFormModule(
     cardFormType: String?,
     promise: Promise
   ) {
-    var face: Int = PayjpCardForm.FACE_MULTI_LINE
-    cardFormType?.let {
-      if (it == "cardDisplay") {
-        face = PayjpCardForm.FACE_CARD_DISPLAY
-      }
+    val face = when (cardFormType) {
+      "cardDisplay" -> PayjpCardForm.FACE_CARD_DISPLAY
+      else -> PayjpCardForm.FACE_MULTI_LINE
     }
     mainThreadHandler.post {
       reactContext.currentActivity?.let { activity ->
         val tenantId = tenantIdString?.let { TenantId(it) }
-        cardForm().start(activity, CODE_START_CARD_FORM, tenantId, face)
+        Payjp.cardForm().start(activity, CODE_START_CARD_FORM, tenantId, face)
       }
       promise.resolve(null)
     }
@@ -108,11 +107,13 @@ class PayjpCardFormModule(
     resultCode: Int,
     data: Intent?
   ) {
-    cardForm().handleResult(data, PayjpCardFormResultCallback { result ->
-      if (result.isSuccess()) {
-        deviceEventEmitterSafety.emit("onCardFormCompleted", null)
-      } else if (result.isCanceled()) {
-        deviceEventEmitterSafety.emit("onCardFormCanceled", null)
+    Payjp.cardForm().handleResult(data, object : PayjpCardFormResultCallback {
+      override fun onResult(result: PayjpCardFormResult) {
+        if (result.isSuccess()) {
+          deviceEventEmitterSafety.emit("onCardFormCompleted", null)
+        } else if (result.isCanceled()) {
+          deviceEventEmitterSafety.emit("onCardFormCanceled", null)
+        }
       }
     })
   }
