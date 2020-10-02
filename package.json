@@ -1,7 +1,7 @@
 {
   "name": "payjp-react-native",
   "description": "A React Native plugin for PAY.JP SDK",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "author": {
     "name": "PAY.JP",
     "email": "support@pay.jp",
