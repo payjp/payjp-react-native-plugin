@@ -1,5 +1,5 @@
 // LICENSE : MIT
-import { NativeModules, NativeEventEmitter } from "react-native";
+import { NativeModules, NativeEventEmitter, ColorValue, processColor, ProcessedColorValue } from "react-native";
 import { Token } from "./models";
 
 /**
@@ -23,23 +23,13 @@ export type OnCardFormProducedToken = (token: Token) => void;
  * カードフォームスタイル（iOS用）
  */
 export type IOSCardFormStyle = {
-    labelTextColor?: RgbaColor | number;
-    inputTextColor?: RgbaColor | number;
-    errorTextColor?: RgbaColor | number;
-    tintColor?: RgbaColor | number;
-    inputFieldBackgroundColor?: RgbaColor | number;
-    submitButtonColor?: RgbaColor | number;
-    highlightColor?: RgbaColor | number;
-};
-
-/**
- * RGBAカラー
- */
-export type RgbaColor = {
-    r: number;
-    g: number;
-    b: number;
-    a?: number;
+    labelTextColor?: ColorValue;
+    inputTextColor?: ColorValue;
+    errorTextColor?: ColorValue;
+    tintColor?: ColorValue;
+    inputFieldBackgroundColor?: ColorValue;
+    submitButtonColor?: ColorValue;
+    highlightColor?: ColorValue;
 };
 
 /**
@@ -99,16 +89,13 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  * @param style スタイル情報
  */
 export const setIOSCardFormStyle = async (style: IOSCardFormStyle): Promise<void> => {
-    const styleConverted: { [P in keyof IOSCardFormStyle]: number[] | number } = {};
+    const styleConverted: { [P in keyof IOSCardFormStyle]: ProcessedColorValue } = {};
     for (const key in style) {
         const styleKey = key as keyof IOSCardFormStyle;
         const styleValue = style[styleKey];
-        if (typeof styleValue === "number") {
-            styleConverted[styleKey] = styleValue;
-        } else if (styleValue) {
-            styleConverted[styleKey] = [styleValue.r, styleValue.g, styleValue.b, styleValue.a].filter(
-                (e) => typeof e === "number" && !Number.isNaN(e)
-            ) as number[];
+        const processedValue = processColor(styleValue);
+        if (processedValue !== null && processedValue !== undefined) {
+            styleConverted[styleKey] = processedValue;
         }
     }
     await RNPAYCardForm.setFormStyle(styleConverted);

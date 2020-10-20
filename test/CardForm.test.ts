@@ -1,9 +1,10 @@
 // LICENSE : MIT
 import * as PayjpCardForm from "../src/CardForm";
 import { CardFormType } from "./../src/CardForm";
-import { NativeModules, processColor } from "react-native";
+import { NativeModules } from "react-native";
 
 jest.mock("react-native", () => {
+    const RN = jest.requireActual("react-native");
     const emitter = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         listeners: {} as any,
@@ -29,7 +30,8 @@ jest.mock("react-native", () => {
                 setFormStyle: jest.fn(),
             },
         },
-        processColor: jest.fn(),
+        // setIOSCardFormStyle call `processColor` internal.
+        processColor: RN.processColor,
     };
     return mockReactNative;
 });
@@ -174,47 +176,15 @@ describe("PayjpCardForm", () => {
 
     it("setIOSCardFormStyle", async (done) => {
         expect.assertions(2);
-        const style = {
-            labelTextColor: {
-                r: 0,
-                g: 0.4,
-                b: 0.8,
-                a: 0.5,
-            },
-            inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff"),
+        const style: PayjpCardForm.IOSCardFormStyle = {
+            labelTextColor: "rgba(255, 0, 255, 1.0)",
+            inputTextColor: "#004488",
+            submitButtonColor: "hsl(360, 100%, 100%)",
         };
         const converted = {
-            labelTextColor: [0, 0.4, 0.8, 0.5],
-            inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff"),
-        };
-        try {
-            await PayjpCardForm.setIOSCardFormStyle(style);
-            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledTimes(1);
-            expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledWith(converted);
-            done();
-        } catch (e) {
-            console.error(e);
-        }
-    });
-
-    it("setIOSCardFormStyle alpha is undefined", async (done) => {
-        expect.assertions(2);
-        const style = {
-            labelTextColor: {
-                r: 0,
-                g: 0.4,
-                b: 0.8,
-                a: undefined,
-            },
-            inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff"),
-        };
-        const converted = {
-            labelTextColor: [0, 0.4, 0.8],
-            inputTextColor: processColor("#004488"),
-            submitButtonColor: processColor("#0055ff"),
+            labelTextColor: 4294902015,
+            inputTextColor: 4278207624,
+            submitButtonColor: 4294967295,
         };
         try {
             await PayjpCardForm.setIOSCardFormStyle(style);
