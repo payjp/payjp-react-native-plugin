@@ -1,24 +1,36 @@
 git:
   submodules: false
 
-matrix:
+jobs:
   include:
   # unit test
   - language: node_js
     node_js: 10
+    os: linux
+    dist: trusty
+    cache:
+      yarn: true
+      directories:
+        - node_modules
+        - example/node_modules
+    install:
+      - yarn --frozen-lockfile
     script:
-      - yarn install && yarn lint && yarn test && yarn build
-      - cd example && yarn install && yarn lint && yarn test --ci
+      - yarn lint && yarn test && yarn build
+      - cd example && yarn --frozen-lockfile && yarn lint && yarn test --ci
   # build check
   - language: android
     jdk: oraclejdk8
     os: linux
+    dist: trusty
     before_cache:
       - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
       - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
     cache:
       yarn: true
       directories:
+        - node_modules
+        - example/node_modules
         - $HOME/.gradle/caches/
         - $HOME/.gradle/wrapper/
         - $HOME/.android/build-cache
@@ -26,8 +38,8 @@ matrix:
       components:
         - tools
         - platform-tools
+        - android-29
         - build-tools-28.0.3
-        - android-28
         - extra-google-m2repository
         - extra-android-m2repository
         - extra-google-google_play_services
@@ -35,9 +47,9 @@ matrix:
       - nvm install 10
       - curl -o- -L https://yarnpkg.com/install.sh | bash
       - export PATH="$HOME/.yarn/bin:$PATH"
-      - yarn install && yarn build
+      - yarn --frozen-lockfile && yarn build
       - cd example
-      - yarn install
+      - yarn --frozen-lockfile
     script:
       - cd android
       - ./gradlew clean build
@@ -49,13 +61,16 @@ matrix:
     cache:
       yarn: true
       cocoapods: true
+      directories:
+        - node_modules
+        - example/node_modules
     before_install:
       - nvm install 10
       - curl -o- -L https://yarnpkg.com/install.sh | bash
       - export PATH="$HOME/.yarn/bin:$PATH"
-      - yarn install && yarn build
+      - yarn --frozen-lockfile && yarn build
       - cd example
-      - yarn install
+      - yarn --frozen-lockfile
       - cd ios
       - pod install
       - cd ..
