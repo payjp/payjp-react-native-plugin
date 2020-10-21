@@ -8,7 +8,7 @@ matrix:
     node_js: 10
     script:
       - yarn install && yarn lint && yarn test && yarn build
-      - cd example && yarn install && yarn lint && yarn test --ci --updateSnapshot
+      - cd example && yarn install && yarn lint && yarn test --ci
   # build check
   - language: android
     jdk: oraclejdk8
