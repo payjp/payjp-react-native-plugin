@@ -26,6 +26,8 @@ jobs:
     before_cache:
       - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
       - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+    before_install:
+      - yes | sdkmanager "build-tools;29.0.2"
     cache:
       yarn: true
       directories:
@@ -39,7 +41,6 @@ jobs:
         - tools
         - platform-tools
         - android-29
-        - build-tools-28.0.3
         - extra-google-m2repository
         - extra-android-m2repository
         - extra-google-google_play_services
