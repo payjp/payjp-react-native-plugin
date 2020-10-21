@@ -19,7 +19,7 @@ import {
     StatusBar,
     Button,
     Platform,
-    processColor,
+    PlatformColor,
 } from "react-native";
 import { PayjpCore, PayjpCardForm, Token, PayjpApplePay } from "payjp-react-native";
 import { postTokenToBackEnd } from "./SampleApi";
@@ -31,13 +31,9 @@ const PAYJP_PUBLIC_KEY = "pk_test_0383a1b8f91e8a6e3ea0e2a9";
 const APPLE_MERCHANT_ID = "merchant.jp.pay.example2";
 // Custom iOS CardForm style
 const iOSCardFormStyle: IOSCardFormStyle = {
-    labelTextColor: {
-        r: 0,
-        g: 0.4,
-        b: 0.8,
-    },
-    inputTextColor: processColor("#004488"),
-    submitButtonColor: processColor("#0055ff"),
+    labelTextColor: PlatformColor("label"),
+    inputTextColor: "#004488",
+    submitButtonColor: "#0055ff",
 };
 
 const onProducedToken = async (token: Token): Promise<void> => {
