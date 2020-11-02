@@ -42,7 +42,7 @@ jobs:
         id: pods-cache
         with:
           path: example/ios/Pods
-          key: ${{ runner.os }}-pods-${{ CACHE_VERSION_PODS }}-${{ hashFiles('example/ios/Podfile.lock') }}
+          key: ${{ runner.os }}-pods-${{ env.CACHE_VERSION_PODS }}-${{ hashFiles('example/ios/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
       - run: yarn --frozen-lockfile
