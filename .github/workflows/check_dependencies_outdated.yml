@@ -1,8 +1,14 @@
 name: Check dependencies outdated
 
+env:
+  CACHE_VERSION_YARN: 1
+  CACHE_VERSION_NODE_MODULES: 1
+  CACHE_VERSION_PODS: 1
+
 on:
   schedule:
     - cron: 0 0 * * 1
+  workflow_dispatch:
 
 jobs:
   check_outdated:
@@ -20,7 +26,7 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ env.CACHE_VERSION_YARN }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Cache node
@@ -30,13 +36,13 @@ jobs:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION_NODE_MODULES }}-${{ hashFiles('yarn.lock') }}
       - name: Cache Cocoapods
         uses: actions/cache@v2
         id: pods-cache
         with:
           path: example/ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile.lock') }}
+          key: ${{ runner.os }}-pods-${{ CACHE_VERSION_PODS }}-${{ hashFiles('example/ios/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
       - run: yarn --frozen-lockfile
