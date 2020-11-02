@@ -28,7 +28,7 @@ jobs:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ env.CACHE_VERSION_YARN }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-yarn-${{ env.CACHE_VERSION_YARN }}-
       - name: Cache node
         uses: actions/cache@v2
         id: node-cache
@@ -37,6 +37,8 @@ jobs:
             node_modules
             */*/node_modules
           key: ${{ runner.os }}-node-${{ env.CACHE_VERSION_NODE_MODULES }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.CACHE_VERSION_NODE_MODULES }}-
       - name: Cache Cocoapods
         uses: actions/cache@v2
         id: pods-cache
@@ -44,7 +46,7 @@ jobs:
           path: example/ios/Pods
           key: ${{ runner.os }}-pods-${{ env.CACHE_VERSION_PODS }}-${{ hashFiles('example/ios/Podfile.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pods-
+            ${{ runner.os }}-pods-${{ env.CACHE_VERSION_PODS }}-
       - run: yarn --frozen-lockfile
       - run: cd example && yarn --frozen-lockfile
       - run: cd example/ios && pod install
