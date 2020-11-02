@@ -17,9 +17,9 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.static_framework = true
   
-  s.dependency "React"
+  s.dependency "React-Core"
   s.dependency 'PAYJP', "~> #{payjp_sdk['ios']}"
   s.dependency 'CardIO', '~> 5.4.1'
-  s.dependency 'GoogleUtilities/AppDelegateSwizzler', '~> 6.7'
+  s.dependency 'GoogleUtilities/AppDelegateSwizzler', '~> 7.0'
 
 end
