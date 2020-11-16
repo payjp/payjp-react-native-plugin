@@ -13,7 +13,7 @@ describe("Example", () => {
             await expect(element(by.text("Name"))).toBeVisible();
             await expect(element(by.text("submit"))).toBeVisible();
         } else {
-            await expect(element(by.text("Submit"))).toBeVisible();
+            await expect(element(by.text("SUBMIT"))).toBeVisible();
         }
     });
 });
