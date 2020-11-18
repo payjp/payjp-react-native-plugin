@@ -27,6 +27,10 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.properties.get('compileSdkVersion', 29)
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 
     defaultConfig {
         minSdkVersion 16
