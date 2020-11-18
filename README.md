@@ -1,7 +1,7 @@
 # React Native Plugin for PAY.JP SDK
 
 ![npm](https://img.shields.io/npm/v/payjp-react-native)
-[![Build Status](https://travis-ci.org/payjp/payjp-react-native-plugin.svg?branch=master)](https://travis-ci.org/payjp/payjp-react-native-plugin)
+![Build and Test](https://github.com/payjp/payjp-react-native-plugin/workflows/Build%20and%20Test/badge.svg?branch=master)
 
 オンライン決済サービス「[PAY.JP](https://pay.jp/)」をReact Nativeアプリケーションに組み込むためのプラグインです。
 このプラグインは以下の機能を提供します。
