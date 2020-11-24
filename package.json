@@ -90,7 +90,8 @@
     "url": "git+https://github.com/payjp/payjp-react-native-plugin.git"
   },
   "resolutions": {
-    "minimist": ">= 0.2.1"
+    "minimist": ">= 0.2.1",
+    "node-fetch": "^2.6.1"
   },
   "scripts": {
     "build": "tsc -p .",
