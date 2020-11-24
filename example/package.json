@@ -35,6 +35,9 @@
     ]
   },
   "private": true,
+  "resolutions": {
+    "node-fetch": "^2.6.1"
+  },
   "scripts": {
     "android": "react-native run-android",
     "clean": "npx rimraf node_modules/",
