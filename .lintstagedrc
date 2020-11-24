@@ -1,15 +1,12 @@
 {
   "*.{js,jsx,ts,tsx}": [
-    "prettier --write",
-    "git add"
+    "prettier --write"
   ],
   "ios/Classes/**/*.{h,m}": [
-    "clang-format -i -style=Google",
-    "git add"
+    "clang-format -i -style=Google"
   ],
   "ios/Classes/**/*.swift": [
-    "swiftlint autocorrect --format",
-    "git add"
+    "swiftlint autocorrect --format"
   ],
   "package.json": [
     "npx fixpack"
