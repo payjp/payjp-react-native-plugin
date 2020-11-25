@@ -91,7 +91,8 @@
   },
   "resolutions": {
     "minimist": ">= 0.2.1",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "@hapi/hoek": "^8.5.1"
   },
   "scripts": {
     "build": "tsc -p .",
