@@ -10,6 +10,22 @@
   "bugs": {
     "url": "https://github.com/payjp/payjp-react-native-plugin/issues"
   },
+  "changelog": {
+    "repo": "payjp/payjp-react-native-plugin",
+    "cacheDir": ".changelog",
+    "labels": {
+      "Type: Breaking Change": ":boom: Breaking Change",
+      "Type: Feature": ":rocket: Feature",
+      "Type: Bug": ":bug: Bug Fix",
+      "Type: Refactoring": ":nail_care: Refactoring",
+      "Type: Documentation": ":memo: Documentation",
+      "Type: Maintenance": ":hammer_and_wrench: Maintenance"
+    },
+    "ignoreCommitters": [
+      "dependabot",
+      "github-actions[bot]"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@types/jest": "^26.0.14",

@@ -5,7 +5,11 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    labels:
+      - "Type: Dependency"
   - package-ecosystem: 'npm'
     directory: '/example'
     schedule:
       interval: 'weekly'
+    labels:
+      - "Type: Dependency"
