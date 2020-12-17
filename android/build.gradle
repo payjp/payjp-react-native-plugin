@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:4.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -35,7 +35,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion rootProject.properties.get('targetSdkVersion', 29)
-        versionName pluginVersion
+        buildConfigField "String", "VERSION_NAME", "\"$pluginVersion\""
     }
     lintOptions {
         warning 'InvalidPackage'
