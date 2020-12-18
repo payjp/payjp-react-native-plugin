@@ -18,10 +18,11 @@ jobs:
           node-version: ${{ env.USER_NODE_VERSION }}
       - name: Create release
         run: |
-          CURRENT=$(hub release | head -n 1)
-          PREV=$(hub release | head -n 2)
-          BODY=$(npx lerna-changelog --from=$PREV --to=$CURRENT)
-          hub release create -m $CURRENT -m $BODY
+          LATEST_TAG=$(git tag | tail -n 1)
+          LATEST_RELEASE=$(hub release | head -n 1)
+          BODY=body.txt
+          npx lerna-changelog --from=$LATEST_RELEASE --to=$LATEST_TAG > BODY
+          hub release create -m $LATEST_TAG -f $BODY $LATEST_TAG
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
 
