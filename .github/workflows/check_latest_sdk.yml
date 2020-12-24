@@ -3,6 +3,7 @@ name: Check latest PAYJP.SDK
 on:
   schedule:
     - cron: 0 0 * * 1-5
+  workflow_dispatch:
 
 jobs:
   check_latest:
