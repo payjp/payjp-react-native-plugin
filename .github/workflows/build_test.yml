@@ -12,7 +12,7 @@ env:
   USER_NODE_VERSION: 10.x
   USER_JAVA_VERSION: 8.x
   IOS_SIMULATOR_DEVICE: iPhone 12 Pro Max
-  IOS_SIMULATOR_RUNTIME: iOS-14-2
+  IOS_SIMULATOR_RUNTIME: iOS-14-3
 
 jobs:
   build:
@@ -116,7 +116,7 @@ jobs:
       - run: make dependencies-example
       - run: make dependencies-example-ios
       - name: List all iPhone Simulator
-        run: xcrun simctl list devices available | grep "iPhone"
+        run: xcrun simctl list devices available
       - name: Start iOS Simulator
         run: |
           UDID=$(xcrun simctl list devices available --json | jq -r '.devices."com.apple.CoreSimulator.SimRuntime.${{ env.IOS_SIMULATOR_RUNTIME }}"[] | select(.name == "${{ env.IOS_SIMULATOR_DEVICE }}").udid')
