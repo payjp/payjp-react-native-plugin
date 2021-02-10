@@ -1,3 +1,8 @@
+.PHONY: prepare-lint
+prepare-lint:
+	brew update
+	brew bundle
+
 .PHONY: dependencies
 dependencies:
 	yarn --frozen-lockfile
