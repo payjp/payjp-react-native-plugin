@@ -23,4 +23,4 @@
 #import "RNPAY.h"
 
 NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.6.1";
+NSString *const RNPAYPluginVersion = @"0.6.2";
