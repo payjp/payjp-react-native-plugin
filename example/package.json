@@ -14,7 +14,7 @@
     "@types/react": "^16.9.53",
     "@types/react-native": "^0.63.37",
     "babel-jest": "^26.6.3",
-    "detox": "^17.13.1",
+    "detox": "^18.19.0",
     "eslint": "^7.14.0",
     "jest": "^25.1.0",
     "jest-circus": "^26.6.3",
