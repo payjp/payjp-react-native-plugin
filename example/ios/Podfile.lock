@@ -86,11 +86,11 @@ PODS:
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
-  - PAYJP (1.6.0)
-  - payjp-react-native (0.6.2):
+  - PAYJP (1.6.1)
+  - payjp-react-native (0.6.3):
     - CardIO (~> 5.4.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.2)
-    - PAYJP (~> 1.6.0)
+    - PAYJP (~> 1.6.1)
     - React-Core
   - PromisesObjC (1.2.12)
   - RCTRequired (0.63.3)
@@ -467,8 +467,8 @@ SPEC CHECKSUMS:
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   GoogleUtilities: 31c5b01f978a70c6cff2afc6272b3f1921614b43
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
-  PAYJP: 38145d2a2eaf28e10dbe53f69fbff7546f16f0e7
-  payjp-react-native: 3c82fd4106be72aff3399ec193ee7f0f9447c110
+  PAYJP: edf800309adc65b71f57edff23c159b97573588f
+  payjp-react-native: 8e16e440a788427ec381683f8c99dc209021f78e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
@@ -495,4 +495,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 609da86a87d29c489f1016070e929e0378fe522c
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
