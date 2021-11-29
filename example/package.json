@@ -11,7 +11,7 @@
     "@babel/runtime": "^7.12.5",
     "@types/detox": "^16.4.2",
     "@types/jest": "^26.0.19",
-    "@types/react": "^16.9.53",
+    "@types/react": "^17.0.37",
     "@types/react-native": "^0.63.37",
     "babel-jest": "^26.6.3",
     "detox": "^17.13.1",
