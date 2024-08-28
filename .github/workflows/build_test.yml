@@ -9,7 +9,7 @@ on:
 
 env:
   CACHE_NUMBER: 0 # increment to truncate cache
-  USER_NODE_VERSION: 10.x
+  USER_NODE_VERSION: 20
   USER_JAVA_VERSION: 8.x
   IOS_SIMULATOR_DEVICE: iPhone 12 Pro Max
   IOS_SIMULATOR_RUNTIME: iOS-14-4
@@ -19,15 +19,15 @@ jobs:
     runs-on: ubuntu-18.04
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: Cache yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -41,11 +41,11 @@ jobs:
       - run: make check-example
 
   build-android:
-    runs-on: macos-10.15
+    runs-on: macos-14
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
       - uses: actions/setup-java@v1
@@ -55,7 +55,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: Cache yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -64,7 +64,7 @@ jobs:
             ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-
             ${{ runner.os }}-yarn-
       - name: Cache Gradle
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/cache
@@ -91,15 +91,15 @@ jobs:
           script: make e2e-android
 
   build-ios:
-    runs-on: macos-10.15
+    runs-on: macos-14
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
       - name: Cache CocoaPods
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: example/ios/Pods
           key: ${{ runner.os }}-pods-${{ env.CACHE_NUMBER }}-${{ hashFiles('example/ios/Podfile.lock') }}
