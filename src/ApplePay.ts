@@ -1,6 +1,6 @@
 // LICENSE : MIT
-import { NativeModules, NativeEventEmitter } from "react-native";
-import { Token } from "./models";
+import {NativeModules, NativeEventEmitter} from 'react-native';
+import {Token} from './models';
 
 /**
  * エラー情報
@@ -62,7 +62,7 @@ export type ApplePayAuthorizationOption = {
     readonly requiredBillingAddress?: boolean;
 };
 
-const { RNPAYApplePay } = NativeModules;
+const {RNPAYApplePay} = NativeModules;
 const applePayEventEmitter = new NativeEventEmitter(RNPAYApplePay);
 const onApplePayProducedTokenSet: Set<OnApplePayProducedToken> = new Set();
 const onApplePayFailedRequestTokenSet: Set<OnApplePayFailedRequestToken> = new Set();
@@ -116,7 +116,7 @@ export const onApplePayUpdate = (observer: {
     onApplePayFailedRequestToken: OnApplePayFailedRequestToken;
     onApplePayCompleted?: OnApplePayCompleted;
 }): (() => void) => {
-    const { onApplePayProducedToken, onApplePayFailedRequestToken, onApplePayCompleted } = observer;
+    const {onApplePayProducedToken, onApplePayFailedRequestToken, onApplePayCompleted} = observer;
     const disconnect = connectApplePayEvent();
     onApplePayProducedToken && onApplePayProducedTokenSet.add(onApplePayProducedToken);
     onApplePayFailedRequestToken && onApplePayFailedRequestTokenSet.add(onApplePayFailedRequestToken);
@@ -130,14 +130,14 @@ export const onApplePayUpdate = (observer: {
 };
 
 const connectApplePayEvent = (): (() => void) => {
-    const onApplePayProducedToken = applePayEventEmitter.addListener("onApplePayProducedToken", (token) => {
-        onApplePayProducedTokenSet.forEach((observer) => observer(token));
+    const onApplePayProducedToken = applePayEventEmitter.addListener('onApplePayProducedToken', token => {
+        onApplePayProducedTokenSet.forEach(observer => observer(token));
     });
-    const onApplePayFailedRequestToken = applePayEventEmitter.addListener("onApplePayFailedRequestToken", (error) => {
-        onApplePayFailedRequestTokenSet.forEach((observer) => observer(error));
+    const onApplePayFailedRequestToken = applePayEventEmitter.addListener('onApplePayFailedRequestToken', error => {
+        onApplePayFailedRequestTokenSet.forEach(observer => observer(error));
     });
-    const onApplePayCompleted = applePayEventEmitter.addListener("onApplePayCompleted", () => {
-        onApplePayCompletedSet.forEach((observer) => observer());
+    const onApplePayCompleted = applePayEventEmitter.addListener('onApplePayCompleted', () => {
+        onApplePayCompletedSet.forEach(observer => observer());
     });
     return (): void => {
         onApplePayProducedToken.remove();

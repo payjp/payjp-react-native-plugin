@@ -1,6 +1,6 @@
 // LICENSE : MIT
-import { NativeModules, NativeEventEmitter, ColorValue, processColor, ProcessedColorValue } from "react-native";
-import { Token } from "./models";
+import {NativeModules, NativeEventEmitter, ColorValue, processColor, ProcessedColorValue} from 'react-native';
+import {Token} from './models';
 
 /**
  * カードフォームがキャンセルされたときに実行されるリスナー
@@ -35,7 +35,7 @@ export type IOSCardFormStyle = {
 /**
  * カードフォームの表示タイプ
  */
-export type CardFormType = "multiLine" | "cardDisplay";
+export type CardFormType = 'multiLine' | 'cardDisplay';
 
 /**
  * カードフォームのオプション
@@ -51,7 +51,7 @@ type CardFormOption = {
     cardFormType?: CardFormType;
 };
 
-const { RNPAYCardForm } = NativeModules;
+const {RNPAYCardForm} = NativeModules;
 const cardFormEventEmitter = new NativeEventEmitter(RNPAYCardForm);
 const onCardFormCanceledSet: Set<OnCardFormCanceled> = new Set();
 const onCardFormCompletedSet: Set<OnCardFormCompleted> = new Set();
@@ -89,7 +89,7 @@ export const showTokenProcessingError = async (message: string): Promise<void> =
  * @param style スタイル情報
  */
 export const setIOSCardFormStyle = async (style: IOSCardFormStyle): Promise<void> => {
-    const styleConverted: { [P in keyof IOSCardFormStyle]: ProcessedColorValue } = {};
+    const styleConverted: {[P in keyof IOSCardFormStyle]: ProcessedColorValue} = {};
     for (const key in style) {
         const styleKey = key as keyof IOSCardFormStyle;
         const styleValue = style[styleKey];
@@ -123,7 +123,7 @@ export const onCardFormUpdate = (observer: {
     onCardFormCompleted?: OnCardFormCompleted;
     onCardFormProducedToken: OnCardFormProducedToken;
 }): (() => void) => {
-    const { onCardFormCanceled, onCardFormCompleted, onCardFormProducedToken } = observer;
+    const {onCardFormCanceled, onCardFormCompleted, onCardFormProducedToken} = observer;
     const unsubscribeNative = connectCardForm();
     onCardFormCanceled && onCardFormCanceledSet.add(onCardFormCanceled);
     onCardFormCompleted && onCardFormCompletedSet.add(onCardFormCompleted);
@@ -137,14 +137,14 @@ export const onCardFormUpdate = (observer: {
 };
 
 const connectCardForm = (): (() => void) => {
-    const onCardFormCanceled = cardFormEventEmitter.addListener("onCardFormCanceled", () => {
-        onCardFormCanceledSet.forEach((observer) => observer());
+    const onCardFormCanceled = cardFormEventEmitter.addListener('onCardFormCanceled', () => {
+        onCardFormCanceledSet.forEach(observer => observer());
     });
-    const onCardFormCompleted = cardFormEventEmitter.addListener("onCardFormCompleted", () => {
-        onCardFormCompletedSet.forEach((observer) => observer());
+    const onCardFormCompleted = cardFormEventEmitter.addListener('onCardFormCompleted', () => {
+        onCardFormCompletedSet.forEach(observer => observer());
     });
-    const onCardFormProducedToken = cardFormEventEmitter.addListener("onCardFormProducedToken", (token) => {
-        onCardFormProducedTokenSet.forEach((observer) => observer(token));
+    const onCardFormProducedToken = cardFormEventEmitter.addListener('onCardFormProducedToken', token => {
+        onCardFormProducedTokenSet.forEach(observer => observer(token));
     });
     return (): void => {
         onCardFormCanceled.remove();

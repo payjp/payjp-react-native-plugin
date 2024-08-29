@@ -1,14 +1,13 @@
 // LICENSE : MIT
-import * as PayjpCardForm from "../src/CardForm";
-import { CardFormType } from "./../src/CardForm";
-import { NativeModules } from "react-native";
+import * as PayjpCardForm from '../src/CardForm';
+import {CardFormType} from './../src/CardForm';
+import {NativeModules} from 'react-native';
 
-jest.mock("react-native", () => {
-    const RN = jest.requireActual("react-native");
+jest.mock('react-native', () => {
+    const RN = jest.requireActual('react-native');
     const emitter = {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         listeners: {} as any,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         removers: {} as any,
         addListener: jest.fn((eventName, callback) => {
             emitter.listeners[eventName] = callback;
@@ -36,12 +35,12 @@ jest.mock("react-native", () => {
     return mockReactNative;
 });
 
-describe("PayjpCardForm", () => {
+describe('PayjpCardForm', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
-    it("startCardForm", async (done) => {
+    it('startCardForm', async done => {
         expect.assertions(1);
         try {
             await PayjpCardForm.startCardForm();
@@ -52,11 +51,11 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("startCardForm with tenantId", async (done) => {
+    it('startCardForm with tenantId', async done => {
         expect.assertions(2);
-        const tenantId = "ten_123";
+        const tenantId = 'ten_123';
         try {
-            await PayjpCardForm.startCardForm({ tenantId: tenantId });
+            await PayjpCardForm.startCardForm({tenantId: tenantId});
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(tenantId, undefined);
             done();
@@ -65,11 +64,11 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("startCardForm with cardFormType", async (done) => {
+    it('startCardForm with cardFormType', async done => {
         expect.assertions(2);
-        const formType: CardFormType = "cardDisplay";
+        const formType: CardFormType = 'cardDisplay';
         try {
-            await PayjpCardForm.startCardForm({ cardFormType: formType });
+            await PayjpCardForm.startCardForm({cardFormType: formType});
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(undefined, formType);
             done();
@@ -78,7 +77,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("completeCardForm", async (done) => {
+    it('completeCardForm', async done => {
         expect.assertions(1);
         try {
             await PayjpCardForm.completeCardForm();
@@ -89,9 +88,9 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("showTokenProcessingError", async (done) => {
+    it('showTokenProcessingError', async done => {
         expect.assertions(2);
-        const message = "test";
+        const message = 'test';
         try {
             await PayjpCardForm.showTokenProcessingError(message);
             expect(NativeModules.RNPAYCardForm.showTokenProcessingError).toHaveBeenCalledTimes(1);
@@ -102,7 +101,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("listen onCardFormCanceled", async (done) => {
+    it('listen onCardFormCanceled', async done => {
         expect.assertions(1);
         try {
             const onCardFormCanceled = jest.fn();
@@ -119,7 +118,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("listen onCardFormCompleted", async (done) => {
+    it('listen onCardFormCompleted', async done => {
         expect.assertions(1);
         try {
             const onCardFormCompleted = jest.fn();
@@ -136,10 +135,10 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("listen onCardFormCompleted", async (done) => {
+    it('listen onCardFormCompleted', async done => {
         expect.assertions(2);
         try {
-            const token = { id: "tok_123" };
+            const token = {id: 'tok_123'};
             const onCardFormProducedToken = jest.fn();
             PayjpCardForm.onCardFormUpdate({
                 onCardFormCanceled: jest.fn(),
@@ -155,7 +154,7 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("unsubscribe listener", async (done) => {
+    it('unsubscribe listener', async done => {
         expect.assertions(3);
         try {
             const unsubscribe = PayjpCardForm.onCardFormUpdate({
@@ -174,12 +173,12 @@ describe("PayjpCardForm", () => {
         }
     });
 
-    it("setIOSCardFormStyle", async (done) => {
+    it('setIOSCardFormStyle', async done => {
         expect.assertions(2);
         const style: PayjpCardForm.IOSCardFormStyle = {
-            labelTextColor: "rgba(255, 0, 255, 1.0)",
-            inputTextColor: "#004488",
-            submitButtonColor: "hsl(360, 100%, 100%)",
+            labelTextColor: 'rgba(255, 0, 255, 1.0)',
+            inputTextColor: '#004488',
+            submitButtonColor: 'hsl(360, 100%, 100%)',
         };
         const converted = {
             labelTextColor: 4294902015,
