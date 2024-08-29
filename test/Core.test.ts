@@ -13,7 +13,7 @@ describe('PayjpCore', () => {
         jest.clearAllMocks();
     });
 
-    it('initialize', async done => {
+    it('initialize', async () => {
         expect.assertions(2);
         const option = {
             publicKey: 'pk_test_123',
@@ -31,13 +31,12 @@ describe('PayjpCore', () => {
                 threeDSecureRedirectUrl: 'https://example.com',
                 threeDSecureRedirectKey: 'example',
             });
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('initialize with default args', async done => {
+    it('initialize with default args', async () => {
         expect.assertions(2);
         const publicKey = 'pk_test_123';
         try {
@@ -52,7 +51,6 @@ describe('PayjpCore', () => {
                 threeDSecureRedirectUrl: null,
                 threeDSecureRedirectKey: null,
             });
-            done();
         } catch (e) {
             console.error(e);
         }

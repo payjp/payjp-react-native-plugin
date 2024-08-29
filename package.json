@@ -71,16 +71,6 @@
       "pre-commit": "lint-staged"
     }
   },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/lib/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/example/"
-    ],
-    "testMatch": [
-      "**/test/**/*.test.ts"
-    ]
-  },
   "keywords": [
     "PAY.JP",
     "payment processing",

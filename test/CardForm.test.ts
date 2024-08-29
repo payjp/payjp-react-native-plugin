@@ -40,68 +40,63 @@ describe('PayjpCardForm', () => {
         jest.clearAllMocks();
     });
 
-    it('startCardForm', async done => {
+    it('startCardForm', async () => {
         expect.assertions(1);
         try {
             await PayjpCardForm.startCardForm();
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('startCardForm with tenantId', async done => {
+    it('startCardForm with tenantId', async () => {
         expect.assertions(2);
         const tenantId = 'ten_123';
         try {
             await PayjpCardForm.startCardForm({tenantId: tenantId});
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(tenantId, undefined);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('startCardForm with cardFormType', async done => {
+    it('startCardForm with cardFormType', async () => {
         expect.assertions(2);
         const formType: CardFormType = 'cardDisplay';
         try {
             await PayjpCardForm.startCardForm({cardFormType: formType});
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(undefined, formType);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('completeCardForm', async done => {
+    it('completeCardForm', async () => {
         expect.assertions(1);
         try {
             await PayjpCardForm.completeCardForm();
             expect(NativeModules.RNPAYCardForm.completeCardForm).toHaveBeenCalledTimes(1);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('showTokenProcessingError', async done => {
+    it('showTokenProcessingError', async () => {
         expect.assertions(2);
         const message = 'test';
         try {
             await PayjpCardForm.showTokenProcessingError(message);
             expect(NativeModules.RNPAYCardForm.showTokenProcessingError).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.showTokenProcessingError).toHaveBeenCalledWith(message);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('listen onCardFormCanceled', async done => {
+    it('listen onCardFormCanceled', async () => {
         expect.assertions(1);
         try {
             const onCardFormCanceled = jest.fn();
@@ -112,13 +107,12 @@ describe('PayjpCardForm', () => {
             });
             NativeModules.MockEventEmitter.listeners.onCardFormCanceled();
             expect(onCardFormCanceled).toHaveBeenCalledTimes(1);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('listen onCardFormCompleted', async done => {
+    it('listen onCardFormCompleted', async () => {
         expect.assertions(1);
         try {
             const onCardFormCompleted = jest.fn();
@@ -129,13 +123,12 @@ describe('PayjpCardForm', () => {
             });
             NativeModules.MockEventEmitter.listeners.onCardFormCompleted();
             expect(onCardFormCompleted).toHaveBeenCalledTimes(1);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('listen onCardFormCompleted', async done => {
+    it('listen onCardFormCompleted', async () => {
         expect.assertions(2);
         try {
             const token = {id: 'tok_123'};
@@ -148,13 +141,12 @@ describe('PayjpCardForm', () => {
             NativeModules.MockEventEmitter.listeners.onCardFormProducedToken(token);
             expect(onCardFormProducedToken).toHaveBeenCalledTimes(1);
             expect(onCardFormProducedToken).toHaveBeenCalledWith(token);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('unsubscribe listener', async done => {
+    it('unsubscribe listener', async () => {
         expect.assertions(3);
         try {
             const unsubscribe = PayjpCardForm.onCardFormUpdate({
@@ -167,13 +159,12 @@ describe('PayjpCardForm', () => {
             expect(removers.onCardFormCanceled.remove).toHaveBeenCalledTimes(1);
             expect(removers.onCardFormCompleted.remove).toHaveBeenCalledTimes(1);
             expect(removers.onCardFormProducedToken.remove).toHaveBeenCalledTimes(1);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it('setIOSCardFormStyle', async done => {
+    it('setIOSCardFormStyle', async () => {
         expect.assertions(2);
         const style: PayjpCardForm.IOSCardFormStyle = {
             labelTextColor: 'rgba(255, 0, 255, 1.0)',
@@ -189,7 +180,6 @@ describe('PayjpCardForm', () => {
             await PayjpCardForm.setIOSCardFormStyle(style);
             expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.setFormStyle).toHaveBeenCalledWith(converted);
-            done();
         } catch (e) {
             console.error(e);
         }
