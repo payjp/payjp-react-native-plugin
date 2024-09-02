@@ -1,6 +1,5 @@
 PODS:
   - boost (1.83.0)
-  - CardIO (5.4.1)
   - DoubleConversion (1.1.6)
   - EXConstants (16.0.2):
     - ExpoModulesCore
@@ -95,7 +94,6 @@ PODS:
   - hermes-engine/Pre-built (0.74.5)
   - PAYJP (1.6.2)
   - payjp-react-native (0.6.3):
-    - CardIO (~> 5.4.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.2)
     - PAYJP (~> 1.6.1)
     - React-Core
@@ -1402,7 +1400,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - CardIO
     - GoogleUtilities
     - PAYJP
     - PromisesObjC
@@ -1553,7 +1550,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
-  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   EXConstants: 409690fbfd5afea964e5e9d6c4eb2c2b59222c59
   Expo: 4773e11951abd0f666f67023f0cb1d48c3e8a32b
@@ -1572,7 +1568,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   hermes-engine: 8c1577f3fdb849cbe7729c2e7b5abc4b845e88f8
   PAYJP: fec0c3f72666b908863ec2f526e340b3d3911f09
-  payjp-react-native: 8e16e440a788427ec381683f8c99dc209021f78e
+  payjp-react-native: 3876d127fc77fb06121b8f6050a9e2b016cda917
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: 3afceddffa65aee666dafd6f0116f1d975db1584

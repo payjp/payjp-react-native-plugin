@@ -14,7 +14,15 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.PAYJPExample"
+      "bundleIdentifier": "com.anonymous.PAYJPExample",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan QR codes."
+      },
+      "entitlements": {
+        "com.apple.developer.in-app-payments": [
+          "merchant.jp.pay.example2"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {

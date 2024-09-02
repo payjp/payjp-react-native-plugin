@@ -14,11 +14,11 @@ check: dependencies
 
 .PHONY: dependencies-example
 dependencies-example: dependencies
-	cd example && yarn --frozen-lockfile
+	cd example2 && yarn --frozen-lockfile
 
 .PHONY: check-example
 check-example: dependencies-example
-	cd example && yarn lint && yarn test --ci
+	cd example2 && yarn lint
 
 .PHONY: build-example-android
 build-example-android: dependencies-example

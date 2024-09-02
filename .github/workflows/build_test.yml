@@ -37,9 +37,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - run: make dependencies
       - run: make check
-      # TODO: full update example
-      # - run: make dependencies-example
-      # - run: make check-example
+      - run: make dependencies-example
+      - run: make check-example
 
   build-android:
     runs-on: macos-14
