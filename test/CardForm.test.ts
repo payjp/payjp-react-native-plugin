@@ -1,7 +1,7 @@
 // LICENSE : MIT
 import * as PayjpCardForm from '../src/CardForm';
-import {CardFormType} from './../src/CardForm';
-import {NativeModules} from 'react-native';
+import { CardFormType } from './../src/CardForm';
+import { NativeModules } from 'react-native';
 
 jest.mock('react-native', () => {
     const RN = jest.requireActual('react-native');
@@ -54,7 +54,7 @@ describe('PayjpCardForm', () => {
         expect.assertions(2);
         const tenantId = 'ten_123';
         try {
-            await PayjpCardForm.startCardForm({tenantId: tenantId});
+            await PayjpCardForm.startCardForm({ tenantId: tenantId });
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(tenantId, undefined);
         } catch (e) {
@@ -66,7 +66,7 @@ describe('PayjpCardForm', () => {
         expect.assertions(2);
         const formType: CardFormType = 'cardDisplay';
         try {
-            await PayjpCardForm.startCardForm({cardFormType: formType});
+            await PayjpCardForm.startCardForm({ cardFormType: formType });
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(undefined, formType);
         } catch (e) {
@@ -131,7 +131,7 @@ describe('PayjpCardForm', () => {
     it('listen onCardFormCompleted', async () => {
         expect.assertions(2);
         try {
-            const token = {id: 'tok_123'};
+            const token = { id: 'tok_123' };
             const onCardFormProducedToken = jest.fn();
             PayjpCardForm.onCardFormUpdate({
                 onCardFormCanceled: jest.fn(),

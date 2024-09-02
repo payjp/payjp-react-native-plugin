@@ -1,10 +1,10 @@
 // LICENSE : MIT
 import * as PayjpCore from '../src/Core';
-import {NativeModules} from 'react-native';
+import { NativeModules } from 'react-native';
 
 jest.mock('react-native', () => ({
     NativeModules: {
-        RNPAYCore: {initialize: jest.fn()},
+        RNPAYCore: { initialize: jest.fn() },
     },
 }));
 
@@ -19,7 +19,7 @@ describe('PayjpCore', () => {
             publicKey: 'pk_test_123',
             locale: 'ja',
             debugEnabled: true,
-            threeDSecureRedirect: {url: 'https://example.com', key: 'example'},
+            threeDSecureRedirect: { url: 'https://example.com', key: 'example' },
         };
         try {
             await PayjpCore.init(option);

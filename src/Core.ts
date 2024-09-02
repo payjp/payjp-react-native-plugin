@@ -1,7 +1,7 @@
 // LICENSE : MIT
-import {NativeModules} from 'react-native';
+import { NativeModules } from 'react-native';
 
-const {RNPAYCore} = NativeModules;
+const { RNPAYCore } = NativeModules;
 
 type InitOption = {
     /**
@@ -26,7 +26,7 @@ type InitOption = {
      * 3Dセキュア利用時のみ必要なオプション
      * PAY.JP管理画面で設定したリダイレクトURLと識別子を指定します
      */
-    threeDSecureRedirect?: {url: string; key: string};
+    threeDSecureRedirect?: { url: string; key: string };
 };
 
 /**

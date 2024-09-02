@@ -1,6 +1,6 @@
 // LICENSE : MIT
 import * as PayjpApplePay from '../src/ApplePay';
-import {NativeModules} from 'react-native';
+import { NativeModules } from 'react-native';
 
 jest.mock('react-native', () => {
     const emitter = {
@@ -126,7 +126,7 @@ describe('PayjpApplePay', () => {
         expect.assertions(2);
         try {
             const onApplePayProducedToken = jest.fn();
-            const token = {id: 'tok_123'};
+            const token = { id: 'tok_123' };
             PayjpApplePay.onApplePayUpdate({
                 onApplePayCompleted: jest.fn(),
                 onApplePayFailedRequestToken: jest.fn(),

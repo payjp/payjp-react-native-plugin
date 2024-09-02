@@ -1,6 +1,6 @@
 // LICENSE : MIT
-import {NativeModules, NativeEventEmitter} from 'react-native';
-import {Token} from './models';
+import { NativeModules, NativeEventEmitter } from 'react-native';
+import { Token } from './models';
 
 /**
  * エラー情報
@@ -62,7 +62,7 @@ export type ApplePayAuthorizationOption = {
     readonly requiredBillingAddress?: boolean;
 };
 
-const {RNPAYApplePay} = NativeModules;
+const { RNPAYApplePay } = NativeModules;
 const applePayEventEmitter = new NativeEventEmitter(RNPAYApplePay);
 const onApplePayProducedTokenSet: Set<OnApplePayProducedToken> = new Set();
 const onApplePayFailedRequestTokenSet: Set<OnApplePayFailedRequestToken> = new Set();
@@ -116,7 +116,7 @@ export const onApplePayUpdate = (observer: {
     onApplePayFailedRequestToken: OnApplePayFailedRequestToken;
     onApplePayCompleted?: OnApplePayCompleted;
 }): (() => void) => {
-    const {onApplePayProducedToken, onApplePayFailedRequestToken, onApplePayCompleted} = observer;
+    const { onApplePayProducedToken, onApplePayFailedRequestToken, onApplePayCompleted } = observer;
     const disconnect = connectApplePayEvent();
     onApplePayProducedToken && onApplePayProducedTokenSet.add(onApplePayProducedToken);
     onApplePayFailedRequestToken && onApplePayFailedRequestTokenSet.add(onApplePayFailedRequestToken);
