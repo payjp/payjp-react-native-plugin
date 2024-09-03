@@ -2,6 +2,7 @@
   "name": "payjp-example",
   "version": "1.0.0",
   "dependencies": {
+    "@expo/react-native-action-sheet": "^4.1.0",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/native": "^6.0.2",
     "eslint": "^8.19.0",

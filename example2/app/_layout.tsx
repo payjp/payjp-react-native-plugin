@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { PayjpCore } from 'payjp-react-native';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 // TODO: REPLACE WITH YOUR PAY.JP PUBLIC KEY
 const PAYJP_PUBLIC_KEY = 'pk_test_0383a1b8f91e8a6e3ea0e2a9';
@@ -38,10 +39,12 @@ export default function RootLayout() {
 
     return (
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="+not-found" />
-            </Stack>
+            <ActionSheetProvider>
+                <Stack>
+                    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                    <Stack.Screen name="+not-found" />
+                </Stack>
+            </ActionSheetProvider>
         </ThemeProvider>
     );
 }

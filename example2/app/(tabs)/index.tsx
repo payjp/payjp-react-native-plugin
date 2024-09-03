@@ -7,6 +7,8 @@ import { ThemedView } from '@/components/ThemedView';
 import React, { useEffect } from 'react';
 import { PayjpCardForm, Token } from 'payjp-react-native';
 import { postTokenToBackEnd } from '../SampleApi';
+import { CardFormType, ExtraAttribute } from 'payjp-react-native/lib/CardForm';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 const onProducedToken = async (token: Token): Promise<void> => {
     try {
@@ -19,7 +21,44 @@ const onProducedToken = async (token: Token): Promise<void> => {
     }
 };
 
+const extraAttributesOptions: { key: string; attributes?: ExtraAttribute[] }[] = [
+    {
+        key: 'email and phone (preset)',
+        attributes: [
+            { type: 'email', preset: 'test@example.com' },
+            { type: 'phone', presetRegion: 'JP', presetNumber: '09012345678' },
+        ],
+    },
+    { key: 'email', attributes: [{ type: 'email' }] },
+    { key: 'phone', attributes: [{ type: 'phone' }] },
+    { key: 'email and phone', attributes: [{ type: 'email' }, { type: 'phone' }] },
+    { key: 'none', attributes: [] },
+    { key: 'cancel' },
+];
+
 export default function HomeScreen() {
+    const { showActionSheetWithOptions } = useActionSheet();
+    const onOpenActionSheet = (formType: CardFormType) => {
+        console.log('onOpenActionSheet', formType);
+        showActionSheetWithOptions(
+            {
+                options: extraAttributesOptions.map(option => option.key),
+                cancelButtonIndex: extraAttributesOptions.length - 1,
+            },
+            (selectedIndex?: number) => {
+                console.log('selectedIndex', selectedIndex);
+                if (selectedIndex === extraAttributesOptions.length - 1 || selectedIndex === undefined) {
+                    return;
+                }
+                const selectedOption = extraAttributesOptions[selectedIndex];
+                PayjpCardForm.startCardForm({
+                    cardFormType: formType,
+                    extraAttributes: selectedOption.attributes,
+                });
+            },
+        );
+    };
+
     useEffect(() => {
         const unsubscribeCardForm = PayjpCardForm.onCardFormUpdate({
             onCardFormCanceled: () => {
@@ -59,14 +98,14 @@ export default function HomeScreen() {
                 <Button
                     testID="start_card_form"
                     title="Add Credit Card（MultiLine）"
-                    onPress={(): void => {
-                        PayjpCardForm.startCardForm();
+                    onPress={() => {
+                        onOpenActionSheet('multiLine');
                     }}
                 />
                 <Button
                     title="Add Credit Card（CardDisplay）"
-                    onPress={(): void => {
-                        PayjpCardForm.startCardForm({ cardFormType: 'cardDisplay' });
+                    onPress={() => {
+                        onOpenActionSheet('cardDisplay');
                     }}
                 />
             </ThemedView>
