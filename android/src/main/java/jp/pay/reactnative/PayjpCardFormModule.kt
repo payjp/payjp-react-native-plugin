@@ -38,6 +38,7 @@ import jp.pay.android.Payjp
 import jp.pay.android.PayjpCardForm
 import jp.pay.android.PayjpTokenBackgroundHandler
 import jp.pay.android.PayjpTokenBackgroundHandler.CardFormStatus
+import jp.pay.android.model.ExtraAttribute
 import jp.pay.android.model.TenantId
 import jp.pay.android.model.Token
 import jp.pay.android.model.toJsonValue
@@ -71,16 +72,36 @@ class PayjpCardFormModule(
   @ReactMethod fun startCardForm(
     tenantIdString: String?,
     cardFormType: String?,
+    extraAttributeEmailEnabled: Boolean,
+    extraAttributePhoneEnabled: Boolean,
+    extraAttributeEmailPreset: String?,
+    extraAttributePhoneRegion: String?,
+    extraAttributePhoneNumber: String?,
     promise: Promise
   ) {
     val face = when (cardFormType) {
       "cardDisplay" -> PayjpCardForm.FACE_CARD_DISPLAY
       else -> PayjpCardForm.FACE_MULTI_LINE
     }
+    val extraAttributes: Array<ExtraAttribute<*>> = listOfNotNull(
+      ExtraAttribute.Email(preset = extraAttributeEmailPreset)
+        .takeIf { extraAttributeEmailEnabled },
+      ExtraAttribute.Phone(
+        region = extraAttributePhoneRegion ?: "JP",
+        number = extraAttributePhoneNumber
+      ).takeIf { extraAttributePhoneEnabled },
+    ).toTypedArray()
+
     mainThreadHandler.post {
       reactContext.currentActivity?.let { activity ->
         val tenantId = tenantIdString?.let { TenantId(it) }
-        Payjp.cardForm().start(activity, CODE_START_CARD_FORM, tenantId, face)
+        Payjp.cardForm().start(
+          activity = activity,
+          requestCode = CODE_START_CARD_FORM,
+          tenant = tenantId,
+          face = face,
+          extraAttributes = extraAttributes,
+        )
       }
       promise.resolve(null)
     }
