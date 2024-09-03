@@ -15,15 +15,26 @@
 /**
  *
  * @export
- * @enum {string}
  */
-export enum CardBrand {
-    Visa = "Visa",
-    MasterCard = "MasterCard",
-    JCB = "JCB",
-    AmericanExpress = "American Express",
-    DinersClub = "Diners Club",
-    Discover = "Discover",
+export const CardBrand = {
+    Visa: 'Visa',
+    MasterCard: 'MasterCard',
+    Jcb: 'JCB',
+    AmericanExpress: 'American Express',
+    DinersClub: 'Diners Club',
+    Discover: 'Discover',
+} as const;
+export type CardBrand = (typeof CardBrand)[keyof typeof CardBrand];
+
+export function instanceOfCardBrand(value: any): boolean {
+    for (const key in CardBrand) {
+        if (Object.prototype.hasOwnProperty.call(CardBrand, key)) {
+            if (CardBrand[key as keyof typeof CardBrand] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 export function CardBrandFromJSON(json: any): CardBrand {

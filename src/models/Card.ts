@@ -23,7 +23,7 @@ function mapValues(data: any, fn: (item: any) => any) {
     return Object.keys(data).reduce((acc, key) => ({ ...acc, [key]: fn(data[key]) }), {});
 }
 
-import { CardBrand, CardBrandFromJSON, CardBrandFromJSONTyped, CardBrandToJSON } from "./";
+import { CardBrand, CardBrandFromJSON, CardBrandFromJSONTyped, CardBrandToJSON } from './';
 
 /**
  *
@@ -98,6 +98,18 @@ export interface Card {
      */
     fingerprint?: string;
     /**
+     * メールアドレス 2024年8月以降、3Dセキュア認証の際にphoneまたはemailのデータ入力が求められます。
+     * @type {string}
+     * @memberof Card
+     */
+    email?: string | null;
+    /**
+     * E.164形式の電話番号 (e.g. 090-0123-4567（日本） => \"+819001234567\") 2024年8月以降、3Dセキュア認証の際にphoneまたはemailのデータ入力が求められます。
+     * @type {string}
+     * @memberof Card
+     */
+    phone?: string | null;
+    /**
      * 都道府県
      * @type {string}
      * @memberof Card
@@ -162,26 +174,28 @@ export function CardFromJSONTyped(json: any, ignoreDiscriminator: boolean): Card
         return json;
     }
     return {
-        id: json["id"],
-        object: !exists(json, "object") ? undefined : json["object"],
-        created: !exists(json, "created") ? undefined : json["created"],
-        name: !exists(json, "name") ? undefined : json["name"],
-        last4: !exists(json, "last4") ? undefined : json["last4"],
-        expMonth: !exists(json, "exp_month") ? undefined : json["exp_month"],
-        expYear: !exists(json, "exp_year") ? undefined : json["exp_year"],
-        brand: !exists(json, "brand") ? undefined : CardBrandFromJSON(json["brand"]),
-        cvcCheck: !exists(json, "cvc_check") ? undefined : json["cvc_check"],
-        threeDSecureStatus: !exists(json, "three_d_secure_status") ? undefined : json["three_d_secure_status"],
-        fingerprint: !exists(json, "fingerprint") ? undefined : json["fingerprint"],
-        addressState: !exists(json, "address_state") ? undefined : json["address_state"],
-        addressCity: !exists(json, "address_city") ? undefined : json["address_city"],
-        addressLine1: !exists(json, "address_line1") ? undefined : json["address_line1"],
-        addressLine2: !exists(json, "address_line2") ? undefined : json["address_line2"],
-        country: !exists(json, "country") ? undefined : json["country"],
-        addressZip: !exists(json, "address_zip") ? undefined : json["address_zip"],
-        addressZipCheck: !exists(json, "address_zip_check") ? undefined : json["address_zip_check"],
-        customer: !exists(json, "customer") ? undefined : json["customer"],
-        metadata: !exists(json, "metadata") ? undefined : json["metadata"],
+        id: json['id'],
+        object: !exists(json, 'object') ? undefined : json['object'],
+        created: !exists(json, 'created') ? undefined : json['created'],
+        name: !exists(json, 'name') ? undefined : json['name'],
+        last4: !exists(json, 'last4') ? undefined : json['last4'],
+        expMonth: !exists(json, 'exp_month') ? undefined : json['exp_month'],
+        expYear: !exists(json, 'exp_year') ? undefined : json['exp_year'],
+        brand: !exists(json, 'brand') ? undefined : CardBrandFromJSON(json['brand']),
+        cvcCheck: !exists(json, 'cvc_check') ? undefined : json['cvc_check'],
+        threeDSecureStatus: !exists(json, 'three_d_secure_status') ? undefined : json['three_d_secure_status'],
+        fingerprint: !exists(json, 'fingerprint') ? undefined : json['fingerprint'],
+        email: !exists(json, 'email') ? undefined : json['email'],
+        phone: !exists(json, 'phone') ? undefined : json['phone'],
+        addressState: !exists(json, 'address_state') ? undefined : json['address_state'],
+        addressCity: !exists(json, 'address_city') ? undefined : json['address_city'],
+        addressLine1: !exists(json, 'address_line1') ? undefined : json['address_line1'],
+        addressLine2: !exists(json, 'address_line2') ? undefined : json['address_line2'],
+        country: !exists(json, 'country') ? undefined : json['country'],
+        addressZip: !exists(json, 'address_zip') ? undefined : json['address_zip'],
+        addressZipCheck: !exists(json, 'address_zip_check') ? undefined : json['address_zip_check'],
+        customer: !exists(json, 'customer') ? undefined : json['customer'],
+        metadata: !exists(json, 'metadata') ? undefined : json['metadata'],
     };
 }
 
@@ -204,6 +218,8 @@ export function CardToJSON(value?: Card | null): any {
         cvc_check: value.cvcCheck,
         three_d_secure_status: value.threeDSecureStatus,
         fingerprint: value.fingerprint,
+        email: value.email,
+        phone: value.phone,
         address_state: value.addressState,
         address_city: value.addressCity,
         address_line1: value.addressLine1,
