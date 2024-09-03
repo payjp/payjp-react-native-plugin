@@ -56,7 +56,15 @@ describe('PayjpCardForm', () => {
         try {
             await PayjpCardForm.startCardForm({ tenantId: tenantId });
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
-            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(tenantId, undefined);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(
+                tenantId,
+                undefined,
+                true,
+                true,
+                undefined,
+                undefined,
+                undefined,
+            );
         } catch (e) {
             console.error(e);
         }
@@ -68,7 +76,77 @@ describe('PayjpCardForm', () => {
         try {
             await PayjpCardForm.startCardForm({ cardFormType: formType });
             expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
-            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(undefined, formType);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(
+                undefined,
+                formType,
+                true,
+                true,
+                undefined,
+                undefined,
+                undefined,
+            );
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('startCardForm with extraAttribute: email', async () => {
+        expect.assertions(2);
+        try {
+            await PayjpCardForm.startCardForm({ extraAttributes: [{ type: 'email' }] });
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(
+                undefined,
+                undefined,
+                true,
+                false,
+                undefined,
+                undefined,
+                undefined,
+            );
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('startCardForm with extraAttribute: phone', async () => {
+        expect.assertions(2);
+        try {
+            await PayjpCardForm.startCardForm({ extraAttributes: [{ type: 'phone' }] });
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(
+                undefined,
+                undefined,
+                false,
+                true,
+                undefined,
+                undefined,
+                undefined,
+            );
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('startCardForm with extraAttribute: preset email and phone', async () => {
+        expect.assertions(2);
+        try {
+            await PayjpCardForm.startCardForm({
+                extraAttributes: [
+                    { type: 'email', preset: 'test@example.com' },
+                    { type: 'phone', presetRegion: 'JP', presetNumber: '09012345678' },
+                ],
+            });
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(
+                undefined,
+                undefined,
+                true,
+                true,
+                'test@example.com',
+                'JP',
+                '09012345678',
+            );
         } catch (e) {
             console.error(e);
         }
@@ -128,7 +206,7 @@ describe('PayjpCardForm', () => {
         }
     });
 
-    it('listen onCardFormCompleted', async () => {
+    it('listen onCardFormCompleted with onCardFormProducedToken', async () => {
         expect.assertions(2);
         try {
             const token = { id: 'tok_123' };
