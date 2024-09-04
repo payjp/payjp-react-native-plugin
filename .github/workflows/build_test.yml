@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 
 env:
-  CACHE_NUMBER: 0 # increment to truncate cache
   USER_NODE_VERSION: 20
   USER_JAVA_VERSION: 17
   IOS_SIMULATOR_DEVICE: iPhone 15 Pro
@@ -69,14 +68,6 @@ jobs:
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
           cache: 'yarn'
-      - name: Cache CocoaPods
-        uses: actions/cache@v4
-        with:
-          path: example/ios/Pods
-          key: ${{ runner.os }}-pods-${{ env.CACHE_NUMBER }}-${{ hashFiles('example/ios/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-pods-
       - name: Install applesimutils
         run: |
           brew tap wix/brew
