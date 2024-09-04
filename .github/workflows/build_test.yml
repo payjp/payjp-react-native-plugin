@@ -11,8 +11,8 @@ env:
   CACHE_NUMBER: 0 # increment to truncate cache
   USER_NODE_VERSION: 20
   USER_JAVA_VERSION: 17
-  IOS_SIMULATOR_DEVICE: iPhone 12 Pro Max
-  IOS_SIMULATOR_RUNTIME: iOS-14-4
+  IOS_SIMULATOR_DEVICE: iPhone 15 Pro
+  IOS_SIMULATOR_RUNTIME: iOS-17-5
 
 jobs:
   build:
@@ -41,6 +41,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           java-version: ${{ env.USER_JAVA_VERSION }}
+          distribution: 'zulu'
       - uses: gradle/actions/setup-gradle@v3
       - run: yarn global add react-native-cli
       - run: yarn global add detox-cli
