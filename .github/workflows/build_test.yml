@@ -52,6 +52,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
+          target: google_apis
           arch: arm64-v8a
           profile: pixel 7
           avd-name: Pixel 7 API 34
