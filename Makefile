@@ -28,8 +28,8 @@ build-example-android: dependencies-example
 
 .PHONY: e2e-android
 e2e-android: dependencies-example
-	cd example2 && detox build --configuration android.emu.debug
-	cd example2 && detox test --configuration android.emu.debug --cleanup
+	cd example2 && detox build --configuration android.emu.release
+	cd example2 && detox test --configuration android.emu.release --cleanup
 
 .PHONY: dependencies-example-ios
 dependencies-example-ios: dependencies-example
@@ -37,5 +37,5 @@ dependencies-example-ios: dependencies-example
 
 .PHONY: e2e-ios
 e2e-ios: dependencies-example
-	cd example2 && detox build --configuration ios.sim.debug
-	cd example2 && detox test --configuration ios.sim.debug --cleanup
+	cd example2 && detox build --configuration ios.sim.release
+	cd example2 && detox test --configuration ios.sim.release --cleanup
