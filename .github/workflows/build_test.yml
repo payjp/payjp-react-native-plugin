@@ -47,16 +47,14 @@ jobs:
       - run: make dependencies
       - run: make dependencies-example
       - run: make build-example-android
-      - name: Show all available avd devices
-        run: $ANDROID_HOME/tools/bin/avdmanager list device
       - name: Run e2e test on Android Emulator
         timeout-minutes: 30
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
-          arch: x86_64
-          profile: pixel
-          avd-name: Pixel_API_29
+          api-level: 34
+          arch: arm64-v8a
+          profile: pixel 7
+          avd-name: Pixel 7 API 34
           script: make e2e-android
 
   build-ios:
