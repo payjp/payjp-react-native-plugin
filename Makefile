@@ -22,7 +22,8 @@ check-example: dependencies-example
 
 .PHONY: build-example-android
 build-example-android: dependencies-example
-	cd example2 && (yes | yarn prebuild) && ./gradlew assembleDebug
+	cd example2 && yes | yarn prebuild
+	cd example2/android && /gradlew assembleDebug
 
 .PHONY: e2e-android
 e2e-android: dependencies-example
@@ -31,9 +32,9 @@ e2e-android: dependencies-example
 
 .PHONY: dependencies-example-ios
 dependencies-example-ios: dependencies-example
-	cd example2 && (yes | yarn prebuild)
+	cd example2 && yes | yarn prebuild
 
 .PHONY: e2e-ios
 e2e-ios: dependencies-example
-	cd example && detox build --configuration ios.sim.release
-	cd example && detox test --configuration ios.sim.release --cleanup
+	cd example2 && detox build --configuration ios.sim.release
+	cd example2 && detox test --configuration ios.sim.release --cleanup
