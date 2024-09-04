@@ -89,7 +89,7 @@
   "scripts": {
     "build": "tsc -p .",
     "clean": "rimraf lib/",
-    "dev-sync": "npm run build && cp -r *podspec lib android ios example2/node_modules/payjp-react-native/",
+    "dev-sync": "npm run build && cp -r *podspec lib android ios example/node_modules/payjp-react-native/",
     "docs": "typedoc --out docs src/",
     "lint": "eslint --cache \"{src,test}/**/*.{ts,tsx}\"",
     "lint-staged": "lint-staged",
