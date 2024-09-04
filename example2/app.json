@@ -37,7 +37,8 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "@config-plugins/detox"
     ],
     "experiments": {
       "typedRoutes": true

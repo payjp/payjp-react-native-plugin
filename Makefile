@@ -22,16 +22,16 @@ check-example: dependencies-example
 
 .PHONY: build-example-android
 build-example-android: dependencies-example
-	cd example/android && ./gradlew build --stacktrace
+	cd example2 && (yes | yarn prebuild) && ./gradlew assembleDebug
 
 .PHONY: e2e-android
 e2e-android: dependencies-example
-	cd example && detox build --configuration android.emu.release
-	cd example && detox test --configuration android.emu.release --cleanup
+	cd example2 && detox build --configuration android.emu.release
+	cd example2 && detox test --configuration android.emu.release --cleanup
 
 .PHONY: dependencies-example-ios
 dependencies-example-ios: dependencies-example
-	cd example/ios && pod install
+	cd example2 && (yes | yarn prebuild)
 
 .PHONY: e2e-ios
 e2e-ios: dependencies-example

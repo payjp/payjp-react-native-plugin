@@ -22,6 +22,9 @@ const onProducedToken = async (token: Token): Promise<void> => {
 };
 
 const extraAttributesOptions: { key: string; attributes?: ExtraAttribute[] }[] = [
+    { key: 'email and phone', attributes: [{ type: 'email' }, { type: 'phone' }] },
+    { key: 'email', attributes: [{ type: 'email' }] },
+    { key: 'phone', attributes: [{ type: 'phone' }] },
     {
         key: 'email and phone (preset)',
         attributes: [
@@ -29,9 +32,6 @@ const extraAttributesOptions: { key: string; attributes?: ExtraAttribute[] }[] =
             { type: 'phone', presetRegion: 'JP', presetNumber: '09012345678' },
         ],
     },
-    { key: 'email', attributes: [{ type: 'email' }] },
-    { key: 'phone', attributes: [{ type: 'phone' }] },
-    { key: 'email and phone', attributes: [{ type: 'email' }, { type: 'phone' }] },
     { key: 'none', attributes: [] },
     { key: 'cancel' },
 ];

@@ -10,7 +10,7 @@ on:
 env:
   CACHE_NUMBER: 0 # increment to truncate cache
   USER_NODE_VERSION: 20
-  USER_JAVA_VERSION: 8.x
+  USER_JAVA_VERSION: 17
   IOS_SIMULATOR_DEVICE: iPhone 12 Pro Max
   IOS_SIMULATOR_RUNTIME: iOS-14-4
 
@@ -23,18 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-      - name: Cache yarn
-        uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-yarn-
+          cache: 'yarn'
       - run: make dependencies
       - run: make check
       - run: make dependencies-example
@@ -48,31 +37,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
-      - uses: actions/setup-java@v1
+          cache: 'yarn'
+      - uses: actions/setup-java@v4
         with:
           java-version: ${{ env.USER_JAVA_VERSION }}
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache yarn
-        uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-yarn-
-      - name: Cache Gradle
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/cache
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ env.CACHE_NUMBER }}-${{ hashFiles('**/*/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-gradle-
+      - uses: gradle/actions/setup-gradle@v3
       - run: yarn global add react-native-cli
       - run: yarn global add detox-cli
       - run: make dependencies
@@ -98,6 +67,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
+          cache: 'yarn'
       - name: Cache CocoaPods
         uses: actions/cache@v4
         with:

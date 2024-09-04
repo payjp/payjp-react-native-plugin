@@ -29,7 +29,7 @@ android {
     compileSdkVersion rootProject.properties.get('compileSdkVersion', 29)
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion rootProject.properties.get('minSdkVersion', 16)
         targetSdkVersion rootProject.properties.get('targetSdkVersion', 29)
         buildConfigField "String", "VERSION_NAME", "\"$pluginVersion\""
     }
