@@ -11,6 +11,7 @@ dependencies:
 check: dependencies
 	yarn lint
 	yarn test
+	yarn build
 
 .PHONY: dependencies-example
 dependencies-example: dependencies
