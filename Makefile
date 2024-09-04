@@ -15,6 +15,7 @@ check: dependencies
 
 .PHONY: dependencies-example
 dependencies-example: dependencies
+	yarn build
 	cd example && yarn --frozen-lockfile
 
 .PHONY: check-example
