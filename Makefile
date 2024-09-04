@@ -25,7 +25,7 @@ check-example: dependencies-example
 .PHONY: build-example-android
 build-example-android: dependencies-example
 	cd example && yes | yarn prebuild
-	cd example/android && ./gradlew assembleDebug
+	cd example/android && ./gradlew assembleDebug -Dorg.gradle.jvmargs="-Xmx4g"
 
 .PHONY: e2e-android
 e2e-android: dependencies-example
