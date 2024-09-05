@@ -55,7 +55,7 @@ jobs:
           target: default
           arch: x86_64
           profile: pixel_7
-          avd-name: Pixel 7
+          avd-name: Pixel_7
           script: make e2e-android
 
   build-ios:
