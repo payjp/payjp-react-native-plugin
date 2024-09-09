@@ -3,7 +3,10 @@
   "compilerOptions": {
     "outDir": "./lib/",
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "allowImportingTsExtensions": false,
+    "declaration": true,
+    "noEmit": false,
   },
   "include": [
     "./src/**/*"

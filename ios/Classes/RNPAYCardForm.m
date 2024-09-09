@@ -47,7 +47,12 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startCardForm
                   : (NSString *)tenantId cardFormType
-                  : (NSString *)cardFormType resolve
+                  : (NSString *)cardFormType extraAttributeEmailEnabled
+                  : (BOOL)extraAttributeEmailEnabled extraAttributePhoneEnabled
+                  : (BOOL)extraAttributePhoneEnabled extraAttributeEmail
+                  : (NSString *)extraAttributeEmail extraAttributePhoneRegion
+                  : (NSString *)extraAttributePhoneRegion extraAttributePhoneNumber
+                  : (NSString *)extraAttributePhoneNumber resolve
                   : (RCTPromiseResolveBlock)resolve reject
                   : (__unused RCTPromiseRejectBlock)reject) {
   NSString *description =
@@ -60,13 +65,25 @@ RCT_EXPORT_METHOD(startCardForm
   if ([cardFormType isEqual:@"cardDisplay"]) {
     viewType = CardFormViewTypeDisplayStyled;
   }
-
+  NSMutableArray<id<PAYExtraAttribute>> *extraAttributes = [NSMutableArray array];
+  if (extraAttributeEmailEnabled) {
+    PAYExtraAttributeEmail *email =
+        [[PAYExtraAttributeEmail alloc] initWithPreset:extraAttributeEmail];
+    [extraAttributes addObject:email];
+  }
+  if (extraAttributePhoneEnabled) {
+    PAYExtraAttributePhone *phone =
+        [[PAYExtraAttributePhone alloc] initWithPresetNumber:extraAttributePhoneNumber
+                                                presetRegion:extraAttributePhoneRegion];
+    [extraAttributes addObject:phone];
+  }
   dispatch_async([self methodQueue], ^{
     PAYCardFormViewController *cardForm = [PAYCardFormViewController
         createCardFormViewControllerWithStyle:wself.style ?: PAYCardFormStyle.defaultStyle
                                      tenantId:tenantId
                                      delegate:wself
-                                     viewType:viewType];
+                                     viewType:viewType
+                              extraAttributes:extraAttributes];
     UIViewController *hostViewController =
         UIApplication.sharedApplication.keyWindow.rootViewController;
     if ([hostViewController isKindOfClass:[UINavigationController class]]) {

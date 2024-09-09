@@ -1,12 +1,11 @@
 // LICENSE : MIT
-import * as PayjpApplePay from "../src/ApplePay";
-import { NativeModules } from "react-native";
+import * as PayjpApplePay from '../src/ApplePay';
+import { NativeModules } from 'react-native';
 
-jest.mock("react-native", () => {
+jest.mock('react-native', () => {
     const emitter = {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         listeners: {} as any,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         removers: {} as any,
         addListener: jest.fn((eventName, callback) => {
             emitter.listeners[eventName] = callback;
@@ -31,69 +30,65 @@ jest.mock("react-native", () => {
     return mockReactNative;
 });
 
-describe("PayjpApplePay", () => {
+describe('PayjpApplePay', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
-    it("isApplePayAvailable", async (done) => {
+    it('isApplePayAvailable', async () => {
         expect.assertions(2);
         try {
             const isAvailable = await PayjpApplePay.isApplePayAvailable();
             expect(NativeModules.RNPAYApplePay.isApplePayAvailable).toHaveBeenCalledTimes(1);
             expect(isAvailable).toBe(true);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it("makeApplePayToken", async (done) => {
+    it('makeApplePayToken', async () => {
         expect.assertions(2);
         try {
             const request = {
-                appleMerchantId: "merchant.com.example",
-                currencyCode: "JPY",
-                countryCode: "JP",
-                summaryItemLabel: "PAY.JP T-shirt",
-                summaryItemAmount: "100",
+                appleMerchantId: 'merchant.com.example',
+                currencyCode: 'JPY',
+                countryCode: 'JP',
+                summaryItemLabel: 'PAY.JP T-shirt',
+                summaryItemAmount: '100',
                 requiredBillingAddress: true,
             };
             await PayjpApplePay.makeApplePayToken(request);
             expect(NativeModules.RNPAYApplePay.makeApplePayToken).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYApplePay.makeApplePayToken).toHaveBeenCalledWith(request);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it("completeApplePay with success params", async (done) => {
+    it('completeApplePay with success params', async () => {
         expect.assertions(2);
         try {
             await PayjpApplePay.completeApplePay(true);
             expect(NativeModules.RNPAYApplePay.completeApplePay).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYApplePay.completeApplePay).toHaveBeenCalledWith(true, null);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it("completeApplePay with failure params", async (done) => {
+    it('completeApplePay with failure params', async () => {
         expect.assertions(2);
         try {
-            const message = "test";
+            const message = 'test';
             await PayjpApplePay.completeApplePay(false, message);
             expect(NativeModules.RNPAYApplePay.completeApplePay).toHaveBeenCalledTimes(1);
             expect(NativeModules.RNPAYApplePay.completeApplePay).toHaveBeenCalledWith(false, message);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it("listen onApplePayCompleted", async (done) => {
+    it('listen onApplePayCompleted', async () => {
         expect.assertions(1);
         try {
             const onApplePayCompleted = jest.fn();
@@ -104,13 +99,12 @@ describe("PayjpApplePay", () => {
             });
             NativeModules.MockEventEmitter.listeners.onApplePayCompleted();
             expect(onApplePayCompleted).toHaveBeenCalledTimes(1);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it("listen onApplePayFailedRequestToken", async (done) => {
+    it('listen onApplePayFailedRequestToken', async () => {
         expect.assertions(2);
         try {
             const onApplePayFailedRequestToken = jest.fn();
@@ -123,17 +117,16 @@ describe("PayjpApplePay", () => {
             NativeModules.MockEventEmitter.listeners.onApplePayFailedRequestToken(errorInfo);
             expect(onApplePayFailedRequestToken).toHaveBeenCalledTimes(1);
             expect(onApplePayFailedRequestToken).toHaveBeenCalledWith(errorInfo);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it("listen onApplePayProducedToken", async (done) => {
+    it('listen onApplePayProducedToken', async () => {
         expect.assertions(2);
         try {
             const onApplePayProducedToken = jest.fn();
-            const token = { id: "tok_123" };
+            const token = { id: 'tok_123' };
             PayjpApplePay.onApplePayUpdate({
                 onApplePayCompleted: jest.fn(),
                 onApplePayFailedRequestToken: jest.fn(),
@@ -142,13 +135,12 @@ describe("PayjpApplePay", () => {
             NativeModules.MockEventEmitter.listeners.onApplePayProducedToken(token);
             expect(onApplePayProducedToken).toHaveBeenCalledTimes(1);
             expect(onApplePayProducedToken).toHaveBeenCalledWith(token);
-            done();
         } catch (e) {
             console.error(e);
         }
     });
 
-    it("unsubscribe listener", async (done) => {
+    it('unsubscribe listener', async () => {
         expect.assertions(3);
         try {
             const unsubscribe = PayjpApplePay.onApplePayUpdate({
@@ -161,7 +153,6 @@ describe("PayjpApplePay", () => {
             expect(removers.onApplePayCompleted.remove).toHaveBeenCalledTimes(1);
             expect(removers.onApplePayFailedRequestToken.remove).toHaveBeenCalledTimes(1);
             expect(removers.onApplePayProducedToken.remove).toHaveBeenCalledTimes(1);
-            done();
         } catch (e) {
             console.error(e);
         }

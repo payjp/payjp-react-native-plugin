@@ -1,23 +1,23 @@
 {
   "name": "model-generator",
-  "version": "1.0.0",
   "description": "api generator for PAY.JP",
+  "version": "1.0.0",
   "author": "PAY.JP <support@pay.jp>",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.13.5",
+    "typescript": "~5.3.3"
+  },
   "license": "MIT",
   "private": true,
   "scripts": {
+    "bootstrap": "npm run generate && npm run copy",
     "build": "tsc -p .",
-    "pull": "git submodule update",
-    "clean": "rimraf dist/",
-    "watch": "tsc -p . --watch",
-    "test": "openapi-generator validate -i openapi/token-api.yaml",
+    "clean": "npx rimraf dist/",
+    "copy": "cp -r src/models ../src",
     "generate": "./generate.sh",
     "postinstall": "npm run pull",
-    "copy": "cp -r src/models ../src",
-    "bootstrap": "npm run generate && npm run copy"
-  },
-  "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^1.0.8-4.2.2",
-    "typescript": "^3.7.5"
+    "pull": "git submodule update --remote",
+    "test": "openapi-generator validate -i openapi/token-api.yaml",
+    "watch": "tsc -p . --watch"
   }
 }

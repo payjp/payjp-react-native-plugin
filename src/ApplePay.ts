@@ -1,6 +1,6 @@
 // LICENSE : MIT
-import { NativeModules, NativeEventEmitter } from "react-native";
-import { Token } from "./models";
+import { NativeModules, NativeEventEmitter } from 'react-native';
+import { Token } from './models';
 
 /**
  * エラー情報
@@ -130,14 +130,14 @@ export const onApplePayUpdate = (observer: {
 };
 
 const connectApplePayEvent = (): (() => void) => {
-    const onApplePayProducedToken = applePayEventEmitter.addListener("onApplePayProducedToken", (token) => {
-        onApplePayProducedTokenSet.forEach((observer) => observer(token));
+    const onApplePayProducedToken = applePayEventEmitter.addListener('onApplePayProducedToken', token => {
+        onApplePayProducedTokenSet.forEach(observer => observer(token));
     });
-    const onApplePayFailedRequestToken = applePayEventEmitter.addListener("onApplePayFailedRequestToken", (error) => {
-        onApplePayFailedRequestTokenSet.forEach((observer) => observer(error));
+    const onApplePayFailedRequestToken = applePayEventEmitter.addListener('onApplePayFailedRequestToken', error => {
+        onApplePayFailedRequestTokenSet.forEach(observer => observer(error));
     });
-    const onApplePayCompleted = applePayEventEmitter.addListener("onApplePayCompleted", () => {
-        onApplePayCompletedSet.forEach((observer) => observer());
+    const onApplePayCompleted = applePayEventEmitter.addListener('onApplePayCompleted', () => {
+        onApplePayCompletedSet.forEach(observer => observer());
     });
     return (): void => {
         onApplePayProducedToken.remove();

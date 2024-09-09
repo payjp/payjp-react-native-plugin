@@ -23,7 +23,7 @@ function mapValues(data: any, fn: (item: any) => any) {
     return Object.keys(data).reduce((acc, key) => ({ ...acc, [key]: fn(data[key]) }), {});
 }
 
-import { Card, CardFromJSON, CardFromJSONTyped, CardToJSON } from "./";
+import { Card, CardFromJSON, CardFromJSONTyped, CardToJSON } from './';
 
 /**
  *
@@ -78,12 +78,12 @@ export function TokenFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tok
         return json;
     }
     return {
-        id: json["id"],
-        card: CardFromJSON(json["card"]),
-        created: json["created"],
-        livemode: json["livemode"],
-        object: json["object"],
-        used: json["used"],
+        id: json['id'],
+        card: CardFromJSON(json['card']),
+        created: json['created'],
+        livemode: json['livemode'],
+        object: json['object'],
+        used: json['used'],
     };
 }
 

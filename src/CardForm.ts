@@ -1,6 +1,6 @@
 // LICENSE : MIT
-import { NativeModules, NativeEventEmitter, ColorValue, processColor, ProcessedColorValue } from "react-native";
-import { Token } from "./models";
+import { NativeModules, NativeEventEmitter, ColorValue, processColor, ProcessedColorValue } from 'react-native';
+import { Token } from './models';
 
 /**
  * カードフォームがキャンセルされたときに実行されるリスナー
@@ -35,8 +35,14 @@ export type IOSCardFormStyle = {
 /**
  * カードフォームの表示タイプ
  */
-export type CardFormType = "multiLine" | "cardDisplay";
+export type CardFormType = 'multiLine' | 'cardDisplay';
 
+type ExtraAttributeEmail = { type: 'email'; preset?: string };
+type ExtraAttributePhone = { type: 'phone'; presetRegion?: string; presetNumber?: string };
+/**
+ * カードフォームの追加属性
+ */
+export type ExtraAttribute = ExtraAttributeEmail | ExtraAttributePhone;
 /**
  * カードフォームのオプション
  */
@@ -49,6 +55,14 @@ type CardFormOption = {
      * カードフォームの表示タイプ（デフォルトはmultiLine）
      */
     cardFormType?: CardFormType;
+    /**
+     * カードフォームに追加の属性項目を設定できます。デフォルトはメールアドレスと電話番号が表示されます。
+     * 入力した内容はカードオブジェクトにセットされ、 3Dセキュア認証実施時に送信されます。
+     *
+     * 3Dセキュア認証実施時の連携項目追加については以下のドキュメントを参照してください。
+     * https://help.pay.jp/ja/articles/9556161
+     */
+    extraAttributes?: ExtraAttribute[];
 };
 
 const { RNPAYCardForm } = NativeModules;
@@ -64,7 +78,18 @@ const onCardFormProducedTokenSet: Set<OnCardFormProducedToken> = new Set();
  * @param options カードフォームのオプション
  */
 export const startCardForm = async (options?: CardFormOption): Promise<void> => {
-    await RNPAYCardForm.startCardForm(options?.tenantId, options?.cardFormType);
+    const extraAttributes = options?.extraAttributes ?? [{ type: 'email' }, { type: 'phone' }];
+    const extraAttributeEmail = extraAttributes.find(attribute => attribute.type === 'email') as ExtraAttributeEmail;
+    const extraAttributePhone = extraAttributes.find(attribute => attribute.type === 'phone') as ExtraAttributePhone;
+    await RNPAYCardForm.startCardForm(
+        options?.tenantId,
+        options?.cardFormType,
+        !!extraAttributeEmail,
+        !!extraAttributePhone,
+        extraAttributeEmail?.preset,
+        extraAttributePhone?.presetRegion,
+        extraAttributePhone?.presetNumber,
+    );
 };
 
 /**
@@ -137,14 +162,14 @@ export const onCardFormUpdate = (observer: {
 };
 
 const connectCardForm = (): (() => void) => {
-    const onCardFormCanceled = cardFormEventEmitter.addListener("onCardFormCanceled", () => {
-        onCardFormCanceledSet.forEach((observer) => observer());
+    const onCardFormCanceled = cardFormEventEmitter.addListener('onCardFormCanceled', () => {
+        onCardFormCanceledSet.forEach(observer => observer());
     });
-    const onCardFormCompleted = cardFormEventEmitter.addListener("onCardFormCompleted", () => {
-        onCardFormCompletedSet.forEach((observer) => observer());
+    const onCardFormCompleted = cardFormEventEmitter.addListener('onCardFormCompleted', () => {
+        onCardFormCompletedSet.forEach(observer => observer());
     });
-    const onCardFormProducedToken = cardFormEventEmitter.addListener("onCardFormProducedToken", (token) => {
-        onCardFormProducedTokenSet.forEach((observer) => observer(token));
+    const onCardFormProducedToken = cardFormEventEmitter.addListener('onCardFormProducedToken', token => {
+        onCardFormProducedTokenSet.forEach(observer => observer(token));
     });
     return (): void => {
         onCardFormCanceled.remove();

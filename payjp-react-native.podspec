@@ -19,7 +19,9 @@ Pod::Spec.new do |s|
   
   s.dependency "React-Core"
   s.dependency 'PAYJP', "~> #{payjp_sdk['ios']}"
-  s.dependency 'CardIO', '~> 5.4.1'
+  # NOTE: If you need to scan card in your card form, please add the following dependency to your Podfile directly.
+  # as default, we don't include this dependency because it causes a issue in arm64 simulator build.
+  # s.dependency 'CardIO', '~> 5.4.1'
   s.dependency 'GoogleUtilities/AppDelegateSwizzler', '~> 7.2'
 
 end

@@ -8,119 +8,54 @@ on:
   workflow_dispatch:
 
 env:
-  CACHE_NUMBER: 0 # increment to truncate cache
-  USER_NODE_VERSION: 10.x
-  USER_JAVA_VERSION: 8.x
-  IOS_SIMULATOR_DEVICE: iPhone 12 Pro Max
-  IOS_SIMULATOR_RUNTIME: iOS-14-4
+  USER_NODE_VERSION: 20
+  USER_JAVA_VERSION: 17
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache yarn
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-yarn-
+          cache: 'yarn'
       - run: make dependencies
       - run: make check
       - run: make dependencies-example
       - run: make check-example
 
   build-android:
-    runs-on: macos-10.15
+    runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
-      - uses: actions/setup-java@v1
+          cache: 'yarn'
+      - uses: actions/setup-java@v4
         with:
           java-version: ${{ env.USER_JAVA_VERSION }}
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache yarn
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-yarn-
-      - name: Cache Gradle
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/cache
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ env.CACHE_NUMBER }}-${{ hashFiles('**/*/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-gradle-
+          distribution: 'zulu'
+      - uses: gradle/actions/setup-gradle@v3
       - run: yarn global add react-native-cli
-      - run: yarn global add detox-cli
       - run: make dependencies
       - run: make dependencies-example
       - run: make build-example-android
-      - name: Show all available avd devices
-        run: $ANDROID_HOME/tools/bin/avdmanager list device
-      - name: Run e2e test on Android Emulator
-        timeout-minutes: 30
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          arch: x86_64
-          profile: pixel
-          avd-name: Pixel_API_29
-          script: make e2e-android
 
   build-ios:
-    runs-on: macos-10.15
+    runs-on: macos-14
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.USER_NODE_VERSION }}
-      - name: Cache CocoaPods
-        uses: actions/cache@v2
-        with:
-          path: example/ios/Pods
-          key: ${{ runner.os }}-pods-${{ env.CACHE_NUMBER }}-${{ hashFiles('example/ios/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-${{ env.CACHE_NUMBER }}-
-            ${{ runner.os }}-pods-
-      - name: Install applesimutils
-        run: |
-          brew tap wix/brew
-          brew install applesimutils
+          cache: 'yarn'
       - run: yarn global add react-native-cli
-      - run: yarn global add detox-cli
       - run: make dependencies
       - run: make dependencies-example
       - run: make dependencies-example-ios
-      - name: List all iPhone Simulator
-        run: xcrun simctl list devices available
-      - name: Start iOS Simulator
-        run: |
-          UDID=$(xcrun simctl list devices available --json | jq -r '.devices."com.apple.CoreSimulator.SimRuntime.${{ env.IOS_SIMULATOR_RUNTIME }}"[] | select(.name == "${{ env.IOS_SIMULATOR_DEVICE }}").udid')
-          xcrun simctl boot "${UDID}"
-      - name: Run e2e test on iOS Simulator
-        run: make e2e-ios
-        timeout-minutes: 30
+

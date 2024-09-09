@@ -58,9 +58,9 @@ export function ModelErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         return json;
     }
     return {
-        code: !exists(json, "code") ? undefined : json["code"],
-        message: json["message"],
-        type: json["type"],
+        code: !exists(json, 'code') ? undefined : json['code'],
+        message: json['message'],
+        type: json['type'],
     };
 }
 

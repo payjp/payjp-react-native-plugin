@@ -1,5 +1,5 @@
 // LICENSE : MIT
-import { NativeModules } from "react-native";
+import { NativeModules } from 'react-native';
 
 const { RNPAYCore } = NativeModules;
 
