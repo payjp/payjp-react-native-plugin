@@ -3602,10 +3602,15 @@ detect-newline@^3.0.0:
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
 
-detox@^20.25.6:
-  version "20.25.6"
-  resolved "https://registry.yarnpkg.com/detox/-/detox-20.25.6.tgz#7fd59555caecd4eaf8a2cf1807f8bdee043355e0"
-  integrity sha512-UouUZ9Xa7WHzVIkv7QgAbG7aym0S7hQboiJJVw2ZfVUhdn4P3mfM6YED/g+fpRxVxiZDFCIziuIbOajToU8yUg==
+detox-copilot@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/detox-copilot/-/detox-copilot-0.0.8.tgz#51dabf1f71a7ef5b5d72240b12f7b74db12124db"
+  integrity sha512-C656nQW4HiAbhFyEboL4MdwTg65WNaCPd14KRvNV+CRXBjWphA0iggCF5tRZxXhCAx9ZjKpk7ajvZZcc47WOTg==
+
+detox@^20.27.1:
+  version "20.27.1"
+  resolved "https://registry.yarnpkg.com/detox/-/detox-20.27.1.tgz#fa8c4f5dc4fff7c56594cd12eda92ec031a956fe"
+  integrity sha512-3IAGB4dRyUlTB3PQa3xgjMYbpaMh2NwmqlYHfwTua7KK1aMZ3P/0gCnafd04Nj0ODX9tXviEyNe6FDVfDZ4fUA==
   dependencies:
     ajv "^8.6.3"
     bunyan "^1.8.12"
@@ -3613,6 +3618,7 @@ detox@^20.25.6:
     caf "^15.0.1"
     chalk "^4.0.0"
     child-process-promise "^2.2.0"
+    detox-copilot "^0.0.8"
     execa "^5.1.1"
     find-up "^5.0.0"
     fs-extra "^11.0.0"
@@ -7057,7 +7063,7 @@ path-type@^4.0.0:
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
 payjp-react-native@../:
-  version "0.6.3"
+  version "0.7.0"
 
 picocolors@^1.0.0, picocolors@^1.0.1:
   version "1.0.1"
