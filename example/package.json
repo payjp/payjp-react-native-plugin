@@ -4,7 +4,7 @@
   "dependencies": {
     "@config-plugins/detox": "^8.0.0",
     "@expo/react-native-action-sheet": "^4.1.0",
-    "@expo/vector-icons": "^14.0.3",
+    "@expo/vector-icons": "^14.0.4",
     "@react-navigation/native": "^6.0.2",
     "eslint": "^8.19.0",
     "expo": "~51.0.34",
