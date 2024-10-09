@@ -38,7 +38,9 @@
     },
     "plugins": [
       "expo-router",
-      "@config-plugins/detox"
+      "@config-plugins/detox",
+      "./config/add-android-dependencies",
+      "./config/payjp-three-d-secure"
     ],
     "experiments": {
       "typedRoutes": true
