@@ -77,6 +77,7 @@ class PayjpCardFormModule(
     extraAttributeEmailPreset: String?,
     extraAttributePhoneRegion: String?,
     extraAttributePhoneNumber: String?,
+    useThreeDSecure: Boolean,
     promise: Promise
   ) {
     val face = when (cardFormType) {
@@ -101,6 +102,7 @@ class PayjpCardFormModule(
           tenant = tenantId,
           face = face,
           extraAttributes = extraAttributes,
+          useThreeDSecure = useThreeDSecure,
         )
       }
       promise.resolve(null)

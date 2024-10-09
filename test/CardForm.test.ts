@@ -64,6 +64,7 @@ describe('PayjpCardForm', () => {
                 undefined,
                 undefined,
                 undefined,
+                false,
             );
         } catch (e) {
             console.error(e);
@@ -84,6 +85,7 @@ describe('PayjpCardForm', () => {
                 undefined,
                 undefined,
                 undefined,
+                false,
             );
         } catch (e) {
             console.error(e);
@@ -103,6 +105,7 @@ describe('PayjpCardForm', () => {
                 undefined,
                 undefined,
                 undefined,
+                false,
             );
         } catch (e) {
             console.error(e);
@@ -122,6 +125,7 @@ describe('PayjpCardForm', () => {
                 undefined,
                 undefined,
                 undefined,
+                false,
             );
         } catch (e) {
             console.error(e);
@@ -146,6 +150,29 @@ describe('PayjpCardForm', () => {
                 'test@example.com',
                 'JP',
                 '09012345678',
+                false,
+            );
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+    it('startCardForm with useThreeDSecure', async () => {
+        expect.assertions(2);
+        try {
+            await PayjpCardForm.startCardForm({
+                useThreeDSecure: true,
+            });
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledTimes(1);
+            expect(NativeModules.RNPAYCardForm.startCardForm).toHaveBeenCalledWith(
+                undefined,
+                undefined,
+                true,
+                true,
+                undefined,
+                undefined,
+                undefined,
+                true,
             );
         } catch (e) {
             console.error(e);

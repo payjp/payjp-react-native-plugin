@@ -52,7 +52,8 @@ RCT_EXPORT_METHOD(startCardForm
                   : (BOOL)extraAttributePhoneEnabled extraAttributeEmail
                   : (NSString *)extraAttributeEmail extraAttributePhoneRegion
                   : (NSString *)extraAttributePhoneRegion extraAttributePhoneNumber
-                  : (NSString *)extraAttributePhoneNumber resolve
+                  : (NSString *)extraAttributePhoneNumber useThreeDSecure
+                  : (BOOL)useThreeDSecure resolve
                   : (RCTPromiseResolveBlock)resolve reject
                   : (__unused RCTPromiseRejectBlock)reject) {
   NSString *description =
@@ -83,7 +84,8 @@ RCT_EXPORT_METHOD(startCardForm
                                      tenantId:tenantId
                                      delegate:wself
                                      viewType:viewType
-                              extraAttributes:extraAttributes];
+                              extraAttributes:extraAttributes
+                              useThreeDSecure:useThreeDSecure];
     UIViewController *hostViewController =
         UIApplication.sharedApplication.keyWindow.rootViewController;
     if ([hostViewController isKindOfClass:[UINavigationController class]]) {
