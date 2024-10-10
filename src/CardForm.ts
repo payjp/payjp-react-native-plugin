@@ -63,6 +63,10 @@ type CardFormOption = {
      * https://help.pay.jp/ja/articles/9556161
      */
     extraAttributes?: ExtraAttribute[];
+    /**
+     * 3-D セキュア認証の実施可否を設定します。デフォルトはfalseです。
+     */
+    useThreeDSecure?: boolean;
 };
 
 const { RNPAYCardForm } = NativeModules;
@@ -89,6 +93,7 @@ export const startCardForm = async (options?: CardFormOption): Promise<void> => 
         extraAttributeEmail?.preset,
         extraAttributePhone?.presetRegion,
         extraAttributePhone?.presetNumber,
+        options?.useThreeDSecure ?? false,
     );
 };
 

@@ -22,8 +22,16 @@ export default function RootLayout() {
         SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     });
     useEffect(() => {
+        // Set up PAY.JP SDK
+        // If you use 3-D Secure, you need to set up the redirect URL and key.
+        // Check the PAY.JP dashboard for the redirect URL and key.
         PayjpCore.init({
             publicKey: PAYJP_PUBLIC_KEY,
+            debugEnabled: __DEV__,
+            threeDSecureRedirect: {
+                url: 'jp.pay.example://tds/finish',
+                key: 'mobileapp',
+            },
         });
     }, []);
 
