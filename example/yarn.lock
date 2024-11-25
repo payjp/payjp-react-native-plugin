@@ -7167,7 +7167,7 @@ path-type@^4.0.0:
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
 payjp-react-native@../:
-  version "0.8.0"
+  version "0.8.2"
 
 picocolors@^1.0.0, picocolors@^1.0.1:
   version "1.0.1"
@@ -7476,10 +7476,10 @@ react-native-helmet-async@2.0.4:
     react-fast-compare "^3.2.2"
     shallowequal "^1.1.0"
 
-react-native-reanimated@~3.15.3:
-  version "3.15.3"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.15.3.tgz#580b5c1cb5a9f85e44b2850640514513d76e350d"
-  integrity sha512-5QBk/7PZvZ98Adxm4MRyglwzsRzReTQIe4Hd2wbBBAZ68IC4OYKvsc8cPEjgx3/1mG8HgHFYhbcDe5U2RjeFqw==
+react-native-reanimated@~3.16.2:
+  version "3.16.2"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.16.2.tgz#8ae2d632cbf02174ce3ef1329b3ce6e3cfe46aa2"
+  integrity sha512-Jk8y+iOLcK3J8YK3Qj/U+zclwfetgM1fFhlYaxFrJ5TPvuwdRG5YY1pvO91FcZ3C1+0meGHR6BZGl9d/Z0xh3Q==
   dependencies:
     "@babel/plugin-transform-arrow-functions" "^7.0.0-0"
     "@babel/plugin-transform-class-properties" "^7.0.0-0"
