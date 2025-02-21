@@ -15,9 +15,8 @@
     "clean": "npx rimraf dist/",
     "copy": "cp -r src/models ../src",
     "generate": "./generate.sh",
-    "postinstall": "npm run pull",
-    "pull": "git submodule update --remote",
-    "test": "openapi-generator validate -i openapi/token-api.yaml",
+    "test": "openapi-generator validate -i token-api.yaml",
+    "validate": "openapi-generator-cli validate -i token-api.yaml",
     "watch": "tsc -p . --watch"
   }
 }
