@@ -11,6 +11,13 @@
 
 詳細は[公式オンラインドキュメント](https://pay.jp/docs/mobileapp-react-native)を確認ください。
 
+## サンプルコード
+
+exampleをご覧ください。
+
+※Android Emulator環境で3Dセキュア機能を動作させる場合、Chromeアプリが初期画面になっていると3Dセキュアの認証画面が立ち上がらない場合がありますのでご注意ください。 ref: https://github.com/payjp/payjp-android/pull/61  
+この事象が起こる場合、一度Chromeアプリを開き初期画面を完了しておくことで解決されます。
+
 ## Compatible Platforms
 
 |Platform|CardForm          |ApplePay          |
