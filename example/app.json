@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "jp.pay.example",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.PAYJPExample",
+      "bundleIdentifier": "jp.pay.example.PAYJPExample",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to scan QR codes."
       },
@@ -29,7 +29,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.PAYJPExample"
+      "package": "jp.pay.example.PAYJPExample"
     },
     "web": {
       "bundler": "metro",
@@ -37,7 +37,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        {
+          "origin": "jp.pay.example://"
+        }
+      ],
       "@config-plugins/detox",
       "./config/add-android-dependencies",
       "./config/payjp-three-d-secure"

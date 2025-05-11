@@ -20,7 +20,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#import "RNPAY.h"
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
+@import PAYJP;
 
-NSString *const RNPAYErrorDomain = @"RNPAYErrorDomain";
-NSString *const RNPAYPluginVersion = @"0.9.0";
+@interface RNPAYThreeDSecureProcessHandler
+    : RCTEventEmitter <RCTBridgeModule, PAYJPThreeDSecureProcessHandlerDelegate>
+
+@end

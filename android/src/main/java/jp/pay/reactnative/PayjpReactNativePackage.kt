@@ -31,9 +31,11 @@ import com.facebook.react.uimanager.ViewManager
 class PayjpReactNativePackage : ReactPackage {
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
     val cardFormModule = PayjpCardFormModule(reactContext)
+    val threeDSecureProcessHandlerModule = PayjpThreeDSecureProcessHandlerModule(reactContext)
     return listOf<NativeModule>(
         PayjpModule(reactContext, cardFormModule),
-        cardFormModule
+        cardFormModule,
+        threeDSecureProcessHandlerModule
     )
   }
 
