@@ -33,6 +33,21 @@ export default function TabLayout() {
                     ),
                 }}
             />
+            <Tabs.Screen
+                name="tds/index"
+                options={{
+                    title: '3Dセキュア',
+                    tabBarIcon: ({ color, focused }) => (
+                        <TabBarIcon name={focused ? 'shield' : 'shield-outline'} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="tds/finish"
+                options={{
+                    href: null,
+                }}
+            />
         </Tabs>
     );
 }
