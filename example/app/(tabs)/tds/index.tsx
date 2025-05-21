@@ -22,9 +22,13 @@ export default function ThreeDSecureScreen() {
             setResultMessage('3Dセキュア認証を開始します...');
             await PayjpThreeDSecure.startThreeDSecureProcess(
                 resourceId,
-                () => {
-                    setResultMessage('3Dセキュア認証が完了しました');
-                    router.push('/tds/finish');
+                status => {
+                    if (status === PayjpThreeDSecure.ThreeDSecureProcessStatus.COMPLETED) {
+                        setResultMessage('3Dセキュア認証が完了しました');
+                        router.push('/tds/finish');
+                    } else if (status === PayjpThreeDSecure.ThreeDSecureProcessStatus.CANCELED) {
+                        setResultMessage('3Dセキュア認証がキャンセルされました');
+                    }
                 },
                 (error: { message: string; code: number }) => {
                     console.error('3Dセキュア認証が失敗しました', error);

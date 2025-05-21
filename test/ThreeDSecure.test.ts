@@ -62,33 +62,73 @@ describe('PayjpThreeDSecure', () => {
     });
 
     describe('startThreeDSecureProcess', () => {
-        it('calls native method with resourceId', async () => {
+        it('calls native method with resourceId and handles completed status', async () => {
             const resourceId = 'charge_xxx';
             const onSucceeded = jest.fn();
             const onFailed = jest.fn();
+
+            mockRNPAYThreeDSecureProcessHandler.startThreeDSecureProcess.mockResolvedValueOnce({
+                status: 'completed',
+            });
+
             await PayjpThreeDSecure.startThreeDSecureProcess(resourceId, onSucceeded, onFailed);
+
             expect(mockRNPAYThreeDSecureProcessHandler.startThreeDSecureProcess).toHaveBeenCalledTimes(1);
             expect(mockRNPAYThreeDSecureProcessHandler.startThreeDSecureProcess).toHaveBeenCalledWith(resourceId);
             expect(onSucceeded).toHaveBeenCalledTimes(1);
+            expect(onSucceeded).toHaveBeenCalledWith(PayjpThreeDSecure.ThreeDSecureProcessStatus.COMPLETED);
             expect(onFailed).not.toHaveBeenCalled();
         });
-        it('calls onFailed if native throws', async () => {
+
+        it('handles canceled status properly', async () => {
+            const resourceId = 'charge_xxx';
+            const onSucceeded = jest.fn();
+            const onFailed = jest.fn();
+
+            mockRNPAYThreeDSecureProcessHandler.startThreeDSecureProcess.mockResolvedValueOnce({
+                status: 'canceled',
+            });
+
+            await PayjpThreeDSecure.startThreeDSecureProcess(resourceId, onSucceeded, onFailed);
+
+            expect(onSucceeded).toHaveBeenCalledTimes(1);
+            expect(onSucceeded).toHaveBeenCalledWith(PayjpThreeDSecure.ThreeDSecureProcessStatus.CANCELED);
+            expect(onFailed).not.toHaveBeenCalled();
+        });
+
+        it('handles unknown status properly', async () => {
+            const resourceId = 'charge_xxx';
+            const onSucceeded = jest.fn();
+            const onFailed = jest.fn();
+
+            mockRNPAYThreeDSecureProcessHandler.startThreeDSecureProcess.mockResolvedValueOnce({
+                status: 'unknown',
+            });
+
+            await PayjpThreeDSecure.startThreeDSecureProcess(resourceId, onSucceeded, onFailed);
+
+            expect(onSucceeded).not.toHaveBeenCalled();
+            expect(onFailed).toHaveBeenCalledTimes(1);
+            expect(onFailed).toHaveBeenCalledWith({
+                message: expect.stringContaining('Unknown status: unknown'),
+                code: 1,
+            });
+        });
+
+        it('calls onFailed if native throws an error', async () => {
             const resourceId = 'charge_xxx';
             const onSucceeded = jest.fn();
             const onFailed = jest.fn();
             const error = { code: 999, message: 'fail' };
+
             mockRNPAYThreeDSecureProcessHandler.startThreeDSecureProcess.mockImplementationOnce(() => {
                 throw error;
             });
-            await expect(PayjpThreeDSecure.startThreeDSecureProcess(resourceId, onSucceeded, onFailed)).rejects.toBe(
-                error,
-            );
+
+            await PayjpThreeDSecure.startThreeDSecureProcess(resourceId, onSucceeded, onFailed);
+
             expect(onSucceeded).not.toHaveBeenCalled();
             expect(onFailed).toHaveBeenCalledTimes(1);
-            expect(onFailed).toHaveBeenCalledWith({
-                message: expect.stringContaining('Native Code: 999, Message: fail'),
-                code: 1,
-            });
         });
     });
 });

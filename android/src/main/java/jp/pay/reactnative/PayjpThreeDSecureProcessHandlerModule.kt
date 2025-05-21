@@ -7,6 +7,8 @@ import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.WritableMap
+import com.facebook.react.bridge.Arguments
 import com.facebook.react.module.annotations.ReactModule
 import jp.pay.android.verifier.PayjpVerifier
 import jp.pay.android.verifier.ui.PayjpThreeDSecureResult
@@ -56,13 +58,19 @@ class PayjpThreeDSecureProcessHandlerModule(
         override fun onResult(result: PayjpThreeDSecureResult) {
           when (result) {
             is PayjpThreeDSecureResult.SuccessResourceId -> {
-              promise.resolve(null)
+              val resultMap = Arguments.createMap().apply {
+                putString("status", "completed")
+              }
+              promise.resolve(resultMap)
             }
             PayjpThreeDSecureResult.Canceled -> {
-              promise.reject("THREE_D_SECURE_CANCELED", "ThreeDSecure process was canceled by user.")
+              val resultMap = Arguments.createMap().apply {
+                putString("status", "canceled")
+              }
+              promise.resolve(resultMap)
             }
             else -> {
-              promise.reject("THREE_D_SECURE_UNKNOWN", "Unknown ThreeDSecure result.")
+              promise.reject("THREE_D_SECURE_FAILED", "Unknown ThreeDSecure result.")
             }
           }
           pendingPromise = null

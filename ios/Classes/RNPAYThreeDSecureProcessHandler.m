@@ -79,16 +79,19 @@ RCT_EXPORT_METHOD(startThreeDSecureProcess : (NSString *)resourceId resolve : (
   switch (status) {
     case ThreeDSecureProcessStatusCompleted:
       if (self.pendingResolve) {
-        self.pendingResolve([NSNull null]);
+        self.pendingResolve(@{@"status" : @"completed"});
       }
       break;
     case ThreeDSecureProcessStatusCanceled:
-      if (self.pendingReject) {
-        self.pendingReject(@"THREE_D_SECURE_CANCELED",
-                           @"ThreeDSecure process was canceled by user.", nil);
+      if (self.pendingResolve) {
+        self.pendingResolve(@{@"status" : @"canceled"});
       }
       break;
     default:
+      if (self.pendingReject) {
+        self.pendingReject(@"THREE_D_SECURE_FAILED",
+                           @"ThreeDSecure process failed with unknown status.", nil);
+      }
       break;
   }
 

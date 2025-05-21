@@ -1,10 +1,18 @@
 // LICENSE : MIT
 import { NativeModules } from 'react-native';
 
+export enum ThreeDSecureProcessStatus {
+    COMPLETED = 'completed',
+
+    CANCELED = 'canceled',
+}
+
 /**
  * 3Dセキュア処理が成功したときに実行されるリスナー
+ *
+ * @param status 処理の結果状態
  */
-export type OnThreeDSecureProcessSucceeded = () => void;
+export type OnThreeDSecureProcessSucceeded = (status: ThreeDSecureProcessStatus) => void;
 
 /**
  * 3Dセキュア処理が失敗したときに実行されるリスナー
@@ -29,12 +37,20 @@ export const startThreeDSecureProcess = async (
     onFailed: OnThreeDSecureProcessFailed,
 ): Promise<void> => {
     try {
-        await RNPAYThreeDSecureProcessHandler.startThreeDSecureProcess(resourceId);
-        onSucceeded();
+        const result = await RNPAYThreeDSecureProcessHandler.startThreeDSecureProcess(resourceId);
+
+        if (result.status === 'completed') {
+            onSucceeded(ThreeDSecureProcessStatus.COMPLETED);
+        } else if (result.status === 'canceled') {
+            onSucceeded(ThreeDSecureProcessStatus.CANCELED);
+        } else {
+            const errorMessage = `Unknown status: ${result.status}`;
+            const errorPayload = { message: errorMessage, code: 1 };
+            onFailed(errorPayload);
+        }
     } catch (nativeError: any) {
         const errorMessage = `Native Code: ${nativeError.code}, Message: ${nativeError.message || 'Unknown error'}`;
         const errorPayload = { message: errorMessage, code: 1 };
         onFailed(errorPayload);
-        throw nativeError;
     }
 };

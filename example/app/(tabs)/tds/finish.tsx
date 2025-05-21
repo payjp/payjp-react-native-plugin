@@ -10,7 +10,7 @@ export default function ThreeDSecureFinishScreen() {
     const router = useRouter();
 
     const handleReturn = () => {
-        router.replace('/tds');
+        router.replace('/');
     };
 
     return (
