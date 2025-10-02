@@ -32,7 +32,6 @@ import com.facebook.react.module.annotations.ReactModule
 import jp.pay.android.Payjp
 import jp.pay.android.PayjpConfiguration
 import jp.pay.android.PayjpTokenBackgroundHandler
-import jp.pay.android.cardio.PayjpCardScannerPlugin
 import jp.pay.android.model.ClientInfo
 import java.util.Locale
 
@@ -70,7 +69,6 @@ class PayjpModule(
             .setDebugEnabled(debugEnabled)
             .setTokenBackgroundHandler(tokenBackgroundHandler)
             .setLocale(locale)
-            .setCardScannerPlugin(PayjpCardScannerPlugin)
             .setClientInfo(clientInfo)
             .setThreeDSecureRedirectName(tdsRedirectKey)
             .build()
