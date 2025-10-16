@@ -53,5 +53,4 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
     implementation "jp.pay:payjp-android:$payjpSdkVersion"
-    implementation "jp.pay:payjp-android-cardio:$payjpSdkVersion"
 }
