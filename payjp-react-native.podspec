@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage     = package['homepage']
   s.license      = package['license']
   s.author       = { package['author']['name'] => package['author']['email'] }
-  s.platform     = :ios, "10.0"
+  s.platform     = :ios, "12.0"
   s.source       = { :path => 'ios' }
   s.source_files = "ios/Classes/**/*.{h,m}"
   s.public_header_files = "ios/Classes/**/*.h"
