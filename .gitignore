@@ -135,3 +135,6 @@ buck-out/
 
 # Brew
 Brewfile.lock.json
+
+# claude
+.serena
