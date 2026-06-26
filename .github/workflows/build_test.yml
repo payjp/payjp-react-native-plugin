@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  USER_NODE_VERSION: 20
+  USER_NODE_VERSION: 22
   USER_JAVA_VERSION: 17
 
 jobs:
