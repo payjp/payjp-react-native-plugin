@@ -19,7 +19,7 @@ jobs:
         with:
           repository: payjp/payjp-android
           release-only: true
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - name: Update with latest sdk
         run: |
           jq '. + { ios: "${{ steps.latest-ios.outputs.tag }}", android: "${{ steps.latest-android.outputs.tag }}"}' sdkconfig.json > tmp.json && mv tmp.json sdkconfig.json

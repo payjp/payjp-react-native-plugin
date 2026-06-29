@@ -1,10 +1,5 @@
 name: Check dependencies outdated
 
-env:
-  CACHE_VERSION_YARN: 1
-  CACHE_VERSION_NODE_MODULES: 1
-  CACHE_VERSION_PODS: 1
-
 on:
   schedule:
     - cron: 0 0 * * 1
@@ -14,39 +9,21 @@ jobs:
   check_outdated:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 10.x
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache yarn
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ env.CACHE_VERSION_YARN }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ env.CACHE_VERSION_YARN }}-
-      - name: Cache node
-        uses: actions/cache@v2
-        id: node-cache
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-node-${{ env.CACHE_VERSION_NODE_MODULES }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ env.CACHE_VERSION_NODE_MODULES }}-
+          node-version: 22
+          cache: 'yarn'
+          cache-dependency-path: |
+            yarn.lock
+            example/yarn.lock
       - name: Cache Cocoapods
-        uses: actions/cache@v2
-        id: pods-cache
+        uses: actions/cache@v4
         with:
           path: example/ios/Pods
-          key: ${{ runner.os }}-pods-${{ env.CACHE_VERSION_PODS }}-${{ hashFiles('example/ios/Podfile.lock') }}
+          key: ${{ runner.os }}-pods-${{ hashFiles('example/ios/Podfile.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pods-${{ env.CACHE_VERSION_PODS }}-
+            ${{ runner.os }}-pods-
       - run: yarn --frozen-lockfile
       - run: cd example && yarn --frozen-lockfile
       - run: cd example/ios && pod install
