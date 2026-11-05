@@ -1,5 +1,6 @@
 import React from 'react';
 import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router/react-navigation';
+import Constants from 'expo-constants';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -28,10 +29,8 @@ export default function RootLayout() {
         PayjpCore.init({
             publicKey: PAYJP_PUBLIC_KEY,
             debugEnabled: __DEV__,
-            threeDSecureRedirect: {
-                url: 'jp.pay.example://tds/finish',
-                key: 'mobileapp',
-            },
+            // Defined in app.json (expo.extra.payjp.threeDSecureRedirect).
+            threeDSecureRedirect: Constants.expoConfig?.extra?.payjp?.threeDSecureRedirect,
         });
     }, []);
 

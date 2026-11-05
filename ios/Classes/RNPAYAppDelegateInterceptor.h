@@ -31,4 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// Receives 3-D Secure redirect URLs for apps that use the UIScene life cycle, where UIKit no
+/// longer calls `application:openURL:options:` on the app delegate.
+API_AVAILABLE(ios(13.0))
+@interface RNPAYSceneDelegateInterceptor : NSObject <UISceneDelegate>
+
++ (instancetype)sharedInstance;
+
+@end
+
 NS_ASSUME_NONNULL_END

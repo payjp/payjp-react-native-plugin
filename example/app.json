@@ -49,6 +49,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "payjp": {
+        "threeDSecureRedirect": {
+          "url": "jp.pay.example://tds/finish",
+          "key": "mobileapp"
+        }
+      }
     }
   }
 }

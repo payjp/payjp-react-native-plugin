@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 
 env:
-  USER_NODE_VERSION: 22
   USER_JAVA_VERSION: 17
 
 jobs:
@@ -19,7 +18,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: ${{ env.USER_NODE_VERSION }}
+          node-version-file: '.node-version'
           cache: 'yarn'
       - run: make dependencies
       - run: make check
@@ -33,7 +32,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: ${{ env.USER_NODE_VERSION }}
+          node-version-file: '.node-version'
           cache: 'yarn'
       - uses: actions/setup-java@v4
         with:
@@ -52,7 +51,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: ${{ env.USER_NODE_VERSION }}
+          node-version-file: '.node-version'
           cache: 'yarn'
       - run: yarn global add react-native-cli
       - run: make dependencies

@@ -20,7 +20,7 @@ export default function TabLayout() {
                 options={{
                     title: 'Card',
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'card' : 'card-outline'} color={color} />
+                        <TabBarIcon name={focused ? 'card' : 'card-outline'} color={color as string} />
                     ),
                 }}
             />
@@ -29,7 +29,7 @@ export default function TabLayout() {
                 options={{
                     title: 'Apple Pay',
                     tabBarIcon: ({ color, focused }) => (
-                        <TabBarIcon name={focused ? 'wallet' : 'wallet-outline'} color={color} />
+                        <TabBarIcon name={focused ? 'wallet' : 'wallet-outline'} color={color as string} />
                     ),
                 }}
             />

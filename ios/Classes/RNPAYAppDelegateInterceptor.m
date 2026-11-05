@@ -22,6 +22,7 @@
  */
 #import "RNPAYAppDelegateInterceptor.h"
 #import <GoogleUtilities/GULAppDelegateSwizzler.h>
+#import <GoogleUtilities/GULSceneDelegateSwizzler.h>
 @import PAYJP;
 
 @implementation RNPAYAppDelegateInterceptor
@@ -58,5 +59,34 @@
   return [[PAYJPThreeDSecureProcessHandler sharedHandler] completeThreeDSecureProcessWithUrl:url];
 }
 #pragma clang diagnostic pop
+
+@end
+
+@implementation RNPAYSceneDelegateInterceptor
+
++ (void)load {
+  // GoogleUtilities only proxies a scene delegate when it sees the scene connect, so this has to
+  // run before the first scene connects (i.e. not lazily from PayjpCore.init).
+  if (@available(iOS 13.0, *)) {
+    [GULSceneDelegateSwizzler proxyOriginalSceneDelegate];
+    [GULSceneDelegateSwizzler registerSceneDelegateInterceptor:[self sharedInstance]];
+  }
+}
+
++ (instancetype)sharedInstance {
+  static dispatch_once_t once;
+  static RNPAYSceneDelegateInterceptor *sharedInstance;
+  dispatch_once(&once, ^{
+    sharedInstance = [[RNPAYSceneDelegateInterceptor alloc] init];
+  });
+  return sharedInstance;
+}
+
+- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {
+  for (UIOpenURLContext *context in URLContexts) {
+    [[PAYJPThreeDSecureProcessHandler sharedHandler]
+        completeThreeDSecureProcessWithUrl:context.URL];
+  }
+}
 
 @end

@@ -34,6 +34,9 @@ android {
         targetSdkVersion rootProject.properties.get('targetSdkVersion', 29)
         buildConfigField "String", "VERSION_NAME", "\"$pluginVersion\""
     }
+    buildFeatures {
+        buildConfig true
+    }
     lintOptions {
         warning 'InvalidPackage'
     }

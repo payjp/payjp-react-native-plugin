@@ -54,6 +54,7 @@ export default function HomeScreen() {
                 PayjpCardForm.startCardForm({
                     cardFormType: formType,
                     extraAttributes: selectedOption.attributes,
+                    useThreeDSecure: true,
                 });
             },
         );
