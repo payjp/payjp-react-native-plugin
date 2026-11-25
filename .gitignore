@@ -138,3 +138,8 @@ Brewfile.lock.json
 
 # claude
 .serena
+
+# Swift Package Manager
+.build/
+.swiftpm/
+/Package.resolved

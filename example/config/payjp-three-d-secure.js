@@ -2,9 +2,8 @@ const { withAndroidManifest } = require('@expo/config-plugins');
 
 // The 3-D Secure redirect URL is defined once in app.json (`expo.extra.payjp.threeDSecureRedirect`).
 // Register the same URL in the PAY.JP Dashboard. It is shared by:
-//   - this plugin (the iOS URL scheme and the Android intent-filter),
-//   - app/_layout.tsx (PayjpCore.init), and
-//   - app/+native-intent.ts (keeps Expo Router from opening a not-found screen).
+//   - this plugin (the iOS URL scheme and the Android intent-filter), and
+//   - App.tsx (PayjpCore.init).
 const getRedirectUrl = config => {
     const url = config.extra?.payjp?.threeDSecureRedirect?.url;
     if (!url) {

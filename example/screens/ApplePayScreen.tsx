@@ -6,7 +6,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { PayjpApplePay, Token } from 'payjp-react-native';
-import { postTokenToBackEnd } from '../SampleApi';
+import { postTokenToBackEnd } from '@/api/SampleApi';
 
 // TODO: REPLACE WITH YOUR APPLE MERCHANT ID
 const APPLE_MERCHANT_ID = 'merchant.jp.pay.example2';
@@ -22,7 +22,7 @@ const onProducedTokenByApplePay = async (token: Token): Promise<void> => {
     }
 };
 
-export default function TabTwoScreen() {
+export default function ApplePayScreen() {
     useEffect(() => {
         const unsubscribeApplePay =
             Platform.OS === 'ios'
@@ -53,8 +53,8 @@ export default function TabTwoScreen() {
                 <ThemedText type="title">Apple Pay</ThemedText>
             </ThemedView>
             <ThemedText>
-                Edit <ThemedText type="defaultSemiBold">APPLE_MERCHANT_ID</ThemedText> in app/(tabs)/applepay.tsx, then
-                start Apple Pay.
+                Edit <ThemedText type="defaultSemiBold">APPLE_MERCHANT_ID</ThemedText> in screens/ApplePayScreen.tsx,
+                then start Apple Pay.
             </ThemedText>
             {Platform.select({
                 ios: <Button title="Buy with Apple Pay" onPress={onPressApplePay} />,

@@ -21,5 +21,7 @@
  * SOFTWARE.
  */
 
+#import <Foundation/Foundation.h>
+
 FOUNDATION_EXPORT NSString *const RNPAYErrorDomain;
 FOUNDATION_EXPORT NSString *const RNPAYPluginVersion;

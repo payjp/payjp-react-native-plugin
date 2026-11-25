@@ -61,6 +61,7 @@
     "android",
     "ios",
     "payjp-react-native.podspec",
+    "Package.swift",
     "sdkconfig.json"
   ],
   "homepage": "https://github.com/payjp/payjp-react-native-plugin",
@@ -100,6 +101,9 @@
     "test": "jest",
     "version": "scripts/sync_version_ios.sh && npm run docs && touch docs/.nojekyll && git add .",
     "watch": "tsc -p . --watch"
+  },
+  "swiftpmConfig": {
+    "name": "PayjpReactNative"
   },
   "types": "lib/index.d.ts"
 }

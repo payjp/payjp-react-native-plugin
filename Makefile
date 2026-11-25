@@ -9,6 +9,7 @@ dependencies:
 
 .PHONY: check
 check: dependencies
+	scripts/check_sdk_version.sh
 	yarn lint
 	yarn test
 	yarn build

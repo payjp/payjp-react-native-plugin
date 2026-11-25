@@ -1,50 +1,26 @@
-# Welcome to your Expo app 👋
+# example構成
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+* Expoプロジェクト
 
-## Get started
+## iOS の依存管理の切り替え（CocoaPods / Swift Package Manager）
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+`ios/` は `prebuild` で生成します。
+CocoaPods 版と Swift Package Manager（SwiftPM）版は、次のスクリプトで切り替えます。
 
 ```bash
-npm run reset-project
+# CocoaPods 版（既定）
+yarn prebuild:ios       # ios/ を生成する
+yarn ios                # 起動する
+
+# SwiftPM 版（実験的。Expo SDK 58 以降・React Native 0.88 以降）
+yarn prebuild:ios:spm   # ios/ を生成する
+yarn ios:spm            # 起動する
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- `prebuild` は `ios/` を作り直します。もう一方の版に切り替えるときは、その版の `prebuild` を実行してください。
+- `yarn ios` と `yarn ios:spm` は、それぞれ CocoaPods 版・SwiftPM 版の `ios/` でのみ動きます。
+- SwiftPM 版でも CocoaPods（`pod` コマンド）が必要です。`pod deintegrate` に使います。
+- Detox による E2E テスト（`make e2e-ios`）は CocoaPods 版でのみ動きます。
+- example が使うネイティブライブラリは、すべて自前の `Package.swift` を持っているため、SwiftPM 版でも回避策は入れていません。
+  - `Package.swift` を持たないライブラリを追加すると、`yarn prebuild:ios:spm` が「Package.swift is missing for library」というエラーで止まります。
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

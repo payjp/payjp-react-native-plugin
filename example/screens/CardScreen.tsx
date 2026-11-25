@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import React, { useEffect } from 'react';
 import { PayjpCardForm, Token } from 'payjp-react-native';
-import { postTokenToBackEnd } from '../SampleApi';
+import { postTokenToBackEnd } from '@/api/SampleApi';
 import { CardFormType, ExtraAttribute } from 'payjp-react-native/lib/CardForm';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 
@@ -36,7 +36,7 @@ const extraAttributesOptions: { key: string; attributes?: ExtraAttribute[] }[] =
     { key: 'cancel' },
 ];
 
-export default function HomeScreen() {
+export default function CardScreen() {
     const { showActionSheetWithOptions } = useActionSheet();
     const onOpenActionSheet = (formType: CardFormType) => {
         console.log('onOpenActionSheet', formType);
@@ -89,7 +89,7 @@ export default function HomeScreen() {
             <ThemedView style={styles.stepContainer}>
                 <ThemedText type="subtitle">Step 1: Set Public Key</ThemedText>
                 <ThemedText>
-                    Edit <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText> to see changes. Replace{' '}
+                    Edit <ThemedText type="defaultSemiBold">App.tsx</ThemedText> to see changes. Replace{' '}
                     <ThemedText type="defaultSemiBold">PAYJP_PUBLIC_KEY</ThemedText> with your PAY.JP public key.
                 </ThemedText>
             </ThemedView>
